@@ -8,7 +8,6 @@ package layers
 
 import (
 	"fmt"
-	"log"
 	"strconv"
 
 	"github.com/dreadl0ck/gopacket"
@@ -78,7 +77,7 @@ var tcpPortLayerType = [65536]gopacket.LayerType{
 // RegisterTCPPortLayerType creates a new mapping between a TCPPort
 // and an underlaying LayerType.
 func RegisterTCPPortLayerType(port TCPPort, layerType gopacket.LayerType) {
-	log.Fatal("test")
+	fmt.Println(port, layerType)
 	tcpPortLayerType[port] = layerType
 }
 
