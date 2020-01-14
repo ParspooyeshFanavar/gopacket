@@ -54,7 +54,6 @@ func (a TCPPort) String() string {
 func (a TCPPort) LayerType() gopacket.LayerType {
 	lt := tcpPortLayerType[uint16(a)]
 	if lt != 0 {
-		fmt.Println("LayerType lookup returned", lt)
 		return lt
 	}
 	return gopacket.LayerTypePayload
