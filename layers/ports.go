@@ -9,6 +9,7 @@ package layers
 import (
 	"fmt"
 	"strconv"
+	"time"
 
 	"github.com/dreadl0ck/gopacket"
 )
@@ -78,6 +79,7 @@ var tcpPortLayerType = [65536]gopacket.LayerType{
 // and an underlaying LayerType.
 func RegisterTCPPortLayerType(port TCPPort, layerType gopacket.LayerType) {
 	fmt.Println(port, layerType)
+	time.Sleep(1 * time.Second)
 	tcpPortLayerType[port] = layerType
 }
 
