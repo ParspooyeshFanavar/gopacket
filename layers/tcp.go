@@ -307,6 +307,7 @@ func (t *TCP) NextLayerType() gopacket.LayerType {
 	if lt == gopacket.LayerTypePayload {
 		lt = t.SrcPort.LayerType()
 	}
+	fmt.Println("TCP: next layer type:", lt)
 	return lt
 }
 
