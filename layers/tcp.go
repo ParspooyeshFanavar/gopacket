@@ -12,7 +12,6 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
-	"time"
 
 	"github.com/dreadl0ck/gopacket"
 )
@@ -226,7 +225,6 @@ func (t *TCP) flagsAndOffset() uint16 {
 }
 
 func (tcp *TCP) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error {
-	fmt.Println("TCP DecodeFromBytes called")
 	if len(data) < 20 {
 		df.SetTruncated()
 		return fmt.Errorf("Invalid TCP header. Length %d less than 20", len(data))
@@ -309,13 +307,10 @@ func (t *TCP) NextLayerType() gopacket.LayerType {
 	if lt == gopacket.LayerTypePayload {
 		lt = t.SrcPort.LayerType()
 	}
-	fmt.Println("TCP: next layer type:", lt)
-	time.Sleep(1 * time.Second)
 	return lt
 }
 
 func decodeTCP(data []byte, p gopacket.PacketBuilder) error {
-	fmt.Println("TCP decodeTCP called")
 	tcp := &TCP{}
 	err := tcp.DecodeFromBytes(data, p)
 	p.AddLayer(tcp)
