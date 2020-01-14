@@ -9,6 +9,7 @@ package layers
 import (
 	"encoding/binary"
 	"errors"
+	"fmt"
 
 	"github.com/dreadl0ck/gopacket"
 )
@@ -79,6 +80,7 @@ func (m *Modbus) CanDecode() gopacket.LayerClass {
 }
 
 func decodeModbus(data []byte, p gopacket.PacketBuilder) error {
+	fmt.Println("decodeModbus called")
 	if len(data) < MinModbusPacketLen {
 		p.SetTruncated()
 		return ErrModbusDataTooSmall
