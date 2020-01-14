@@ -46,6 +46,7 @@ func init() {
 }
 
 func (m *Modbus) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error {
+	fmt.Println("MODBUS DecodeFromBytes called")
 	if len(data) < MinModbusPacketLen {
 		df.SetTruncated()
 		return ErrModbusDataTooSmall
@@ -76,11 +77,12 @@ func (m *Modbus) NextLayerType() gopacket.LayerType {
 }
 
 func (m *Modbus) CanDecode() gopacket.LayerClass {
+	fmt.Println("MODBUS CanDecode called")
 	return LayerTypeModbus
 }
 
 func decodeModbus(data []byte, p gopacket.PacketBuilder) error {
-	fmt.Println("decodeModbus called")
+	fmt.Println("MODBUS decodeModbus called")
 	if len(data) < MinModbusPacketLen {
 		p.SetTruncated()
 		return ErrModbusDataTooSmall
