@@ -12,6 +12,7 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
+	"time"
 
 	"github.com/dreadl0ck/gopacket"
 )
@@ -308,6 +309,7 @@ func (t *TCP) NextLayerType() gopacket.LayerType {
 		lt = t.SrcPort.LayerType()
 	}
 	fmt.Println("TCP: next layer type:", lt)
+	time.Sleep(1 * time.Second)
 	return lt
 }
 
