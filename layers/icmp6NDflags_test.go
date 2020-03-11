@@ -10,7 +10,7 @@ package layers
 import (
 	"testing"
 
-	"github.com/google/gopacket"
+	"github.com/dreadl0ck/gopacket"
 )
 
 var icmp6NeighborAnnouncementData = []byte{

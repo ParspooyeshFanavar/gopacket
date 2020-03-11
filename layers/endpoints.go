@@ -11,7 +11,7 @@ import (
 	"net"
 	"strconv"
 
-	"github.com/google/gopacket"
+	"github.com/dreadl0ck/gopacket"
 )
 
 var (

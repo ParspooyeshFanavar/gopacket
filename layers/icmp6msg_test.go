@@ -10,7 +10,7 @@ package layers
 import (
 	"testing"
 
-	"github.com/google/gopacket"
+	"github.com/dreadl0ck/gopacket"
 )
 
 // testPacketICMPv6RouterAdvertisement is the packet:

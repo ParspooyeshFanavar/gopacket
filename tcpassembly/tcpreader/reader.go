@@ -48,7 +48,7 @@ import (
 	"errors"
 	"io"
 
-	"github.com/google/gopacket/tcpassembly"
+	"github.com/dreadl0ck/gopacket/tcpassembly"
 )
 
 var discardBuffer = make([]byte, 4096)

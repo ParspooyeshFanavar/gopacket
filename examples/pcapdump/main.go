@@ -16,9 +16,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/google/gopacket/dumpcommand"
-	"github.com/google/gopacket/examples/util"
-	"github.com/google/gopacket/pcap"
+	"github.com/dreadl0ck/gopacket/dumpcommand"
+	"github.com/dreadl0ck/gopacket/examples/util"
+	"github.com/dreadl0ck/gopacket/pcap"
 )
 
 var iface = flag.String("i", "eth0", "Interface to read packets from")
