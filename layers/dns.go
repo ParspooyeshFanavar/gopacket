@@ -640,6 +640,11 @@ func (q *DNSQuestion) decode(data []byte, offset int, df gopacket.DecodeFeedback
 	}
 
 	q.Name = name
+
+	// avoid runtime error: slice bounds out of range [:62] with capacity 61
+	if len(data) < endq+2 {
+		return endq, nil
+	}
 	q.Type = DNSType(binary.BigEndian.Uint16(data[endq : endq+2]))
 	q.Class = DNSClass(binary.BigEndian.Uint16(data[endq+2 : endq+4]))
 
