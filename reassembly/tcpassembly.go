@@ -24,8 +24,8 @@ import (
 	"encoding/hex"
 	"flag"
 	"fmt"
-	"github.com/sasha-s/go-deadlock"
 	"log"
+	"sync"
 	"time"
 
 	"github.com/dreadl0ck/gopacket"
@@ -448,7 +448,7 @@ func (half *halfconnection) Dump() string {
 type connection struct {
 	key      key // client->server
 	c2s, s2c halfconnection
-	mu       deadlock.RWMutex
+	mu       sync.RWMutex
 }
 
 func (c *connection) reset(k key, s Stream, ts time.Time) {

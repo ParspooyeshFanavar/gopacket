@@ -8,7 +8,7 @@ package reassembly
 
 import (
 	"flag"
-	"github.com/sasha-s/go-deadlock"
+	"sync"
 	"log"
 	"time"
 
@@ -138,7 +138,7 @@ func (c *pageCache) replace(p *page) {
 type StreamPool struct {
 	conns              map[key]*connection
 	users              int
-	mu                 deadlock.RWMutex
+	mu                 sync.RWMutex
 	factory            StreamFactory
 	free               []*connection
 	all                [][]connection
