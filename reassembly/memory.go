@@ -7,7 +7,9 @@
 package reassembly
 
 import (
+	"bytes"
 	"flag"
+	"fmt"
 	"sync"
 	"log"
 	"time"
@@ -166,6 +168,19 @@ func (p *StreamPool) Dump() {
 	for _, conn := range p.conns {
 		log.Printf("%v %s", conn.key, conn)
 	}
+}
+
+// Dump logs all connections and returns a string
+func (p *StreamPool) DumpString() string {
+	p.mu.Lock()
+	defer p.mu.Unlock()
+	var b bytes.Buffer
+
+	b.WriteString(fmt.Sprintf("Remaining %d connections: \n", len(p.conns)))
+	for _, conn := range p.conns {
+		b.WriteString(fmt.Sprintf("%v %s\n", conn.key, conn))
+	}
+	return b.String()
 }
 
 func (p *StreamPool) remove(conn *connection) {
