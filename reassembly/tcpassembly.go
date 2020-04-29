@@ -418,13 +418,18 @@ type halfconnection struct {
 	queuedPackets  int
 	overlapBytes   int
 	overlapPackets int
+
+	sync.Mutex
 }
 
 func (half *halfconnection) String() string {
 	closed := ""
+
+	half.Lock()
 	if half.closed {
 		closed = "closed "
 	}
+	half.Unlock()
 	return fmt.Sprintf("%screated:%v, last:%v", closed, half.created, half.lastSeen)
 }
 
@@ -1192,7 +1197,9 @@ func (a *Assembler) closeHalfConnection(conn *connection, half *halfconnection) 
 	if *debugLog {
 		log.Printf("%v closing", conn)
 	}
+	half.Lock()
 	half.closed = true
+	half.Unlock()
 	for p := half.first; p != nil; p = p.next {
 		// FIXME: it should be already empty
 		a.pc.replace(p)
