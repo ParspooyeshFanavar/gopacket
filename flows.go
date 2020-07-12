@@ -132,9 +132,8 @@ func (e EndpointType) String() string {
 
 func (a Endpoint) String() string {
 	if t, ok := endpointTypes[a.typ]; ok && t.Formatter != nil {
-		// panic: runtime error: index out of range [1] with length 0
-		fmt.Println(len(a.raw), a.len)
-		if len(a.raw) < a.len {
+		// prevent panic: runtime error: index out of range [1] with length 0
+		if a.len == 0 {
 			return ""
 		}
 		return t.Formatter(a.raw[:a.len])
