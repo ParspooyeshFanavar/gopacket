@@ -153,15 +153,9 @@ func (smtp *SMTP) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error
 		}
 
 		// check if smtp is encrypted
-		tlsType := TLSType(line[0])
-		if tlsType.String() == "Unknown" { // try to parse line if not encrypted
-			parseErr := smtp.parseLine(line)
-			if parseErr != nil {
-				return err
-			}
-		} else { // smtp seams to be encrypted, stop here
-			smtp.IsEncrypted = true
-			break
+		parseErr := smtp.parseLine(line)
+		if parseErr != nil {
+			return err
 		}
 
 		if isLastLine {
