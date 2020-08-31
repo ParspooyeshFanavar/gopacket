@@ -156,7 +156,7 @@ func decodeAVP(data []byte) (*AVP, error) {
 
 	// if true, message either trancated or malformed
 	if len(data) < int(avp.Len) {
-		return avp, fmt.Errorf("could not decode avp. Provided avp length: %d, available bites to decode %d", avp.Len, len(data))
+		return avp, fmt.Errorf("could not decode avp. Provided avp length: %d, available bytes to decode %d", avp.Len, len(data))
 	}
 
 	avpChunk := data[:avp.Len]
