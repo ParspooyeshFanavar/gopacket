@@ -151,6 +151,7 @@ var (
 	LayerTypeCIP                          = gopacket.RegisterLayerType(145, gopacket.LayerTypeMetadata{Name: "CIP", Decoder: gopacket.DecodeFunc(decodeCIP)})
 	LayerTypeSMTP                         = gopacket.RegisterLayerType(146, gopacket.LayerTypeMetadata{Name: "SMTP", Decoder: gopacket.DecodeFunc(decodeSMTP)})
 	LayerTypeDiameter                     = gopacket.RegisterLayerType(147, gopacket.LayerTypeMetadata{Name: "Diameter", Decoder: gopacket.DecodeFunc(decodeDiameter)})
+	LayerTypeERSPANII                     = gopacket.RegisterLayerType(148, gopacket.LayerTypeMetadata{Name: "ERSPAN Type II", Decoder: gopacket.DecodeFunc(decodeERSPANII)})
 )
 
 var (
