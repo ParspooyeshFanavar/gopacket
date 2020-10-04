@@ -60,7 +60,6 @@ func (a TCPPort) LayerType() gopacket.LayerType {
 }
 
 var tcpPortLayerType = [65536]gopacket.LayerType{
-	25:   LayerTypeSMTP,
 	53:   LayerTypeDNS,
 	502:  LayerTypeModbus, // modbustcp
 	3868: LayerTypeDiameter,  // diameter
