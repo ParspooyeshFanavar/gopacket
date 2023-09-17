@@ -109,7 +109,6 @@ func (a *AVP) setPadding() {
 	var flag bool
 
 	for _, b := range paddedAVPFormates {
-
 		if a.AttributeFormat == b {
 			flag = true
 			break

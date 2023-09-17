@@ -10,6 +10,7 @@ package layers
 import (
 	"encoding/binary"
 	"fmt"
+
 	"github.com/dreadl0ck/gopacket"
 )
 

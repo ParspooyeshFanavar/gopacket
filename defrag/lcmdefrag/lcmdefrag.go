@@ -32,8 +32,9 @@ type lcmPacket struct {
 // LCMDefragmenter supports defragmentation of LCM messages.
 //
 // References
-//   https://lcm-proj.github.io/
-//   https://github.com/lcm-proj/lcm
+//
+//	https://lcm-proj.github.io/
+//	https://github.com/lcm-proj/lcm
 type LCMDefragmenter struct {
 	packets map[uint32]*lcmPacket
 }
@@ -63,7 +64,7 @@ func (lp *lcmPacket) append(in *layers.LCM) {
 func (lp *lcmPacket) assemble() (out *layers.LCM, err error) {
 	var blob []byte
 
-	//Extract packets
+	// Extract packets
 	for i := uint16(0); i < lp.totalFrags; i++ {
 		fragment, ok := lp.frags[i]
 		if !ok {

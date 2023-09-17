@@ -160,56 +160,55 @@ import (
 // The current version of NTP (NTP V4)'s RFC (V4 - RFC 5905) contains
 // the following diagram for the NTP record format:
 
-//      0                   1                   2                   3
-//      0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-//     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-//     |LI | VN  |Mode |    Stratum    |     Poll      |   Precision   |
-//     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-//     |                         Root Delay                            |
-//     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-//     |                         Root Dispersion                       |
-//     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-//     |                          Reference ID                         |
-//     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-//     |                                                               |
-//     +                     Reference Timestamp (64)                  +
-//     |                                                               |
-//     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-//     |                                                               |
-//     +                      Origin Timestamp (64)                    +
-//     |                                                               |
-//     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-//     |                                                               |
-//     +                      Receive Timestamp (64)                   +
-//     |                                                               |
-//     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-//     |                                                               |
-//     +                      Transmit Timestamp (64)                  +
-//     |                                                               |
-//     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-//     |                                                               |
-//     .                                                               .
-//     .                    Extension Field 1 (variable)               .
-//     .                                                               .
-//     |                                                               |
-//     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-//     |                                                               |
-//     .                                                               .
-//     .                    Extension Field 2 (variable)               .
-//     .                                                               .
-//     |                                                               |
-//     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-//     |                          Key Identifier                       |
-//     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-//     |                                                               |
-//     |                            dgst (128)                         |
-//     |                                                               |
-//     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-//     From http://www.ietf.org/rfc/rfc5905.txt
+//	 0                   1                   2                   3
+//	 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+//	+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+//	|LI | VN  |Mode |    Stratum    |     Poll      |   Precision   |
+//	+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+//	|                         Root Delay                            |
+//	+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+//	|                         Root Dispersion                       |
+//	+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+//	|                          Reference ID                         |
+//	+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+//	|                                                               |
+//	+                     Reference Timestamp (64)                  +
+//	|                                                               |
+//	+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+//	|                                                               |
+//	+                      Origin Timestamp (64)                    +
+//	|                                                               |
+//	+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+//	|                                                               |
+//	+                      Receive Timestamp (64)                   +
+//	|                                                               |
+//	+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+//	|                                                               |
+//	+                      Transmit Timestamp (64)                  +
+//	|                                                               |
+//	+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+//	|                                                               |
+//	.                                                               .
+//	.                    Extension Field 1 (variable)               .
+//	.                                                               .
+//	|                                                               |
+//	+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+//	|                                                               |
+//	.                                                               .
+//	.                    Extension Field 2 (variable)               .
+//	.                                                               .
+//	|                                                               |
+//	+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+//	|                          Key Identifier                       |
+//	+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+//	|                                                               |
+//	|                            dgst (128)                         |
+//	|                                                               |
+//	+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+//	From http://www.ietf.org/rfc/rfc5905.txt
 //
 // The fields "Extension Field 1 (variable)" and later are optional fields,
 // and so we can set a minimum NTP record size of 48 bytes.
-//
 const ntpMinimumRecordSizeInBytes int = 48
 
 //******************************************************************************
@@ -221,14 +220,16 @@ const ntpMinimumRecordSizeInBytes int = 48
 // payload in an NTP UDP packet.
 //
 
-type NTPLeapIndicator uint8
-type NTPVersion uint8
-type NTPMode uint8
-type NTPStratum uint8
-type NTPLog2Seconds int8
-type NTPFixed16Seconds uint32
-type NTPReferenceID uint32
-type NTPTimestamp uint64
+type (
+	NTPLeapIndicator  uint8
+	NTPVersion        uint8
+	NTPMode           uint8
+	NTPStratum        uint8
+	NTPLog2Seconds    int8
+	NTPFixed16Seconds uint32
+	NTPReferenceID    uint32
+	NTPTimestamp      uint64
+)
 
 type NTP struct {
 	BaseLayer // Stores the packet bytes and payload bytes.
@@ -268,7 +269,6 @@ func (d *NTP) LayerType() gopacket.LayerType {
 //
 // This function is employed in layertypes.go to register the NTP layer.
 func decodeNTP(data []byte, p gopacket.PacketBuilder) error {
-
 	// Attempt to decode the byte slice.
 	d := &NTP{}
 	err := d.DecodeFromBytes(data, p)
@@ -293,7 +293,6 @@ func decodeNTP(data []byte, p gopacket.PacketBuilder) error {
 // and returns nil.
 // Upon failure, it returns an error (non nil).
 func (d *NTP) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error {
-
 	// If the data block is too short to be a NTP record, then return an error.
 	if len(data) < ntpMinimumRecordSizeInBytes {
 		df.SetTruncated()
@@ -314,7 +313,7 @@ func (d *NTP) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error {
 	//    Contents is supposed to contain the bytes of the data at this level.
 	//    Payload is supposed to contain the payload of this level.
 	// Here we set the baselayer to be the bytes of the NTP record.
-	d.BaseLayer = BaseLayer{Contents: data[:len(data)]}
+	d.BaseLayer = BaseLayer{Contents: data[:]}
 
 	// Extract the fields from the block of bytes.
 	// To make sense of this, refer to the packet diagram

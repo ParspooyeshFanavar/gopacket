@@ -65,6 +65,7 @@ func (d diameterFloat64) getDecodedData() string     { return fmt.Sprintf("%f", 
 func (d diameterUnsigned32) getDecodedData() string {
 	return strconv.FormatUint(uint64(d.decodedData), 10)
 }
+
 func (d diameterUnsigned64) getDecodedData() string {
 	return strconv.FormatUint(uint64(d.decodedData), 10)
 }
@@ -82,7 +83,6 @@ func (d *diameterOctetString) decode(data []byte) error {
 }
 
 func (d *diameterUnsigned32) decode(data []byte) error {
-
 	if len(data) != 4 {
 		return errors.New("not enough data to decode Unsigned Interger32")
 	}
@@ -93,7 +93,6 @@ func (d *diameterUnsigned32) decode(data []byte) error {
 }
 
 func (d *diameterUnsigned64) decode(data []byte) error {
-
 	if len(data) != 8 {
 		return errors.New("not enough data to decode Unsigned Interger64")
 	}
@@ -104,7 +103,6 @@ func (d *diameterUnsigned64) decode(data []byte) error {
 }
 
 func (d *diameterInteger32) decode(data []byte) error {
-
 	if len(data) != 4 {
 		return errors.New("not enough data to decode Unsigned Interger32")
 	}
@@ -115,7 +113,6 @@ func (d *diameterInteger32) decode(data []byte) error {
 }
 
 func (d *diameterInteger64) decode(data []byte) error {
-
 	if len(data) != 8 {
 		return errors.New("not enough data to decode Unsigned Interger64")
 	}
@@ -126,7 +123,6 @@ func (d *diameterInteger64) decode(data []byte) error {
 }
 
 func (d *diameterFloat32) decode(data []byte) error {
-
 	if len(data) != 4 {
 		return errors.New("not enough data to decode Unsigned Interger32")
 	}
@@ -137,7 +133,6 @@ func (d *diameterFloat32) decode(data []byte) error {
 }
 
 func (d *diameterFloat64) decode(data []byte) error {
-
 	if len(data) != 8 {
 		return errors.New("not enough data to decode Unsigned Interger64")
 	}
@@ -148,7 +143,6 @@ func (d *diameterFloat64) decode(data []byte) error {
 }
 
 func (d *diameterIPAddress) decode(data []byte) error {
-
 	var ip net.IP
 	// IPv4 is 4 bytes, IPv6 is 16 bytes. add 2 bytes each which is the chunk representing the type of the address (first two bits of data)
 	if len(data) != 6 && len(data) != 18 {

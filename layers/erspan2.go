@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	//ERSPANIIVersionObsolete - The obsolete value for the version field
+	// ERSPANIIVersionObsolete - The obsolete value for the version field
 	ERSPANIIVersionObsolete = 0x0
 	// ERSPANIIVersion - The current value for the version field
 	ERSPANIIVersion = 0x1

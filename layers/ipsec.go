@@ -8,8 +8,8 @@ package layers
 
 import (
 	"encoding/binary"
-
 	"errors"
+
 	"github.com/dreadl0ck/gopacket"
 )
 

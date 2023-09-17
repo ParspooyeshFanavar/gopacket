@@ -103,7 +103,6 @@ func (g *GTPv1U) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error 
 	}
 	g.BaseLayer = BaseLayer{Contents: data[:cIndex], Payload: data[cIndex:]}
 	return nil
-
 }
 
 // SerializeTo writes the serialized form of this layer into the
@@ -151,7 +150,6 @@ func (g *GTPv1U) SerializeTo(b gopacket.SerializeBuffer, opts gopacket.Serialize
 		}
 	}
 	return nil
-
 }
 
 // CanDecode returns a set of layers that GTP objects can decode.

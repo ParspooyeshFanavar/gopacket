@@ -5814,6 +5814,7 @@ var tcpPortNames = map[TCPPort]string{
 	49000: "matahari",
 	49001: "nusrp",
 }
+
 var udpPortNames = map[UDPPort]string{
 	1:     "tcpmux",
 	2:     "compressnet",
@@ -11274,6 +11275,7 @@ var udpPortNames = map[UDPPort]string{
 	48653: "robotraconteur",
 	49001: "nusdp-disc",
 }
+
 var sctpPortNames = map[SCTPPort]string{
 	9:     "discard",
 	20:    "ftp-data",

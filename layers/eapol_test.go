@@ -50,8 +50,10 @@ func TestPacketEAPOLKey(t *testing.T) {
 	if p.ErrorLayer() != nil {
 		t.Error("Failed to decode packet:", p.ErrorLayer().Error())
 	}
-	checkLayers(p, []gopacket.LayerType{LayerTypeEAPOL, LayerTypeEAPOLKey,
-		LayerTypeDot11InformationElement}, t)
+	checkLayers(p, []gopacket.LayerType{
+		LayerTypeEAPOL, LayerTypeEAPOLKey,
+		LayerTypeDot11InformationElement,
+	}, t)
 
 	{
 		got := p.Layer(LayerTypeEAPOL).(*EAPOL)

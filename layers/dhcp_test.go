@@ -15,19 +15,23 @@ import (
 )
 
 func TestDHCPv4EncodeRequest(t *testing.T) {
-	dhcp := &DHCPv4{Operation: DHCPOpRequest, HardwareType: LinkTypeEthernet, Xid: 0x12345678,
+	dhcp := &DHCPv4{
+		Operation: DHCPOpRequest, HardwareType: LinkTypeEthernet, Xid: 0x12345678,
 		ClientIP: net.IP{0, 0, 0, 0}, YourClientIP: net.IP{0, 0, 0, 0}, NextServerIP: net.IP{0, 0, 0, 0}, RelayAgentIP: net.IP{0, 0, 0, 0},
 		ClientHWAddr: net.HardwareAddr{0x12, 0x34, 0x56, 0x78, 0x9a, 0xbc},
-		ServerName:   make([]byte, 64), File: make([]byte, 128)}
+		ServerName:   make([]byte, 64), File: make([]byte, 128),
+	}
 
 	dhcp.Options = append(dhcp.Options, NewDHCPOption(DHCPOptMessageType, []byte{byte(DHCPMsgTypeDiscover)}))
 	dhcp.Options = append(dhcp.Options, NewDHCPOption(DHCPOptHostname, []byte{'e', 'x', 'a', 'm', 'p', 'l', 'e', '.', 'c', 'o', 'm'}))
 	dhcp.Options = append(dhcp.Options, NewDHCPOption(DHCPOptPad, nil))
 	dhcp.Options = append(dhcp.Options, NewDHCPOption(DHCPOptParamsRequest,
-		[]byte{byte(DHCPOptSubnetMask), byte(DHCPOptBroadcastAddr), byte(DHCPOptTimeOffset),
+		[]byte{
+			byte(DHCPOptSubnetMask), byte(DHCPOptBroadcastAddr), byte(DHCPOptTimeOffset),
 			byte(DHCPOptRouter), byte(DHCPOptDomainName), byte(DHCPOptDNS), byte(DHCPOptDomainSearch),
 			byte(DHCPOptHostname), byte(DHCPOptNetBIOSTCPNS), byte(DHCPOptInterfaceMTU), byte(DHCPOptClasslessStaticRoute),
-			byte(DHCPOptNTPServers)}))
+			byte(DHCPOptNTPServers),
+		}))
 
 	buf := gopacket.NewSerializeBuffer()
 	opts := gopacket.SerializeOptions{FixLengths: true}
@@ -42,10 +46,12 @@ func TestDHCPv4EncodeRequest(t *testing.T) {
 }
 
 func TestDHCPv4EncodeResponse(t *testing.T) {
-	dhcp := &DHCPv4{Operation: DHCPOpReply, HardwareType: LinkTypeEthernet, Xid: 0x12345678,
+	dhcp := &DHCPv4{
+		Operation: DHCPOpReply, HardwareType: LinkTypeEthernet, Xid: 0x12345678,
 		ClientIP: net.IP{0, 0, 0, 0}, YourClientIP: net.IP{192, 168, 0, 123}, NextServerIP: net.IP{192, 168, 0, 1}, RelayAgentIP: net.IP{0, 0, 0, 0},
 		ClientHWAddr: net.HardwareAddr{0x12, 0x34, 0x56, 0x78, 0x9a, 0xbc},
-		ServerName:   make([]byte, 64), File: make([]byte, 128)}
+		ServerName:   make([]byte, 64), File: make([]byte, 128),
+	}
 
 	dhcp.Options = append(dhcp.Options, NewDHCPOption(DHCPOptMessageType, []byte{byte(DHCPMsgTypeOffer)}))
 	dhcp.Options = append(dhcp.Options, NewDHCPOption(DHCPOptSubnetMask, []byte{255, 255, 255, 0}))
@@ -68,7 +74,7 @@ func TestDHCPv4EncodeResponse(t *testing.T) {
 }
 
 func TestDHCPv4DecodeOption(t *testing.T) {
-	var tests = []struct {
+	tests := []struct {
 		msg string
 		buf []byte
 		err error

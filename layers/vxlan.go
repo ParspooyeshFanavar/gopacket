@@ -10,6 +10,7 @@ import (
 	"encoding/binary"
 	"errors"
 	"fmt"
+
 	"github.com/dreadl0ck/gopacket"
 )
 
@@ -73,7 +74,6 @@ func (vx *VXLAN) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error 
 	vx.Payload = data[vxlanLength:]
 
 	return nil
-
 }
 
 func decodeVXLAN(data []byte, p gopacket.PacketBuilder) error {

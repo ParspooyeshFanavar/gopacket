@@ -29,8 +29,9 @@ const (
 // variety of programming languages.
 //
 // References
-//   https://lcm-proj.github.io/
-//   https://github.com/lcm-proj/lcm
+//
+//	https://lcm-proj.github.io/
+//	https://github.com/lcm-proj/lcm
 type LCM struct {
 	// Common (short & fragmented header) fields
 	Magic          uint32
@@ -65,7 +66,8 @@ var (
 // will be used when registering with RegisterLayerType towards gopacket,
 // otherwise an incremental value starting from 1001 will be used.
 func RegisterLCMLayerType(num int, name string, fingerprint LCMFingerprint,
-	decoder gopacket.Decoder) gopacket.LayerType {
+	decoder gopacket.Decoder,
+) gopacket.LayerType {
 	metadata := gopacket.LayerTypeMetadata{Name: name, Decoder: decoder}
 
 	if num == 0 {

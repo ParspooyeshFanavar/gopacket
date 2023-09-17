@@ -66,8 +66,10 @@ func fnvHash(s []byte) (h uint64) {
 	return
 }
 
-const fnvBasis = 14695981039346656037
-const fnvPrime = 1099511628211
+const (
+	fnvBasis = 14695981039346656037
+	fnvPrime = 1099511628211
+)
 
 // FastHash provides a quick hashing function for an endpoint, useful if you'd
 // like to split up endpoints by modulos or other load-balancing techniques.

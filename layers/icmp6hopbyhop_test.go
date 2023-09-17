@@ -64,7 +64,6 @@ func TestPacketICMPv6WithHopByHop(t *testing.T) {
 
 	respLayers := make([]gopacket.LayerType, 0)
 	err := parser.DecodeLayers(icmp6HopByHopData, &respLayers)
-
 	if err != nil {
 		t.Errorf("error decoding layers %s", err)
 		return

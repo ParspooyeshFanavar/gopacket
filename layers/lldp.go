@@ -62,9 +62,8 @@ type LLDPChassisID struct {
 }
 
 func (c *LLDPChassisID) serialize() []byte {
-
-	var buf = make([]byte, c.serializedLen())
-	idLen := uint16(LLDPTLVChassisID)<<9 | uint16(len(c.ID)+1) //id should take 7 bits, length should take 9 bits, +1 for subtype
+	buf := make([]byte, c.serializedLen())
+	idLen := uint16(LLDPTLVChassisID)<<9 | uint16(len(c.ID)+1) // id should take 7 bits, length should take 9 bits, +1 for subtype
 	binary.BigEndian.PutUint16(buf[0:2], idLen)
 	buf[2] = byte(c.Subtype)
 	copy(buf[3:], c.ID)
@@ -96,9 +95,8 @@ type LLDPPortID struct {
 }
 
 func (c *LLDPPortID) serialize() []byte {
-
-	var buf = make([]byte, c.serializedLen())
-	idLen := uint16(LLDPTLVPortID)<<9 | uint16(len(c.ID)+1) //id should take 7 bits, length should take 9 bits, +1 for subtype
+	buf := make([]byte, c.serializedLen())
+	idLen := uint16(LLDPTLVPortID)<<9 | uint16(len(c.ID)+1) // id should take 7 bits, length should take 9 bits, +1 for subtype
 	binary.BigEndian.PutUint16(buf[0:2], idLen)
 	buf[2] = byte(c.Subtype)
 	copy(buf[3:], c.ID)
@@ -240,7 +238,7 @@ type LinkLayerDiscoveryInfo struct {
 	Unknown         []LinkLayerDiscoveryValue // undecoded TLVs
 }
 
-/// IEEE 802.1 TLV Subtypes
+// / IEEE 802.1 TLV Subtypes
 const (
 	LLDP8021SubtypePortVLANID       uint8 = 1
 	LLDP8021SubtypeProtocolVLANID   uint8 = 2
@@ -793,9 +791,8 @@ func (c *LinkLayerDiscovery) SerializeTo(b gopacket.SerializeBuffer, opts gopack
 	if err != nil {
 		return err
 	}
-	binary.BigEndian.PutUint16(vb[len(vb)-2:], uint16(0)) //End tlv, 2 bytes, all zero
+	binary.BigEndian.PutUint16(vb[len(vb)-2:], uint16(0)) // End tlv, 2 bytes, all zero
 	return nil
-
 }
 
 func decodeLinkLayerDiscovery(data []byte, p gopacket.PacketBuilder) error {
@@ -1088,7 +1085,7 @@ func (l *LinkLayerDiscoveryInfo) DecodeMedia() (info LLDPInfoMedia, err error) {
 				if err = checkLLDPOrgSpecificLen(o, 3); err != nil {
 					return
 				}
-				//ll := uint8(o.Info[0])
+				// ll := uint8(o.Info[0])
 				info.Location.Address.What = LLDPLocationAddressWhat(o.Info[1])
 				info.Location.Address.CountryCode = string(o.Info[2:4])
 				data := o.Info[4:]

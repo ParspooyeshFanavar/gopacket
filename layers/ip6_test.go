@@ -100,7 +100,7 @@ var testPacketIPv6HopByHop0 = []byte{
 }
 
 func TestPacketIPv6HopByHop0Serialize(t *testing.T) {
-	var serialize = make([]gopacket.SerializableLayer, 0, 2)
+	serialize := make([]gopacket.SerializableLayer, 0, 2)
 	var err error
 
 	ip6 := &IPv6{}
@@ -112,7 +112,7 @@ func TestPacketIPv6HopByHop0Serialize(t *testing.T) {
 	serialize = append(serialize, ip6)
 
 	tlv := &IPv6HopByHopOption{}
-	tlv.OptionType = 0x01 //PadN
+	tlv.OptionType = 0x01 // PadN
 	tlv.OptionData = []byte{0x00, 0x00, 0x00, 0x00}
 	hop := &IPv6HopByHop{}
 	hop.Options = append(hop.Options, tlv)
@@ -150,8 +150,10 @@ func TestPacketIPv6HopByHop0Decode(t *testing.T) {
 		NextHeader:   IPProtocolIPv6HopByHop,
 		HopLimit:     64,
 		SrcIP:        net.IP{0x20, 0x01, 0x0d, 0xb8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01},
-		DstIP: net.IP{0x20, 0x01, 0x0d, 0xb8, 0x00, 0x00, 0x00, 0x00,
-			0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02},
+		DstIP: net.IP{
+			0x20, 0x01, 0x0d, 0xb8, 0x00, 0x00, 0x00, 0x00,
+			0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02,
+		},
 	}
 
 	hop := &ip6.hbh
@@ -198,10 +200,11 @@ func TestPacketIPv6HopByHop0Decode(t *testing.T) {
 }
 
 // testPacketIPv6Destination0 is the packet:
-//   12:40:14.429409595 IP6 2001:db8::1 > 2001:db8::2: DSTOPT no next header
-//   	0x0000:  6000 0000 0008 3c40 2001 0db8 0000 0000  `.....<@........
-//   	0x0010:  0000 0000 0000 0001 2001 0db8 0000 0000  ................
-//   	0x0020:  0000 0000 0000 0002 3b00 0104 0000 0000  ........;.......
+//
+//	12:40:14.429409595 IP6 2001:db8::1 > 2001:db8::2: DSTOPT no next header
+//		0x0000:  6000 0000 0008 3c40 2001 0db8 0000 0000  `.....<@........
+//		0x0010:  0000 0000 0000 0001 2001 0db8 0000 0000  ................
+//		0x0020:  0000 0000 0000 0002 3b00 0104 0000 0000  ........;.......
 var testPacketIPv6Destination0 = []byte{
 	0x60, 0x00, 0x00, 0x00, 0x00, 0x08, 0x3c, 0x40, 0x20, 0x01, 0x0d, 0xb8, 0x00, 0x00, 0x00, 0x00,
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x20, 0x01, 0x0d, 0xb8, 0x00, 0x00, 0x00, 0x00,
@@ -209,7 +212,7 @@ var testPacketIPv6Destination0 = []byte{
 }
 
 func TestPacketIPv6Destination0Serialize(t *testing.T) {
-	var serialize = make([]gopacket.SerializableLayer, 0, 2)
+	serialize := make([]gopacket.SerializableLayer, 0, 2)
 	var err error
 
 	ip6 := &IPv6{}
@@ -221,7 +224,7 @@ func TestPacketIPv6Destination0Serialize(t *testing.T) {
 	serialize = append(serialize, ip6)
 
 	tlv := &IPv6DestinationOption{}
-	tlv.OptionType = 0x01 //PadN
+	tlv.OptionType = 0x01 // PadN
 	tlv.OptionData = []byte{0x00, 0x00, 0x00, 0x00}
 	dst := &IPv6Destination{}
 	dst.Options = append(dst.Options, tlv)
@@ -259,8 +262,10 @@ func TestPacketIPv6Destination0Decode(t *testing.T) {
 		NextHeader:   IPProtocolIPv6Destination,
 		HopLimit:     64,
 		SrcIP:        net.IP{0x20, 0x01, 0x0d, 0xb8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01},
-		DstIP: net.IP{0x20, 0x01, 0x0d, 0xb8, 0x00, 0x00, 0x00, 0x00,
-			0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02},
+		DstIP: net.IP{
+			0x20, 0x01, 0x0d, 0xb8, 0x00, 0x00, 0x00, 0x00,
+			0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02,
+		},
 	}
 
 	dst := &IPv6Destination{}
@@ -309,7 +314,7 @@ var testPacketIPv6JumbogramHeader = []byte{
 }
 
 func TestIPv6JumbogramSerialize(t *testing.T) {
-	var serialize = make([]gopacket.SerializableLayer, 0, 2)
+	serialize := make([]gopacket.SerializableLayer, 0, 2)
 	var err error
 
 	ip6 := &IPv6{}
@@ -366,8 +371,10 @@ func TestIPv6JumbogramDecode(t *testing.T) {
 		NextHeader:   IPProtocolIPv6HopByHop,
 		HopLimit:     64,
 		SrcIP:        net.IP{0x20, 0x01, 0x0d, 0xb8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01},
-		DstIP: net.IP{0x20, 0x01, 0x0d, 0xb8, 0x00, 0x00, 0x00, 0x00,
-			0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02},
+		DstIP: net.IP{
+			0x20, 0x01, 0x0d, 0xb8, 0x00, 0x00, 0x00, 0x00,
+			0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02,
+		},
 	}
 	buf := new(bytes.Buffer)
 	buf.Write([]byte{0x3b, 0x00, 0xc2, 0x04, 0x00, 0x01, 0x00, 0x08})

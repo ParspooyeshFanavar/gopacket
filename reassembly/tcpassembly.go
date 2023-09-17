@@ -41,8 +41,10 @@ var defaultDebug = false
 
 var debugLog = flag.Bool("assembly_debug_log", defaultDebug, "If true, the github.com/dreadl0ck/gopacket/reassembly library will log verbose debugging information (at least one line per packet)")
 
-const invalidSequence = -1
-const uint32Max = 0xFFFFFFFF
+const (
+	invalidSequence = -1
+	uint32Max       = 0xFFFFFFFF
+)
 
 // Sequence is a TCP sequence number.  It provides a few convenience functions
 // for handling TCP wrap-around.  The sequence should always be in the range
@@ -52,9 +54,11 @@ type Sequence int64
 
 // Difference defines an ordering for comparing TCP sequences that's safe for
 // roll-overs.  It returns:
-//    > 0 : if t comes after s
-//    < 0 : if t comes before s
-//      0 : if t == s
+//
+//	> 0 : if t comes after s
+//	< 0 : if t comes before s
+//	  0 : if t == s
+//
 // The number returned is the sequence difference, so 4.Difference(8) will
 // return 4.
 //
@@ -242,12 +246,15 @@ type page struct {
 func (p *page) getBytes() []byte {
 	return p.bytes
 }
+
 func (p *page) captureInfo() gopacket.CaptureInfo {
 	return p.ac.GetCaptureInfo()
 }
+
 func (p *page) assemblerContext() AssemblerContext {
 	return p.ac
 }
+
 func (p *page) convertToPages(pc *pageCache, skip int, ac AssemblerContext) (*page, *page, int) {
 	if skip != 0 {
 		p.bytes = p.bytes[skip:]
@@ -256,25 +263,32 @@ func (p *page) convertToPages(pc *pageCache, skip int, ac AssemblerContext) (*pa
 	p.prev, p.next = nil, nil
 	return p, p, 1
 }
+
 func (p *page) length() int {
 	return len(p.bytes)
 }
+
 func (p *page) release(pc *pageCache) int {
 	pc.replace(p)
 	return 1
 }
+
 func (p *page) isStart() bool {
 	return p.start
 }
+
 func (p *page) isEnd() bool {
 	return p.end
 }
+
 func (p *page) getSeq() Sequence {
 	return p.seq
 }
+
 func (p *page) isPacket() bool {
 	return p.ac != nil
 }
+
 func (p *page) String() string {
 	return fmt.Sprintf("page@%p{seq: %v, bytes:%d, -> nextSeq:%v} (prev:%p, next:%p)", p, p.seq, len(p.bytes), p.seq+Sequence(len(p.bytes)), p.prev, p.next)
 }
@@ -291,24 +305,31 @@ type livePacket struct {
 func (lp *livePacket) getBytes() []byte {
 	return lp.bytes
 }
+
 func (lp *livePacket) captureInfo() gopacket.CaptureInfo {
 	return lp.ac.GetCaptureInfo()
 }
+
 func (lp *livePacket) assemblerContext() AssemblerContext {
 	return lp.ac
 }
+
 func (lp *livePacket) length() int {
 	return len(lp.bytes)
 }
+
 func (lp *livePacket) isStart() bool {
 	return lp.start
 }
+
 func (lp *livePacket) isEnd() bool {
 	return lp.end
 }
+
 func (lp *livePacket) getSeq() Sequence {
 	return lp.seq
 }
+
 func (lp *livePacket) isPacket() bool {
 	return true
 }
@@ -343,6 +364,7 @@ func (lp *livePacket) convertToPages(pc *pageCache, skip int, ac AssemblerContex
 	}
 	return first, current, numPages
 }
+
 func (lp *livePacket) estimateNumberOfPages() int {
 	return (len(lp.bytes) + pageBytes + 1) / pageBytes
 }
@@ -356,9 +378,9 @@ func (lp *livePacket) release(*pageCache) int {
 // it to create a new Stream for every TCP stream.
 //
 // assembly will, in order:
-//    1) Create the stream via StreamFactory.New
-//    2) Call ReassembledSG 0 or more times, passing in reassembled TCP data in order
-//    3) Call ReassemblyComplete one time, after which the stream is dereferenced by assembly.
+//  1. Create the stream via StreamFactory.New
+//  2. Call ReassembledSG 0 or more times, passing in reassembled TCP data in order
+//  3. Call ReassemblyComplete one time, after which the stream is dereferenced by assembly.
 type Stream interface {
 	// Tell whether the TCP packet should be accepted, start could be modified to force a start even if no SYN have been seen
 	Accept(tcp *layers.TCP, ci gopacket.CaptureInfo, dir TCPFlowDirection, nextSeq Sequence, start *bool, ac AssemblerContext) bool
@@ -522,7 +544,7 @@ type AssemblerOptions struct {
 // applications written in Go.  The Assembler uses the following methods to be
 // as fast as possible, to keep packet processing speedy:
 //
-// Avoids Lock Contention
+// # Avoids Lock Contention
 //
 // Assemblers locks connections, but each connection has an individual lock, and
 // rarely will two Assemblers be looking at the same connection.  Assemblers
@@ -542,7 +564,7 @@ type AssemblerOptions struct {
 // avoiding all lock contention.  Only when different Assemblers could receive
 // packets for the same Stream should a StreamPool be shared between them.
 //
-// Avoids Memory Copying
+// # Avoids Memory Copying
 //
 // In the common case, handling of a single TCP packet should result in zero
 // memory allocations.  The Assembler will look up the connection, figure out
@@ -550,7 +572,7 @@ type AssemblerOptions struct {
 // the appropriate connection's handling code.  Only if a packet arrives out of
 // order is its contents copied and stored in memory for later.
 //
-// Avoids Memory Allocation
+// # Avoids Memory Allocation
 //
 // Assemblers try very hard to not use memory allocation unless absolutely
 // necessary.  Packet data for sequential packets is passed directly to streams
@@ -637,9 +659,9 @@ type assemblerAction struct {
 //
 // Each AssembleWithContext call results in, in order:
 //
-//    zero or one call to StreamFactory.New, creating a stream
-//    zero or one call to ReassembledSG on a single stream
-//    zero or one call to ReassemblyComplete on the same stream
+//	zero or one call to StreamFactory.New, creating a stream
+//	zero or one call to ReassembledSG on a single stream
+//	zero or one call to ReassemblyComplete on the same stream
 func (a *Assembler) AssembleWithContext(netFlow gopacket.Flow, t *layers.TCP, ac AssemblerContext) {
 	var conn *connection
 	var half *halfconnection
@@ -1119,7 +1141,6 @@ func (a *Assembler) sendToConnection(conn *connection, half *halfconnection, ac 
 	return nextSeq
 }
 
-//
 func (a *Assembler) addPending(half *halfconnection, firstSeq Sequence) int {
 	if half.saved == nil {
 		return 0
@@ -1213,7 +1234,7 @@ func (a *Assembler) closeHalfConnection(conn *connection, half *halfconnection) 
 		half.pages--
 	}
 	if conn.s2c.closed && conn.c2s.closed {
-		if half.stream.ReassemblyComplete(nil) { //FIXME: which context to pass ?
+		if half.stream.ReassemblyComplete(nil) { // FIXME: which context to pass ?
 			a.connPool.remove(conn)
 		}
 	}

@@ -10,8 +10,8 @@ import (
 	"bytes"
 	"flag"
 	"fmt"
-	"sync"
 	"log"
+	"sync"
 	"time"
 
 	"github.com/dreadl0ck/gopacket/layers"
@@ -64,7 +64,7 @@ func (c *pageCache) grow() {
 // Remove references to unused pages to let GC collect them
 // Note: memory used by c.free itself it not collected.
 func (c *pageCache) tryShrink() {
-	var min = c.pcSize / 2
+	min := c.pcSize / 2
 	if min < initialAllocSize {
 		min = initialAllocSize
 	}

@@ -37,8 +37,10 @@ import (
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 */
 
-type VRRPv2Type uint8
-type VRRPv2AuthType uint8
+type (
+	VRRPv2Type     uint8
+	VRRPv2AuthType uint8
+)
 
 const (
 	VRRPv2Advertisement VRRPv2Type = 0x01 // router advertisement
@@ -91,8 +93,7 @@ type VRRPv2 struct {
 func (v *VRRPv2) LayerType() gopacket.LayerType { return LayerTypeVRRP }
 
 func (v *VRRPv2) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error {
-
-	v.BaseLayer = BaseLayer{Contents: data[:len(data)]}
+	v.BaseLayer = BaseLayer{Contents: data[:]}
 	v.Version = data[0] >> 4 // high nibble == VRRP version. We're expecting v2
 
 	v.Type = VRRPv2Type(data[0] & 0x0F) // low nibble == VRRP type. Expecting 1 (advertisement)

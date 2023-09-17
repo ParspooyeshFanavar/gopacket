@@ -57,7 +57,7 @@ var icmp6RouterAdvertisementData = []byte{
 	0x00,       // flags & reserves
 	0x07, 0x08, // router lifetime
 	0x00, 0x00, 0x00, 0x00, // reachable time
-	0x00, 0x00, 0x00, 0x00, //retrans time
+	0x00, 0x00, 0x00, 0x00, // retrans time
 	0x01, 0x01, 0xde, 0x42, 0x72, 0xb0, 0x1e, 0xf4, // source link layer address
 	0x05, 0x01, 0x00, 0x00, 0x00, 0x00, 0x05, 0xdc, // MTU option
 }
@@ -74,7 +74,6 @@ func TestPacketICMPv6NeighborAnnouncementFlags(t *testing.T) {
 
 	respLayers := make([]gopacket.LayerType, 0)
 	err := parser.DecodeLayers(icmp6NeighborAnnouncementData, &respLayers)
-
 	if err != nil {
 		t.Errorf("error decoding layers %s", err)
 		return
@@ -109,7 +108,6 @@ func TestPacketICMPv6RouterAnnouncementFlags(t *testing.T) {
 
 	respLayers := make([]gopacket.LayerType, 0)
 	err := parser.DecodeLayers(icmp6RouterAdvertisementData, &respLayers)
-
 	if err != nil {
 		t.Errorf("error decoding layers %s", err)
 		return

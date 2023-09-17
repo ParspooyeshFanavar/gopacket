@@ -19,9 +19,7 @@ const (
 	modbusPort         uint16 = 502
 )
 
-var (
-	ErrModbusDataTooSmall = errors.New("Data too small for Modbus")
-)
+var ErrModbusDataTooSmall = errors.New("Data too small for Modbus")
 
 type FC byte
 
@@ -98,7 +96,7 @@ func (fc FC) masked() FC {
 func (fc FC) String() (s string) {
 	if fc.exception() {
 		s = `Exception: `
-		fc = fc.masked() //we aren't passing by pointer, so its not a problem to reuse
+		fc = fc.masked() // we aren't passing by pointer, so its not a problem to reuse
 	}
 
 	switch fc {

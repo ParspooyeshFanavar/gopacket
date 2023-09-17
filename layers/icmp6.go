@@ -66,58 +66,56 @@ type icmpv6TypeCodeInfoStruct struct {
 	codeStr *map[uint8]string
 }
 
-var (
-	icmpv6TypeCodeInfo = map[uint8]icmpv6TypeCodeInfoStruct{
-		ICMPv6TypeDestinationUnreachable: icmpv6TypeCodeInfoStruct{
-			"DestinationUnreachable", &map[uint8]string{
-				ICMPv6CodeNoRouteToDst:           "NoRouteToDst",
-				ICMPv6CodeAdminProhibited:        "AdminProhibited",
-				ICMPv6CodeBeyondScopeOfSrc:       "BeyondScopeOfSrc",
-				ICMPv6CodeAddressUnreachable:     "AddressUnreachable",
-				ICMPv6CodePortUnreachable:        "PortUnreachable",
-				ICMPv6CodeSrcAddressFailedPolicy: "SrcAddressFailedPolicy",
-				ICMPv6CodeRejectRouteToDst:       "RejectRouteToDst",
-			},
+var icmpv6TypeCodeInfo = map[uint8]icmpv6TypeCodeInfoStruct{
+	ICMPv6TypeDestinationUnreachable: {
+		"DestinationUnreachable", &map[uint8]string{
+			ICMPv6CodeNoRouteToDst:           "NoRouteToDst",
+			ICMPv6CodeAdminProhibited:        "AdminProhibited",
+			ICMPv6CodeBeyondScopeOfSrc:       "BeyondScopeOfSrc",
+			ICMPv6CodeAddressUnreachable:     "AddressUnreachable",
+			ICMPv6CodePortUnreachable:        "PortUnreachable",
+			ICMPv6CodeSrcAddressFailedPolicy: "SrcAddressFailedPolicy",
+			ICMPv6CodeRejectRouteToDst:       "RejectRouteToDst",
 		},
-		ICMPv6TypePacketTooBig: icmpv6TypeCodeInfoStruct{
-			"PacketTooBig", nil,
+	},
+	ICMPv6TypePacketTooBig: {
+		"PacketTooBig", nil,
+	},
+	ICMPv6TypeTimeExceeded: {
+		"TimeExceeded", &map[uint8]string{
+			ICMPv6CodeHopLimitExceeded:               "HopLimitExceeded",
+			ICMPv6CodeFragmentReassemblyTimeExceeded: "FragmentReassemblyTimeExceeded",
 		},
-		ICMPv6TypeTimeExceeded: icmpv6TypeCodeInfoStruct{
-			"TimeExceeded", &map[uint8]string{
-				ICMPv6CodeHopLimitExceeded:               "HopLimitExceeded",
-				ICMPv6CodeFragmentReassemblyTimeExceeded: "FragmentReassemblyTimeExceeded",
-			},
+	},
+	ICMPv6TypeParameterProblem: {
+		"ParameterProblem", &map[uint8]string{
+			ICMPv6CodeErroneousHeaderField:   "ErroneousHeaderField",
+			ICMPv6CodeUnrecognizedNextHeader: "UnrecognizedNextHeader",
+			ICMPv6CodeUnrecognizedIPv6Option: "UnrecognizedIPv6Option",
 		},
-		ICMPv6TypeParameterProblem: icmpv6TypeCodeInfoStruct{
-			"ParameterProblem", &map[uint8]string{
-				ICMPv6CodeErroneousHeaderField:   "ErroneousHeaderField",
-				ICMPv6CodeUnrecognizedNextHeader: "UnrecognizedNextHeader",
-				ICMPv6CodeUnrecognizedIPv6Option: "UnrecognizedIPv6Option",
-			},
-		},
-		ICMPv6TypeEchoRequest: icmpv6TypeCodeInfoStruct{
-			"EchoRequest", nil,
-		},
-		ICMPv6TypeEchoReply: icmpv6TypeCodeInfoStruct{
-			"EchoReply", nil,
-		},
-		ICMPv6TypeRouterSolicitation: icmpv6TypeCodeInfoStruct{
-			"RouterSolicitation", nil,
-		},
-		ICMPv6TypeRouterAdvertisement: icmpv6TypeCodeInfoStruct{
-			"RouterAdvertisement", nil,
-		},
-		ICMPv6TypeNeighborSolicitation: icmpv6TypeCodeInfoStruct{
-			"NeighborSolicitation", nil,
-		},
-		ICMPv6TypeNeighborAdvertisement: icmpv6TypeCodeInfoStruct{
-			"NeighborAdvertisement", nil,
-		},
-		ICMPv6TypeRedirect: icmpv6TypeCodeInfoStruct{
-			"Redirect", nil,
-		},
-	}
-)
+	},
+	ICMPv6TypeEchoRequest: {
+		"EchoRequest", nil,
+	},
+	ICMPv6TypeEchoReply: {
+		"EchoReply", nil,
+	},
+	ICMPv6TypeRouterSolicitation: {
+		"RouterSolicitation", nil,
+	},
+	ICMPv6TypeRouterAdvertisement: {
+		"RouterAdvertisement", nil,
+	},
+	ICMPv6TypeNeighborSolicitation: {
+		"NeighborSolicitation", nil,
+	},
+	ICMPv6TypeNeighborAdvertisement: {
+		"NeighborAdvertisement", nil,
+	},
+	ICMPv6TypeRedirect: {
+		"Redirect", nil,
+	},
+}
 
 type ICMPv6TypeCode uint16
 

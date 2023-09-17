@@ -37,33 +37,43 @@ import (
 	"github.com/dreadl0ck/gopacket/reassembly"
 )
 
-var maxcount = flag.Int("c", -1, "Only grab this many packets, then exit")
-var decoder = flag.String("decoder", "", "Name of the decoder to use (default: guess from capture)")
-var statsevery = flag.Int("stats", 1000, "Output statistics every N packets")
-var lazy = flag.Bool("lazy", false, "If true, do lazy decoding")
-var nodefrag = flag.Bool("nodefrag", false, "If true, do not do IPv4 defrag")
-var checksum = flag.Bool("checksum", false, "Check TCP checksum")
-var nooptcheck = flag.Bool("nooptcheck", false, "Do not check TCP options (useful to ignore MSS on captures with TSO)")
-var ignorefsmerr = flag.Bool("ignorefsmerr", false, "Ignore TCP FSM errors")
-var allowmissinginit = flag.Bool("allowmissinginit", false, "Support streams without SYN/SYN+ACK/ACK sequence")
-var verbose = flag.Bool("verbose", false, "Be verbose")
-var debug = flag.Bool("debug", false, "Display debug information")
-var quiet = flag.Bool("quiet", false, "Be quiet regarding errors")
+var (
+	maxcount         = flag.Int("c", -1, "Only grab this many packets, then exit")
+	decoder          = flag.String("decoder", "", "Name of the decoder to use (default: guess from capture)")
+	statsevery       = flag.Int("stats", 1000, "Output statistics every N packets")
+	lazy             = flag.Bool("lazy", false, "If true, do lazy decoding")
+	nodefrag         = flag.Bool("nodefrag", false, "If true, do not do IPv4 defrag")
+	checksum         = flag.Bool("checksum", false, "Check TCP checksum")
+	nooptcheck       = flag.Bool("nooptcheck", false, "Do not check TCP options (useful to ignore MSS on captures with TSO)")
+	ignorefsmerr     = flag.Bool("ignorefsmerr", false, "Ignore TCP FSM errors")
+	allowmissinginit = flag.Bool("allowmissinginit", false, "Support streams without SYN/SYN+ACK/ACK sequence")
+	verbose          = flag.Bool("verbose", false, "Be verbose")
+	debug            = flag.Bool("debug", false, "Display debug information")
+	quiet            = flag.Bool("quiet", false, "Be quiet regarding errors")
+)
 
 // http
 var nohttp = flag.Bool("nohttp", false, "Disable HTTP parsing")
-var output = flag.String("output", "", "Path to create file for HTTP 200 OK responses")
-var writeincomplete = flag.Bool("writeincomplete", false, "Write incomplete response")
 
-var hexdump = flag.Bool("dump", false, "Dump HTTP request/response as hex")
-var hexdumppkt = flag.Bool("dumppkt", false, "Dump packet as hex")
+var (
+	output          = flag.String("output", "", "Path to create file for HTTP 200 OK responses")
+	writeincomplete = flag.Bool("writeincomplete", false, "Write incomplete response")
+)
+
+var (
+	hexdump    = flag.Bool("dump", false, "Dump HTTP request/response as hex")
+	hexdumppkt = flag.Bool("dumppkt", false, "Dump packet as hex")
+)
 
 // capture
 var iface = flag.String("i", "eth0", "Interface to read packets from")
-var fname = flag.String("r", "", "Filename to read from, overrides -i")
-var snaplen = flag.Int("s", 65536, "Snap length (number of bytes max to read per packet")
-var tstype = flag.String("timestamp_type", "", "Type of timestamps to use")
-var promisc = flag.Bool("promisc", true, "Set promiscuous mode")
+
+var (
+	fname   = flag.String("r", "", "Filename to read from, overrides -i")
+	snaplen = flag.Int("s", 65536, "Snap length (number of bytes max to read per packet")
+	tstype  = flag.String("timestamp_type", "", "Type of timestamps to use")
+	promisc = flag.Bool("promisc", true, "Set promiscuous mode")
+)
 
 var memprofile = flag.String("memprofile", "", "Write memory profile")
 
@@ -85,8 +95,10 @@ var stats struct {
 	overlapPackets      int
 }
 
-const closeTimeout time.Duration = time.Hour * 24 // Closing inactive: TODO: from CLI
-const timeout time.Duration = time.Minute * 5     // Pending bytes: TODO: from CLI
+const (
+	closeTimeout time.Duration = time.Hour * 24  // Closing inactive: TODO: from CLI
+	timeout      time.Duration = time.Minute * 5 // Pending bytes: TODO: from CLI
+)
 
 /*
  * HTTP part
@@ -115,10 +127,12 @@ func (h *httpReader) Read(p []byte) (int, error) {
 	return l, nil
 }
 
-var outputLevel int
-var errorsMap map[string]uint
-var errorsMapMutex sync.Mutex
-var errors uint
+var (
+	outputLevel    int
+	errorsMap      map[string]uint
+	errorsMapMutex sync.Mutex
+	errors         uint
+)
 
 // Too bad for perf that a... is evaluated
 func Error(t string, s string, a ...interface{}) {
@@ -131,11 +145,13 @@ func Error(t string, s string, a ...interface{}) {
 		fmt.Printf(s, a...)
 	}
 }
+
 func Info(s string, a ...interface{}) {
 	if outputLevel >= 1 {
 		fmt.Printf(s, a...)
 	}
 }
+
 func Debug(s string, a ...interface{}) {
 	if outputLevel >= 2 {
 		fmt.Printf(s, a...)
@@ -217,7 +233,7 @@ func (h *httpReader) run(wg *sync.WaitGroup) {
 				n := 0
 				for true {
 					_, err := os.Stat(target)
-					//if os.IsNotExist(err) != nil {
+					// if os.IsNotExist(err) != nil {
 					if err != nil {
 						break
 					}
@@ -655,7 +671,7 @@ func main() {
 	fmt.Printf(" overlap packets:\t%d\n", stats.overlapPackets)
 	fmt.Printf(" overlap bytes:\t\t%d\n", stats.overlapBytes)
 	fmt.Printf("Errors: %d\n", errors)
-	for e, _ := range errorsMap {
+	for e := range errorsMap {
 		fmt.Printf(" %s:\t\t%d\n", e, errorsMap[e])
 	}
 }

@@ -21,10 +21,12 @@ import (
 	"github.com/dreadl0ck/gopacket/tcpassembly"
 )
 
-var iface = flag.String("i", "eth0", "Interface to get packets from")
-var snaplen = flag.Int("s", 16<<10, "SnapLen for pcap packet capture")
-var filter = flag.String("f", "tcp", "BPF filter for pcap")
-var logAllPackets = flag.Bool("v", false, "Logs every packet in great detail")
+var (
+	iface         = flag.String("i", "eth0", "Interface to get packets from")
+	snaplen       = flag.Int("s", 16<<10, "SnapLen for pcap packet capture")
+	filter        = flag.String("f", "tcp", "BPF filter for pcap")
+	logAllPackets = flag.Bool("v", false, "Logs every packet in great detail")
+)
 
 // key is used to map bidirectional streams to each other.
 type key struct {

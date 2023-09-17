@@ -17,10 +17,8 @@ const (
 	cipBasePacketLen int = 2
 )
 
-var (
-	// ErrCIPDataTooSmall indicates that a CIP packet has been truncated
-	ErrCIPDataTooSmall = errors.New("CIP packet data truncated")
-)
+// ErrCIPDataTooSmall indicates that a CIP packet has been truncated
+var ErrCIPDataTooSmall = errors.New("CIP packet data truncated")
 
 // CIP implements encoding/decoding for the Common Industrial Protocol, as
 // defined by ODVA (odva.org).

@@ -14,7 +14,6 @@ import (
 var flagInput = flag.String("r", "", "input file")
 
 func main() {
-
 	flag.Parse()
 
 	r, err := pcap.OpenOffline(*flagInput)
@@ -25,7 +24,7 @@ func main() {
 
 	fmt.Println("detected link type:", r.LinkType())
 
-	var layerMap = make(map[string]int64)
+	layerMap := make(map[string]int64)
 
 	print("processing packets... ")
 	for {

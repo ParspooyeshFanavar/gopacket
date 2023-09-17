@@ -40,13 +40,15 @@ type pcapPkthdr struct {
 	Caplen uint32
 	Len    uint32
 }
-type pcapTPtr uintptr
-type pcapBpfInstruction struct {
-	Code uint16
-	Jt   uint8
-	Jf   uint8
-	K    uint32
-}
+type (
+	pcapTPtr           uintptr
+	pcapBpfInstruction struct {
+		Code uint16
+		Jt   uint8
+		Jf   uint8
+		K    uint32
+	}
+)
 type pcapBpfProgram struct {
 	Len       uint32
 	Pad_cgo_0 [4]byte
@@ -57,15 +59,17 @@ type pcapStats struct {
 	Drop   uint32
 	Ifdrop uint32
 }
-type pcapCint int32
-type pcapIf struct {
-	Next        *pcapIf
-	Name        *int8
-	Description *int8
-	Addresses   *pcapAddr
-	Flags       uint32
-	Pad_cgo_0   [4]byte
-}
+type (
+	pcapCint int32
+	pcapIf   struct {
+		Next        *pcapIf
+		Name        *int8
+		Description *int8
+		Addresses   *pcapAddr
+		Flags       uint32
+		Pad_cgo_0   [4]byte
+	}
+)
 
 type pcapAddr struct {
 	Next      *pcapAddr

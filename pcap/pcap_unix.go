@@ -5,6 +5,7 @@
 // that can be found in the LICENSE file in the root of the source
 // tree.
 //
+//go:build !windows
 // +build !windows
 
 package pcap
@@ -185,9 +186,11 @@ const (
 	pcapTstampPrecisionNano  = C.PCAP_TSTAMP_PRECISION_NANO
 )
 
-type pcapPkthdr C.struct_pcap_pkthdr
-type pcapTPtr *C.struct_pcap
-type pcapBpfProgram C.struct_bpf_program
+type (
+	pcapPkthdr     C.struct_pcap_pkthdr
+	pcapTPtr       *C.struct_pcap
+	pcapBpfProgram C.struct_bpf_program
+)
 
 func (h *pcapPkthdr) getSec() int64 {
 	return int64(h.ts.tv_sec)

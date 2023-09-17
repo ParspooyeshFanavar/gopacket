@@ -4,6 +4,7 @@
 // that can be found in the LICENSE file in the root of the source
 // tree.
 
+//go:build linux
 // +build linux
 
 // Package routing provides a very basic but mostly functional implementation of
@@ -58,9 +59,11 @@ type routeSlice []*rtInfo
 func (r routeSlice) Len() int {
 	return len(r)
 }
+
 func (r routeSlice) Less(i, j int) bool {
 	return r[i].Priority < r[j].Priority
 }
+
 func (r routeSlice) Swap(i, j int) {
 	r[i], r[j] = r[j], r[i]
 }

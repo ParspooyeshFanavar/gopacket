@@ -110,7 +110,7 @@ func TestPacketHeader(t *testing.T) {
 
 	equal(t, ci.CaptureLength, 42)
 	equal(t, ci.Length, 42)
-	equal(t, ci.Timestamp, time.Date(2019, 04, 23, 07, 01, 32, 831815*1000, time.UTC)) //with nanosec
+	equal(t, ci.Timestamp, time.Date(2019, 04, 23, 07, 01, 32, 831815*1000, time.UTC)) // with nanosec
 
 }
 
@@ -161,7 +161,6 @@ func TestNotOverlapBuf(t *testing.T) {
 	if overlap[30] == overlap2[30] {
 		t.Error(fmt.Errorf("Should not be: %x", overlap[30]))
 	}
-
 }
 
 func GeneratePacks(num int) []byte {
@@ -173,6 +172,7 @@ func GeneratePacks(num int) []byte {
 	copy(buf, packs)
 	return buf
 }
+
 func BenchmarkReadPacketData(b *testing.B) {
 	buf := GeneratePacks(100)
 	handle, _ := NewSnoopReader(bytes.NewReader(buf))

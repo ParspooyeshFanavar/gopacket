@@ -74,7 +74,6 @@ func TestIPOptResetDuringDecoding(t *testing.T) {
 	}
 
 	ipBytes, err := serialize(ipWithoutOptions)
-
 	if err != nil {
 		t.Fatalf("Failed to serialize ip layer: %v", err)
 	}
@@ -88,7 +87,6 @@ func TestIPOptResetDuringDecoding(t *testing.T) {
 	if len(ip.Options) > 0 {
 		t.Fatalf("Options slice has stale data from previous packet")
 	}
-
 }
 
 func serialize(ip *IPv4) ([]byte, error) {

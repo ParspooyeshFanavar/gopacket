@@ -237,7 +237,7 @@ type OSPF struct {
 	Content      interface{}
 }
 
-//OSPFv2 extend the OSPF head with version 2 specific fields
+// OSPFv2 extend the OSPF head with version 2 specific fields
 type OSPFv2 struct {
 	BaseLayer
 	OSPF
@@ -423,7 +423,7 @@ func extractLSAInformation(lstype, lsalength uint16, data []byte) (interface{}, 
 		var prefixes []Prefix
 		var prefixOffset uint32 = 32
 		var j uint16
-		var datalen = len(data)
+		datalen := len(data)
 		numOfPrefixes := binary.BigEndian.Uint16(data[20:22])
 		for j = 0; j < numOfPrefixes; j++ {
 			// avoid index out of range error
@@ -583,7 +583,6 @@ func (ospf *OSPFv2) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) err
 
 // DecodeFromBytes decodes the given bytes into the OSPF layer.
 func (ospf *OSPFv3) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error {
-
 	if len(data) < 16 {
 		return fmt.Errorf("Packet too smal for OSPF Version 3")
 	}
@@ -681,6 +680,7 @@ func (ospf *OSPFv3) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) err
 func (ospf *OSPFv2) LayerType() gopacket.LayerType {
 	return LayerTypeOSPF
 }
+
 func (ospf *OSPFv3) LayerType() gopacket.LayerType {
 	return LayerTypeOSPF
 }
@@ -689,6 +689,7 @@ func (ospf *OSPFv3) LayerType() gopacket.LayerType {
 func (ospf *OSPFv2) NextLayerType() gopacket.LayerType {
 	return gopacket.LayerTypeZero
 }
+
 func (ospf *OSPFv3) NextLayerType() gopacket.LayerType {
 	return gopacket.LayerTypeZero
 }
@@ -697,6 +698,7 @@ func (ospf *OSPFv3) NextLayerType() gopacket.LayerType {
 func (ospf *OSPFv2) CanDecode() gopacket.LayerClass {
 	return LayerTypeOSPF
 }
+
 func (ospf *OSPFv3) CanDecode() gopacket.LayerClass {
 	return LayerTypeOSPF
 }

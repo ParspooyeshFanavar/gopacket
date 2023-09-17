@@ -256,7 +256,6 @@ func TestDefragIDField(t *testing.T) {
 		t.Fatalf("defrag: expecting a fragmented packet with ID %d, got %d",
 			expectedID, ipFragmented.Id)
 	}
-
 }
 
 func gentestDefrag(t *testing.T, defrag *IPv4Defragmenter, buf []byte, expect bool, label string) *layers.IPv4 {

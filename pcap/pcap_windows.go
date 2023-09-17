@@ -102,10 +102,11 @@ func bytePtrToString(r uintptr) string {
 	return byteSliceToString(bval[:])
 }
 
-var wpcapHandle windows.Handle
-var msvcrtHandle syscall.Handle
 var (
-	callocPtr,
+	wpcapHandle  windows.Handle
+	msvcrtHandle syscall.Handle
+)
+var callocPtr,
 	pcapStrerrorPtr,
 	pcapStatustostrPtr,
 	pcapOpenLivePtr,
@@ -152,7 +153,6 @@ var (
 	pcapSetBufferSizePtr,
 	pcapSetImmediateModePtr,
 	pcapHopenOfflinePtr uintptr
-)
 
 func init() {
 	LoadWinPCAP()
@@ -225,7 +225,7 @@ func LoadWinPCAP() error {
 	pcapSendpacketPtr = mustLoad("pcap_sendpacket")
 	pcapSetdirectionPtr = mustLoad("pcap_setdirection")
 	pcapSnapshotPtr = mustLoad("pcap_snapshot")
-	//libpcap <1.2 doesn't have pcap_*_tstamp_* functions
+	// libpcap <1.2 doesn't have pcap_*_tstamp_* functions
 	pcapTstampTypeValToNamePtr = mightLoad("pcap_tstamp_type_val_to_name")
 	pcapTstampTypeNameToValPtr = mightLoad("pcap_tstamp_type_name_to_val")
 	pcapListTstampTypesPtr = mightLoad("pcap_list_tstamp_types")
@@ -240,11 +240,11 @@ func LoadWinPCAP() error {
 	pcapSetSnaplenPtr = mustLoad("pcap_set_snaplen")
 	pcapSetPromiscPtr = mustLoad("pcap_set_promisc")
 	pcapSetTimeoutPtr = mustLoad("pcap_set_timeout")
-	//winpcap does not support rfmon
+	// winpcap does not support rfmon
 	pcapCanSetRfmonPtr = mightLoad("pcap_can_set_rfmon")
 	pcapSetRfmonPtr = mightLoad("pcap_set_rfmon")
 	pcapSetBufferSizePtr = mustLoad("pcap_set_buffer_size")
-	//libpcap <1.5 does not have pcap_set_immediate_mode
+	// libpcap <1.5 does not have pcap_set_immediate_mode
 	pcapSetImmediateModePtr = mightLoad("pcap_set_immediate_mode")
 	pcapHopenOfflinePtr = mustLoad("pcap_hopen_offline")
 
@@ -681,7 +681,7 @@ func (t TimestampSource) pcapTstampTypeValToName() string {
 		return err.Error()
 	}
 
-	//libpcap <1.2 doesn't have pcap_*_tstamp_* functions
+	// libpcap <1.2 doesn't have pcap_*_tstamp_* functions
 	if pcapTstampTypeValToNamePtr == 0 {
 		return "pcap timestamp types not supported"
 	}
@@ -695,7 +695,7 @@ func pcapTstampTypeNameToVal(s string) (TimestampSource, error) {
 		return 0, err
 	}
 
-	//libpcap <1.2 doesn't have pcap_*_tstamp_* functions
+	// libpcap <1.2 doesn't have pcap_*_tstamp_* functions
 	if pcapTstampTypeNameToValPtr == 0 {
 		return 0, statusError(pcapCint(pcapError))
 	}
@@ -784,7 +784,7 @@ func (p *InactiveHandle) pcapSetTimeout(timeout time.Duration) error {
 }
 
 func (p *InactiveHandle) pcapListTstampTypes() (out []TimestampSource) {
-	//libpcap <1.2 doesn't have pcap_*_tstamp_* functions
+	// libpcap <1.2 doesn't have pcap_*_tstamp_* functions
 	if pcapListTstampTypesPtr == 0 {
 		return
 	}
@@ -803,7 +803,7 @@ func (p *InactiveHandle) pcapListTstampTypes() (out []TimestampSource) {
 }
 
 func (p *InactiveHandle) pcapSetTstampType(t TimestampSource) error {
-	//libpcap <1.2 doesn't have pcap_*_tstamp_* functions
+	// libpcap <1.2 doesn't have pcap_*_tstamp_* functions
 	if pcapSetTstampTypePtr == 0 {
 		return statusError(pcapError)
 	}
@@ -815,7 +815,7 @@ func (p *InactiveHandle) pcapSetTstampType(t TimestampSource) error {
 }
 
 func (p *InactiveHandle) pcapSetRfmon(monitor bool) error {
-	//winpcap does not support rfmon
+	// winpcap does not support rfmon
 	if pcapCanSetRfmonPtr == 0 {
 		return CannotSetRFMon
 	}
@@ -848,7 +848,7 @@ func (p *InactiveHandle) pcapSetBufferSize(bufferSize int) error {
 }
 
 func (p *InactiveHandle) pcapSetImmediateMode(mode bool) error {
-	//libpcap <1.5 does not have pcap_set_immediate_mode
+	// libpcap <1.5 does not have pcap_set_immediate_mode
 	if pcapSetImmediateModePtr == 0 {
 		return statusError(pcapError)
 	}

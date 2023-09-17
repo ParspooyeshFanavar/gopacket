@@ -86,7 +86,7 @@ func (enip *ENIP) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error
 func (enip *ENIP) getPayload(data []byte, df gopacket.DecodeFeedback) (err error) {
 	enip.CommandSpecific.Cmd = enip.Command
 	switch enip.Command {
-	case registerSession: //register session
+	case registerSession: // register session
 		if len(data) < enipMinRegSessionPacketLen {
 			df.SetTruncated()
 			err = ErrENIPDataTooSmall
@@ -100,11 +100,11 @@ func (enip *ENIP) getPayload(data []byte, df gopacket.DecodeFeedback) (err error
 			df.SetTruncated()
 			return ErrENIPDataTooSmall
 		}
-		//grab the item count
+		// grab the item count
 		itemCount := int(binary.LittleEndian.Uint16(data[30:32]))
 		csdEnd := 32
 		for i := 0; i < itemCount; i++ {
-			csdEnd += getDataFormatIDLen(binary.LittleEndian.Uint16(data[csdEnd:]), data[csdEnd+2:]) //get length
+			csdEnd += getDataFormatIDLen(binary.LittleEndian.Uint16(data[csdEnd:]), data[csdEnd+2:]) // get length
 		}
 		if len(data) < csdEnd {
 			df.SetTruncated()
@@ -124,7 +124,7 @@ func (enip *ENIP) getPayload(data []byte, df gopacket.DecodeFeedback) (err error
 func getDataFormatIDLen(id uint16, data []byte) int {
 	switch id {
 	case 0x0000:
-		return 4 //ID plus length of zero
+		return 4 // ID plus length of zero
 	case 0x000C:
 		return 8
 	case 0x00A1:
@@ -132,22 +132,22 @@ func getDataFormatIDLen(id uint16, data []byte) int {
 	case 0x00B1:
 		return 6
 	case 0x00B2:
-		return 4 //ID plus length
+		return 4 // ID plus length
 	case 0x0100:
-		return 4 //ID plus length
+		return 4 // ID plus length
 	case 0x8000:
-		return 4 //ID plus length
+		return 4 // ID plus length
 	case 0x8001:
-		return 2 //ID plus length
+		return 2 // ID plus length
 	case 0x8002:
-		return 2 //ID plus length
+		return 2 // ID plus length
 	}
 	return 0
 }
 
 func (enip *ENIP) getInterfaceHandleNextProto(interfaceHandle uint32) gopacket.LayerType {
 	switch interfaceHandle {
-	case 0: //CIP
+	case 0: // CIP
 		return LayerTypeCIP
 	}
 	return gopacket.LayerTypePayload

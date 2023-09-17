@@ -46,12 +46,15 @@ type errorDecoderForLinkType int
 func (a *errorDecoderForLinkType) Decode(data []byte, p gopacket.PacketBuilder) error {
 	return a
 }
+
 func (a *errorDecoderForLinkType) Error() string {
 	return fmt.Sprintf("Unable to decode LinkType %d", int(*a))
 }
 
-var errorDecodersForLinkType [256]errorDecoderForLinkType
-var LinkTypeMetadata [256]EnumMetadata
+var (
+	errorDecodersForLinkType [256]errorDecoderForLinkType
+	LinkTypeMetadata         [256]EnumMetadata
+)
 
 func initUnknownTypesForLinkType() {
 	for i := 0; i < 256; i++ {
@@ -83,12 +86,15 @@ type errorDecoderForEthernetType int
 func (a *errorDecoderForEthernetType) Decode(data []byte, p gopacket.PacketBuilder) error {
 	return a
 }
+
 func (a *errorDecoderForEthernetType) Error() string {
 	return fmt.Sprintf("Unable to decode EthernetType %d", int(*a))
 }
 
-var errorDecodersForEthernetType [65536]errorDecoderForEthernetType
-var EthernetTypeMetadata [65536]EnumMetadata
+var (
+	errorDecodersForEthernetType [65536]errorDecoderForEthernetType
+	EthernetTypeMetadata         [65536]EnumMetadata
+)
 
 func initUnknownTypesForEthernetType() {
 	for i := 0; i < 65536; i++ {
@@ -120,12 +126,15 @@ type errorDecoderForPPPType int
 func (a *errorDecoderForPPPType) Decode(data []byte, p gopacket.PacketBuilder) error {
 	return a
 }
+
 func (a *errorDecoderForPPPType) Error() string {
 	return fmt.Sprintf("Unable to decode PPPType %d", int(*a))
 }
 
-var errorDecodersForPPPType [65536]errorDecoderForPPPType
-var PPPTypeMetadata [65536]EnumMetadata
+var (
+	errorDecodersForPPPType [65536]errorDecoderForPPPType
+	PPPTypeMetadata         [65536]EnumMetadata
+)
 
 func initUnknownTypesForPPPType() {
 	for i := 0; i < 65536; i++ {
@@ -157,12 +166,15 @@ type errorDecoderForIPProtocol int
 func (a *errorDecoderForIPProtocol) Decode(data []byte, p gopacket.PacketBuilder) error {
 	return a
 }
+
 func (a *errorDecoderForIPProtocol) Error() string {
 	return fmt.Sprintf("Unable to decode IPProtocol %d", int(*a))
 }
 
-var errorDecodersForIPProtocol [256]errorDecoderForIPProtocol
-var IPProtocolMetadata [256]EnumMetadata
+var (
+	errorDecodersForIPProtocol [256]errorDecoderForIPProtocol
+	IPProtocolMetadata         [256]EnumMetadata
+)
 
 func initUnknownTypesForIPProtocol() {
 	for i := 0; i < 256; i++ {
@@ -194,12 +206,15 @@ type errorDecoderForSCTPChunkType int
 func (a *errorDecoderForSCTPChunkType) Decode(data []byte, p gopacket.PacketBuilder) error {
 	return a
 }
+
 func (a *errorDecoderForSCTPChunkType) Error() string {
 	return fmt.Sprintf("Unable to decode SCTPChunkType %d", int(*a))
 }
 
-var errorDecodersForSCTPChunkType [256]errorDecoderForSCTPChunkType
-var SCTPChunkTypeMetadata [256]EnumMetadata
+var (
+	errorDecodersForSCTPChunkType [256]errorDecoderForSCTPChunkType
+	SCTPChunkTypeMetadata         [256]EnumMetadata
+)
 
 func initUnknownTypesForSCTPChunkType() {
 	for i := 0; i < 256; i++ {
@@ -231,12 +246,15 @@ type errorDecoderForPPPoECode int
 func (a *errorDecoderForPPPoECode) Decode(data []byte, p gopacket.PacketBuilder) error {
 	return a
 }
+
 func (a *errorDecoderForPPPoECode) Error() string {
 	return fmt.Sprintf("Unable to decode PPPoECode %d", int(*a))
 }
 
-var errorDecodersForPPPoECode [256]errorDecoderForPPPoECode
-var PPPoECodeMetadata [256]EnumMetadata
+var (
+	errorDecodersForPPPoECode [256]errorDecoderForPPPoECode
+	PPPoECodeMetadata         [256]EnumMetadata
+)
 
 func initUnknownTypesForPPPoECode() {
 	for i := 0; i < 256; i++ {
@@ -268,12 +286,15 @@ type errorDecoderForFDDIFrameControl int
 func (a *errorDecoderForFDDIFrameControl) Decode(data []byte, p gopacket.PacketBuilder) error {
 	return a
 }
+
 func (a *errorDecoderForFDDIFrameControl) Error() string {
 	return fmt.Sprintf("Unable to decode FDDIFrameControl %d", int(*a))
 }
 
-var errorDecodersForFDDIFrameControl [256]errorDecoderForFDDIFrameControl
-var FDDIFrameControlMetadata [256]EnumMetadata
+var (
+	errorDecodersForFDDIFrameControl [256]errorDecoderForFDDIFrameControl
+	FDDIFrameControlMetadata         [256]EnumMetadata
+)
 
 func initUnknownTypesForFDDIFrameControl() {
 	for i := 0; i < 256; i++ {
@@ -305,12 +326,15 @@ type errorDecoderForEAPOLType int
 func (a *errorDecoderForEAPOLType) Decode(data []byte, p gopacket.PacketBuilder) error {
 	return a
 }
+
 func (a *errorDecoderForEAPOLType) Error() string {
 	return fmt.Sprintf("Unable to decode EAPOLType %d", int(*a))
 }
 
-var errorDecodersForEAPOLType [256]errorDecoderForEAPOLType
-var EAPOLTypeMetadata [256]EnumMetadata
+var (
+	errorDecodersForEAPOLType [256]errorDecoderForEAPOLType
+	EAPOLTypeMetadata         [256]EnumMetadata
+)
 
 func initUnknownTypesForEAPOLType() {
 	for i := 0; i < 256; i++ {
@@ -342,12 +366,15 @@ type errorDecoderForProtocolFamily int
 func (a *errorDecoderForProtocolFamily) Decode(data []byte, p gopacket.PacketBuilder) error {
 	return a
 }
+
 func (a *errorDecoderForProtocolFamily) Error() string {
 	return fmt.Sprintf("Unable to decode ProtocolFamily %d", int(*a))
 }
 
-var errorDecodersForProtocolFamily [256]errorDecoderForProtocolFamily
-var ProtocolFamilyMetadata [256]EnumMetadata
+var (
+	errorDecodersForProtocolFamily [256]errorDecoderForProtocolFamily
+	ProtocolFamilyMetadata         [256]EnumMetadata
+)
 
 func initUnknownTypesForProtocolFamily() {
 	for i := 0; i < 256; i++ {
@@ -379,12 +406,15 @@ type errorDecoderForDot11Type int
 func (a *errorDecoderForDot11Type) Decode(data []byte, p gopacket.PacketBuilder) error {
 	return a
 }
+
 func (a *errorDecoderForDot11Type) Error() string {
 	return fmt.Sprintf("Unable to decode Dot11Type %d", int(*a))
 }
 
-var errorDecodersForDot11Type [256]errorDecoderForDot11Type
-var Dot11TypeMetadata [256]EnumMetadata
+var (
+	errorDecodersForDot11Type [256]errorDecoderForDot11Type
+	Dot11TypeMetadata         [256]EnumMetadata
+)
 
 func initUnknownTypesForDot11Type() {
 	for i := 0; i < 256; i++ {
@@ -416,12 +446,15 @@ type errorDecoderForUSBTransportType int
 func (a *errorDecoderForUSBTransportType) Decode(data []byte, p gopacket.PacketBuilder) error {
 	return a
 }
+
 func (a *errorDecoderForUSBTransportType) Error() string {
 	return fmt.Sprintf("Unable to decode USBTransportType %d", int(*a))
 }
 
-var errorDecodersForUSBTransportType [256]errorDecoderForUSBTransportType
-var USBTransportTypeMetadata [256]EnumMetadata
+var (
+	errorDecodersForUSBTransportType [256]errorDecoderForUSBTransportType
+	USBTransportTypeMetadata         [256]EnumMetadata
+)
 
 func initUnknownTypesForUSBTransportType() {
 	for i := 0; i < 256; i++ {

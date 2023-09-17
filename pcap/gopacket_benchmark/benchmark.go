@@ -36,13 +36,15 @@ import (
 	"github.com/dreadl0ck/gopacket/tcpassembly"
 )
 
-var decodeLazy *bool = flag.Bool("lazy", false, "If true, use lazy decoding")
-var decodeNoCopy *bool = flag.Bool("nocopy", true, "If true, avoid an extra copy when decoding packets")
-var printErrors *bool = flag.Bool("printErrors", false, "If true, check for and print error layers.")
-var printLayers *bool = flag.Bool("printLayers", false, "If true, print out the layers of each packet")
-var repeat *int = flag.Int("repeat", 5, "Read over the file N times")
-var cpuProfile *string = flag.String("cpuprofile", "", "If set, write CPU profile to filename")
-var url *string = flag.String("url", "http://www.ll.mit.edu/mission/communications/cyber/CSTcorpora/ideval/data/1999/training/week1/tuesday/inside.tcpdump.gz", "URL to gzip'd pcap file")
+var (
+	decodeLazy   *bool   = flag.Bool("lazy", false, "If true, use lazy decoding")
+	decodeNoCopy *bool   = flag.Bool("nocopy", true, "If true, avoid an extra copy when decoding packets")
+	printErrors  *bool   = flag.Bool("printErrors", false, "If true, check for and print error layers.")
+	printLayers  *bool   = flag.Bool("printLayers", false, "If true, print out the layers of each packet")
+	repeat       *int    = flag.Int("repeat", 5, "Read over the file N times")
+	cpuProfile   *string = flag.String("cpuprofile", "", "If set, write CPU profile to filename")
+	url          *string = flag.String("url", "http://www.ll.mit.edu/mission/communications/cyber/CSTcorpora/ideval/data/1999/training/week1/tuesday/inside.tcpdump.gz", "URL to gzip'd pcap file")
+)
 
 type BufferPacketSource struct {
 	index int
@@ -196,14 +198,15 @@ func benchmarkPacketDecode(packetSource *gopacket.PacketSource) {
 	}
 }
 
-type streamFactory struct {
-}
+type streamFactory struct{}
 
 func (s *streamFactory) New(netFlow, tcpFlow gopacket.Flow) tcpassembly.Stream {
 	return s
 }
+
 func (s *streamFactory) Reassembled([]tcpassembly.Reassembly) {
 }
+
 func (s *streamFactory) ReassemblyComplete() {
 }
 

@@ -1856,10 +1856,10 @@ func setupNgReadBenchmark(b *testing.B) *NgReader {
 		0x0A, 0x0D, 0x0D, 0x0A, // Section Header
 		0, 0, 0, 28, // block total length
 		0x1A, 0x2B, 0x3C, 0x4D, // BOM
-		0, 1, 0, 0, //Version
-		0, 0, 0, 0, //Section length
-		0, 0, 0, 0, //Section length
-		0, 0, 0, 28, //block total length
+		0, 1, 0, 0, // Version
+		0, 0, 0, 0, // Section length
+		0, 0, 0, 0, // Section length
+		0, 0, 0, 28, // block total length
 
 		0, 0, 0, 1, // IDB
 		0, 0, 0, 20, // block total length
@@ -1897,7 +1897,6 @@ func setupNgReadBenchmark(b *testing.B) *NgReader {
 	packetReader := bufio.NewReaderSize(packet, len(packet.packet))
 
 	r, err := NewNgReader(header, DefaultNgReaderOptions)
-
 	if err != nil {
 		b.Fatal("Couldn't read header + IDB:", err)
 	}

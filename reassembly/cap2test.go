@@ -4,6 +4,7 @@
 // that can be found in the LICENSE file in the root of the source
 // tree.
 
+//go:build ignore
 // +build ignore
 
 package main
@@ -61,7 +62,7 @@ func main() {
 		} else {
 			pktTcp++
 			tcp := tcp.(*layers.TCP)
-			//fmt.Printf("packet: %s\n", tcp)
+			// fmt.Printf("packet: %s\n", tcp)
 			var b bytes.Buffer
 			b.WriteString("{\n")
 			// TCP

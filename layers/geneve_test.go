@@ -136,7 +136,7 @@ func TestDecodeGeneve3(t *testing.T) {
 			Protocol:       EthernetTypeTransparentEthernetBridging,
 			VNI:            0xa,
 			Options: []*GeneveOption{
-				&GeneveOption{
+				{
 					Class:  0x0,
 					Type:   0x80,
 					Length: 8,

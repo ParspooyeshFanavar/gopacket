@@ -68,6 +68,7 @@ func NewIPEndpoint(a net.IP) gopacket.Endpoint {
 func NewMACEndpoint(a net.HardwareAddr) gopacket.Endpoint {
 	return gopacket.NewEndpoint(EndpointMAC, []byte(a))
 }
+
 func newPortEndpoint(t gopacket.EndpointType, p uint16) gopacket.Endpoint {
 	return gopacket.NewEndpoint(t, []byte{byte(p >> 8), byte(p)})
 }

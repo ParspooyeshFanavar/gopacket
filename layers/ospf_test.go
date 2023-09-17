@@ -15,6 +15,7 @@ import (
 
 // testPacketOSPF2Hello is the packet:
 // 13:19:20.008765 IP 192.168.170.8 > 224.0.0.5: OSPFv2, Hello, length 44
+//
 //	0x0000:  0100 5e00 0005 00e0 18b1 0cad 0800 45c0  ..^...........E.
 //	0x0010:  0040 0812 0000 0159 65dd c0a8 aa08 e000  .@.....Ye.......
 //	0x0020:  0005 0201 002c c0a8 aa08 0000 0001 273b  .....,........';
@@ -68,6 +69,7 @@ func TestPacketOSPF2Hello(t *testing.T) {
 		t.Error("No OSPF layer type found in packet")
 	}
 }
+
 func BenchmarkDecodePacketPacket5(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		gopacket.NewPacket(testPacketOSPF2Hello, LinkTypeEthernet, gopacket.NoCopy)
@@ -75,13 +77,14 @@ func BenchmarkDecodePacketPacket5(b *testing.B) {
 }
 
 // testPacketOSPF3Hello is the packet:
-//   14:43:11.663317 IP6 fe80::1 > ff02::5: OSPFv3, Hello, length 36
-//   	0x0000:  3333 0000 0005 c200 1ffa 0001 86dd 6e00  33............n.
-//   	0x0010:  0000 0024 5901 fe80 0000 0000 0000 0000  ...$Y...........
-//   	0x0020:  0000 0000 0001 ff02 0000 0000 0000 0000  ................
-//   	0x0030:  0000 0000 0005 0301 0024 0101 0101 0000  .........$......
-//   	0x0040:  0001 fb86 0000 0000 0005 0100 0013 000a  ................
-//   	0x0050:  0028 0000 0000 0000 0000                 .(........
+//
+//	14:43:11.663317 IP6 fe80::1 > ff02::5: OSPFv3, Hello, length 36
+//		0x0000:  3333 0000 0005 c200 1ffa 0001 86dd 6e00  33............n.
+//		0x0010:  0000 0024 5901 fe80 0000 0000 0000 0000  ...$Y...........
+//		0x0020:  0000 0000 0001 ff02 0000 0000 0000 0000  ................
+//		0x0030:  0000 0000 0005 0301 0024 0101 0101 0000  .........$......
+//		0x0040:  0001 fb86 0000 0000 0005 0100 0013 000a  ................
+//		0x0050:  0028 0000 0000 0000 0000                 .(........
 var testPacketOSPF3Hello = []byte{
 	0x33, 0x33, 0x00, 0x00, 0x00, 0x05, 0xc2, 0x00, 0x1f, 0xfa, 0x00, 0x01, 0x86, 0xdd, 0x6e, 0x00,
 	0x00, 0x00, 0x00, 0x24, 0x59, 0x01, 0xfe, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -131,6 +134,7 @@ func TestPacketOSPF3Hello(t *testing.T) {
 		t.Error("No OSPF layer type found in packet")
 	}
 }
+
 func BenchmarkDecodePacketPacket0(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		gopacket.NewPacket(testPacketOSPF3Hello, LinkTypeEthernet, gopacket.NoCopy)
@@ -139,6 +143,7 @@ func BenchmarkDecodePacketPacket0(b *testing.B) {
 
 // testPacketOSPF2DBDesc is the packet:
 // 13:20:14.414477 IP 192.168.170.8 > 192.168.170.2: OSPFv2, Database Description, length 32
+//
 //	0x0000:  0060 0881 7a70 00e0 18b1 0cad 0800 45c0  .`..zp........E.
 //	0x0010:  0034 2be5 0000 0159 b770 c0a8 aa08 c0a8  .4+....Y.p......
 //	0x0020:  aa02 0202 0020 c0a8 aa08 0000 0001 a052  ...............R
@@ -182,6 +187,7 @@ func TestPacketOSPF2DBDesc(t *testing.T) {
 		t.Error("No OSPF layer type found in packet")
 	}
 }
+
 func BenchmarkDecodePacketPacket6(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		gopacket.NewPacket(testPacketOSPF2DBDesc, LinkTypeEthernet, gopacket.NoCopy)
@@ -189,13 +195,14 @@ func BenchmarkDecodePacketPacket6(b *testing.B) {
 }
 
 // testPacketOSPF3DBDesc is the packet:
-//   14:43:51.657571 IP6 fe80::2 > fe80::1: OSPFv3, Database Description, length 28
-//   	0x0000:  c200 1ffa 0001 c201 1ffa 0001 86dd 6e00  ..............n.
-//   	0x0010:  0000 001c 5901 fe80 0000 0000 0000 0000  ....Y...........
-//   	0x0020:  0000 0000 0002 fe80 0000 0000 0000 0000  ................
-//   	0x0030:  0000 0000 0001 0302 001c 0202 0202 0000  ................
-//   	0x0040:  0001 d826 0000 0000 0013 05dc 0007 0000  ...&............
-//   	0x0050:  1d46                                     .F
+//
+//	14:43:51.657571 IP6 fe80::2 > fe80::1: OSPFv3, Database Description, length 28
+//		0x0000:  c200 1ffa 0001 c201 1ffa 0001 86dd 6e00  ..............n.
+//		0x0010:  0000 001c 5901 fe80 0000 0000 0000 0000  ....Y...........
+//		0x0020:  0000 0000 0002 fe80 0000 0000 0000 0000  ................
+//		0x0030:  0000 0000 0001 0302 001c 0202 0202 0000  ................
+//		0x0040:  0001 d826 0000 0000 0013 05dc 0007 0000  ...&............
+//		0x0050:  1d46                                     .F
 var testPacketOSPF3DBDesc = []byte{
 	0xc2, 0x00, 0x1f, 0xfa, 0x00, 0x01, 0xc2, 0x01, 0x1f, 0xfa, 0x00, 0x01, 0x86, 0xdd, 0x6e, 0x00,
 	0x00, 0x00, 0x00, 0x1c, 0x59, 0x01, 0xfe, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -237,6 +244,7 @@ func TestPacketOSPF3DBDesc(t *testing.T) {
 		t.Error("No OSPF layer type found in packet")
 	}
 }
+
 func BenchmarkDecodePacketPacket1(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		gopacket.NewPacket(testPacketOSPF3DBDesc, LinkTypeEthernet, gopacket.NoCopy)
@@ -245,6 +253,7 @@ func BenchmarkDecodePacketPacket1(b *testing.B) {
 
 // testPacketOSPF2LSRequest is the packet:
 // 13:20:14.418003 IP 192.168.170.2 > 192.168.170.8: OSPFv2, LS-Request, length 36
+//
 //	0x0000:  00e0 18b1 0cad 0060 0881 7a70 0800 45c0  .......`..zp..E.
 //	0x0010:  0038 88c6 0000 0159 5a8b c0a8 aa02 c0a8  .8.....YZ.......
 //	0x0020:  aa08 0203 0024 c0a8 aa03 0000 0001 bdc7  .....$..........
@@ -274,7 +283,7 @@ func TestPacketOSPF2LSRequest(t *testing.T) {
 				AreaID:       1,
 				Checksum:     0xbdc7,
 				Content: []LSReq{
-					LSReq{
+					{
 						LSType:    0x1,
 						LSID:      0xc0a8aa08,
 						AdvRouter: 0xc0a8aa08,
@@ -289,6 +298,7 @@ func TestPacketOSPF2LSRequest(t *testing.T) {
 		t.Error("No OSPF layer type found in packet")
 	}
 }
+
 func BenchmarkDecodePacketPacket7(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		gopacket.NewPacket(testPacketOSPF2LSRequest, LinkTypeEthernet, gopacket.NoCopy)
@@ -296,17 +306,18 @@ func BenchmarkDecodePacketPacket7(b *testing.B) {
 }
 
 // testPacketOSPF3LSRequest is the packet:
-//   14:43:51.673584 IP6 fe80::2 > fe80::1: OSPFv3, LS-Request, length 100
-//   	0x0000:  c200 1ffa 0001 c201 1ffa 0001 86dd 6e00  ..............n.
-//   	0x0010:  0000 0064 5901 fe80 0000 0000 0000 0000  ...dY...........
-//   	0x0020:  0000 0000 0002 fe80 0000 0000 0000 0000  ................
-//   	0x0030:  0000 0000 0001 0303 0064 0202 0202 0000  .........d......
-//   	0x0040:  0001 2c9a 0000 0000 2001 0000 0000 0101  ..,.............
-//   	0x0050:  0101 0000 2003 0000 0003 0101 0101 0000  ................
-//   	0x0060:  2003 0000 0002 0101 0101 0000 2003 0000  ................
-//   	0x0070:  0001 0101 0101 0000 2003 0000 0000 0101  ................
-//   	0x0080:  0101 0000 0008 0000 0005 0101 0101 0000  ................
-//   	0x0090:  2009 0000 0000 0101 0101                 ..........
+//
+//	14:43:51.673584 IP6 fe80::2 > fe80::1: OSPFv3, LS-Request, length 100
+//		0x0000:  c200 1ffa 0001 c201 1ffa 0001 86dd 6e00  ..............n.
+//		0x0010:  0000 0064 5901 fe80 0000 0000 0000 0000  ...dY...........
+//		0x0020:  0000 0000 0002 fe80 0000 0000 0000 0000  ................
+//		0x0030:  0000 0000 0001 0303 0064 0202 0202 0000  .........d......
+//		0x0040:  0001 2c9a 0000 0000 2001 0000 0000 0101  ..,.............
+//		0x0050:  0101 0000 2003 0000 0003 0101 0101 0000  ................
+//		0x0060:  2003 0000 0002 0101 0101 0000 2003 0000  ................
+//		0x0070:  0001 0101 0101 0000 2003 0000 0000 0101  ................
+//		0x0080:  0101 0000 0008 0000 0005 0101 0101 0000  ................
+//		0x0090:  2009 0000 0000 0101 0101                 ..........
 var testPacketOSPF3LSRequest = []byte{
 	0xc2, 0x00, 0x1f, 0xfa, 0x00, 0x01, 0xc2, 0x01, 0x1f, 0xfa, 0x00, 0x01, 0x86, 0xdd, 0x6e, 0x00,
 	0x00, 0x00, 0x00, 0x64, 0x59, 0x01, 0xfe, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -336,37 +347,37 @@ func TestPacketOSPF3LSRequest(t *testing.T) {
 				AreaID:       1,
 				Checksum:     0x2c9a,
 				Content: []LSReq{
-					LSReq{
+					{
 						LSType:    0x2001,
 						LSID:      0x00000000,
 						AdvRouter: 0x01010101,
 					},
-					LSReq{
+					{
 						LSType:    0x2003,
 						LSID:      0x00000003,
 						AdvRouter: 0x01010101,
 					},
-					LSReq{
+					{
 						LSType:    0x2003,
 						LSID:      0x00000002,
 						AdvRouter: 0x01010101,
 					},
-					LSReq{
+					{
 						LSType:    0x2003,
 						LSID:      0x00000001,
 						AdvRouter: 0x01010101,
 					},
-					LSReq{
+					{
 						LSType:    0x2003,
 						LSID:      0x00000000,
 						AdvRouter: 0x01010101,
 					},
-					LSReq{
+					{
 						LSType:    0x0008,
 						LSID:      0x00000005,
 						AdvRouter: 0x01010101,
 					},
-					LSReq{
+					{
 						LSType:    0x2009,
 						LSID:      0x00000000,
 						AdvRouter: 0x01010101,
@@ -383,6 +394,7 @@ func TestPacketOSPF3LSRequest(t *testing.T) {
 		t.Error("No OSPF layer type found in packet")
 	}
 }
+
 func BenchmarkDecodePacketPacket2(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		gopacket.NewPacket(testPacketOSPF3LSRequest, LinkTypeEthernet, gopacket.NoCopy)
@@ -391,6 +403,7 @@ func BenchmarkDecodePacketPacket2(b *testing.B) {
 
 // testPacketOSPF2LSUpdate is the packet:
 // 13:20:14.420459 IP 192.168.170.2 > 224.0.0.6: OSPFv2, LS-Update, length 292
+//
 //	0x0000:  0100 5e00 0006 0060 0881 7a70 0800 45c0  ..^....`..zp..E.
 //	0x0010:  0138 3025 0000 0159 3cd7 c0a8 aa02 e000  .80%...Y<.......
 //	0x0020:  0006 0204 0124 c0a8 aa03 0000 0001 366b  .....$........6k
@@ -454,7 +467,7 @@ func TestPacketOSPF2LSUpdate(t *testing.T) {
 				Content: LSUpdate{
 					NumOfLSAs: 7,
 					LSAs: []LSA{
-						LSA{
+						{
 							LSAheader: LSAheader{
 								LSAge:       0x2,
 								LSType:      0x1,
@@ -469,13 +482,13 @@ func TestPacketOSPF2LSUpdate(t *testing.T) {
 								Flags: 0x2,
 								Links: 0x2,
 								Routers: []RouterV2{
-									RouterV2{
+									{
 										LinkID:   0xc0a8aa00,
 										LinkData: 0xffffff00,
 										Type:     0x03,
 										Metric:   0x0a,
 									},
-									RouterV2{
+									{
 										LinkID:   0xc0a8aa00,
 										LinkData: 0xffffff00,
 										Type:     0x03,
@@ -484,7 +497,7 @@ func TestPacketOSPF2LSUpdate(t *testing.T) {
 								},
 							},
 						},
-						LSA{
+						{
 							LSAheader: LSAheader{
 								LSAge:       0x3,
 								LSType:      0x5,
@@ -503,7 +516,7 @@ func TestPacketOSPF2LSUpdate(t *testing.T) {
 								ExternalRouteTag:  0x0,
 							},
 						},
-						LSA{
+						{
 							LSAheader: LSAheader{
 								LSAge:       0x3,
 								LSType:      0x5,
@@ -522,7 +535,7 @@ func TestPacketOSPF2LSUpdate(t *testing.T) {
 								ExternalRouteTag:  0x0,
 							},
 						},
-						LSA{
+						{
 							LSAheader: LSAheader{
 								LSAge:       0x3,
 								LSType:      0x5,
@@ -541,7 +554,7 @@ func TestPacketOSPF2LSUpdate(t *testing.T) {
 								ExternalRouteTag:  0x0,
 							},
 						},
-						LSA{
+						{
 							LSAheader: LSAheader{
 								LSAge:       0x3,
 								LSType:      0x5,
@@ -560,7 +573,7 @@ func TestPacketOSPF2LSUpdate(t *testing.T) {
 								ExternalRouteTag:  0x0,
 							},
 						},
-						LSA{
+						{
 							LSAheader: LSAheader{
 								LSAge:       0x3,
 								LSType:      0x5,
@@ -579,7 +592,7 @@ func TestPacketOSPF2LSUpdate(t *testing.T) {
 								ExternalRouteTag:  0x0,
 							},
 						},
-						LSA{
+						{
 							LSAheader: LSAheader{
 								LSAge:       0x3,
 								LSType:      0x5,
@@ -609,6 +622,7 @@ func TestPacketOSPF2LSUpdate(t *testing.T) {
 		t.Error("No OSPF layer type found in packet")
 	}
 }
+
 func BenchmarkDecodePacketPacket8(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		gopacket.NewPacket(testPacketOSPF2LSUpdate, LinkTypeEthernet, gopacket.NoCopy)
@@ -617,6 +631,7 @@ func BenchmarkDecodePacketPacket8(b *testing.B) {
 
 // testPacketOSPF2LSUpdateLSA2 is the packet:
 // 00:50:17.836469 IP 172.24.27.86 > ospf-all.mcast.net: OSPFv2, LS-Update, length 104
+//
 //	0x0000:  0100 5e00 0005 d4e8 80c2 b1c9 8100 017f
 //	0x0010:  0800 45c0 008c f7e4 0000 0159 1901 ac18
 //	0x0020:  1b56 e000 0005 0204 0058 ac18 0446 0000
@@ -656,7 +671,7 @@ func TestPacketOSPF2LSUpdateLSA2(t *testing.T) {
 				Content: LSUpdate{
 					NumOfLSAs: 2,
 					LSAs: []LSA{
-						LSA{
+						{
 							LSAheader: LSAheader{
 								LSAge:       0x1,
 								LSType:      0x1,
@@ -671,7 +686,7 @@ func TestPacketOSPF2LSUpdateLSA2(t *testing.T) {
 								Flags: 0x0,
 								Links: 0x1,
 								Routers: []RouterV2{
-									RouterV2{
+									{
 										LinkID:   0xac181b56,
 										LinkData: 0xac181b56,
 										Type:     0x02,
@@ -680,7 +695,7 @@ func TestPacketOSPF2LSUpdateLSA2(t *testing.T) {
 								},
 							},
 						},
-						LSA{
+						{
 							LSAheader: LSAheader{
 								LSAge:       0x1,
 								LSType:      0x2,
@@ -715,6 +730,7 @@ func TestPacketOSPF2LSUpdateLSA2(t *testing.T) {
 
 // testPacketOSPF2LSUpdateLSA7 is the packet:
 // 00:00:00.337386 IP 172.24.27.84 > ospf-dsig.mcast.net: OSPFv2, LS-Update, length 100
+//
 //	0x0000:  0100 5e00 0006 001a 1e02 81a8 8100 017f
 //	0x0010:  0800 45c0 0088 0000 4000 0159 d0ea ac18
 //	0x0020:  1b54 e000 0006 0204 0054 ac18 1b54 0000
@@ -754,7 +770,7 @@ func TestPacketOSPF2LSUpdateLSA7(t *testing.T) {
 				Content: LSUpdate{
 					NumOfLSAs: 2,
 					LSAs: []LSA{
-						LSA{
+						{
 							LSAheader: LSAheader{
 								LSAge:       0x1,
 								LSType:      0x7,
@@ -773,7 +789,7 @@ func TestPacketOSPF2LSUpdateLSA7(t *testing.T) {
 								ExternalRouteTag:  0x0,
 							},
 						},
-						LSA{
+						{
 							LSAheader: LSAheader{
 								LSAge:       0x1,
 								LSType:      0x7,
@@ -805,29 +821,30 @@ func TestPacketOSPF2LSUpdateLSA7(t *testing.T) {
 }
 
 // testPacketOSPF3LSUpdate is the packet:
-//   14:43:51.681554 IP6 fe80::1 > fe80::2: OSPFv3, LS-Update, length 288
-//   	0x0000:  c201 1ffa 0001 c200 1ffa 0001 86dd 6e00  ..............n.
-//   	0x0010:  0000 0120 5901 fe80 0000 0000 0000 0000  ....Y...........
-//   	0x0020:  0000 0000 0001 fe80 0000 0000 0000 0000  ................
-//   	0x0030:  0000 0000 0002 0304 0120 0101 0101 0000  ................
-//   	0x0040:  0001 e556 0000 0000 0007 0028 2001 0000  ...V.......(....
-//   	0x0050:  0000 0101 0101 8000 0002 d13a 0018 0100  ...........:....
-//   	0x0060:  0033 0029 2003 0000 0003 0101 0101 8000  .3.)............
-//   	0x0070:  0001 6259 0024 0000 004a 4000 0000 2001  ..bY.$...J@.....
-//   	0x0080:  0db8 0000 0003 0029 2003 0000 0002 0101  .......)........
-//   	0x0090:  0101 8000 0001 baf6 0024 0000 0054 4000  .........$...T@.
-//   	0x00a0:  0000 2001 0db8 0000 0004 0029 2003 0000  ...........)....
-//   	0x00b0:  0001 0101 0101 8000 0001 eba0 0024 0000  .............$..
-//   	0x00c0:  004a 4000 0000 2001 0db8 0000 0034 0029  .J@..........4.)
-//   	0x00d0:  2003 0000 0000 0101 0101 8000 0001 0ebd  ................
-//   	0x00e0:  0024 0000 0040 4000 0000 2001 0db8 0000  .$...@@.........
-//   	0x00f0:  0000 0023 0008 0000 0005 0101 0101 8000  ...#............
-//   	0x0100:  0002 3d08 0038 0100 0033 fe80 0000 0000  ..=..8...3......
-//   	0x0110:  0000 0000 0000 0000 0001 0000 0001 4000  ..............@.
-//   	0x0120:  0000 2001 0db8 0000 0012 0023 2009 0000  ...........#....
-//   	0x0130:  0000 0101 0101 8000 0001 e8d2 002c 0001  .............,..
-//   	0x0140:  2001 0000 0000 0101 0101 4000 000a 2001  ..........@.....
-//   	0x0150:  0db8 0000 0012                           ......
+//
+//	14:43:51.681554 IP6 fe80::1 > fe80::2: OSPFv3, LS-Update, length 288
+//		0x0000:  c201 1ffa 0001 c200 1ffa 0001 86dd 6e00  ..............n.
+//		0x0010:  0000 0120 5901 fe80 0000 0000 0000 0000  ....Y...........
+//		0x0020:  0000 0000 0001 fe80 0000 0000 0000 0000  ................
+//		0x0030:  0000 0000 0002 0304 0120 0101 0101 0000  ................
+//		0x0040:  0001 e556 0000 0000 0007 0028 2001 0000  ...V.......(....
+//		0x0050:  0000 0101 0101 8000 0002 d13a 0018 0100  ...........:....
+//		0x0060:  0033 0029 2003 0000 0003 0101 0101 8000  .3.)............
+//		0x0070:  0001 6259 0024 0000 004a 4000 0000 2001  ..bY.$...J@.....
+//		0x0080:  0db8 0000 0003 0029 2003 0000 0002 0101  .......)........
+//		0x0090:  0101 8000 0001 baf6 0024 0000 0054 4000  .........$...T@.
+//		0x00a0:  0000 2001 0db8 0000 0004 0029 2003 0000  ...........)....
+//		0x00b0:  0001 0101 0101 8000 0001 eba0 0024 0000  .............$..
+//		0x00c0:  004a 4000 0000 2001 0db8 0000 0034 0029  .J@..........4.)
+//		0x00d0:  2003 0000 0000 0101 0101 8000 0001 0ebd  ................
+//		0x00e0:  0024 0000 0040 4000 0000 2001 0db8 0000  .$...@@.........
+//		0x00f0:  0000 0023 0008 0000 0005 0101 0101 8000  ...#............
+//		0x0100:  0002 3d08 0038 0100 0033 fe80 0000 0000  ..=..8...3......
+//		0x0110:  0000 0000 0000 0000 0001 0000 0001 4000  ..............@.
+//		0x0120:  0000 2001 0db8 0000 0012 0023 2009 0000  ...........#....
+//		0x0130:  0000 0101 0101 8000 0001 e8d2 002c 0001  .............,..
+//		0x0140:  2001 0000 0000 0101 0101 4000 000a 2001  ..........@.....
+//		0x0150:  0db8 0000 0012                           ......
 var testPacketOSPF3LSUpdate = []byte{
 	0xc2, 0x01, 0x1f, 0xfa, 0x00, 0x01, 0xc2, 0x00, 0x1f, 0xfa, 0x00, 0x01, 0x86, 0xdd, 0x6e, 0x00,
 	0x00, 0x00, 0x01, 0x20, 0x59, 0x01, 0xfe, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -871,7 +888,7 @@ func TestPacketOSPF3LSUpdate(t *testing.T) {
 				Content: LSUpdate{
 					NumOfLSAs: 7,
 					LSAs: []LSA{
-						LSA{
+						{
 							LSAheader: LSAheader{
 								LSAge:       40,
 								LSType:      0x2001,
@@ -886,7 +903,7 @@ func TestPacketOSPF3LSUpdate(t *testing.T) {
 								Options: 0x33,
 							},
 						},
-						LSA{
+						{
 							LSAheader: LSAheader{
 								LSAge:       41,
 								LSType:      0x2003,
@@ -903,7 +920,7 @@ func TestPacketOSPF3LSUpdate(t *testing.T) {
 								AddressPrefix: []byte{0x20, 0x01, 0x0d, 0xb8, 0x00, 0x00, 0x00, 0x03},
 							},
 						},
-						LSA{
+						{
 							LSAheader: LSAheader{
 								LSAge:       41,
 								LSType:      0x2003,
@@ -920,7 +937,7 @@ func TestPacketOSPF3LSUpdate(t *testing.T) {
 								AddressPrefix: []byte{0x20, 0x1, 0xd, 0xb8, 0x0, 0x0, 0x0, 0x4},
 							},
 						},
-						LSA{
+						{
 							LSAheader: LSAheader{
 								LSAge:       41,
 								LSType:      0x2003,
@@ -937,7 +954,7 @@ func TestPacketOSPF3LSUpdate(t *testing.T) {
 								AddressPrefix: []byte{0x20, 0x1, 0xd, 0xb8, 0x0, 0x0, 0x0, 0x34},
 							},
 						},
-						LSA{
+						{
 							LSAheader: LSAheader{
 								LSAge:       41,
 								LSType:      0x2003,
@@ -954,7 +971,7 @@ func TestPacketOSPF3LSUpdate(t *testing.T) {
 								AddressPrefix: []byte{0x20, 0x1, 0xd, 0xb8, 0x0, 0x0, 0x0, 0x0},
 							},
 						},
-						LSA{
+						{
 							LSAheader: LSAheader{
 								LSAge:       35,
 								LSType:      0x8,
@@ -970,7 +987,7 @@ func TestPacketOSPF3LSUpdate(t *testing.T) {
 								LinkLocalAddress: []byte{0xfe, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01},
 								NumOfPrefixes:    1,
 								Prefixes: []Prefix{
-									Prefix{
+									{
 										PrefixLength:  64,
 										PrefixOptions: 0,
 										AddressPrefix: []byte{0x20, 0x01, 0x0d, 0xb8, 0x00, 0x00, 0x00, 0x12},
@@ -978,7 +995,7 @@ func TestPacketOSPF3LSUpdate(t *testing.T) {
 								},
 							},
 						},
-						LSA{
+						{
 							LSAheader: LSAheader{
 								LSAge:       35,
 								LSType:      0x2009,
@@ -993,7 +1010,7 @@ func TestPacketOSPF3LSUpdate(t *testing.T) {
 								RefLSType:     0x2001,
 								RefAdvRouter:  0x01010101,
 								Prefixes: []Prefix{
-									Prefix{
+									{
 										PrefixLength:  64,
 										PrefixOptions: 0,
 										Metric:        10,
@@ -1015,6 +1032,7 @@ func TestPacketOSPF3LSUpdate(t *testing.T) {
 		t.Error("No OSPF layer type found in packet")
 	}
 }
+
 func BenchmarkDecodePacketPacket3(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		gopacket.NewPacket(testPacketOSPF3LSUpdate, LinkTypeEthernet, gopacket.NoCopy)
@@ -1023,6 +1041,7 @@ func BenchmarkDecodePacketPacket3(b *testing.B) {
 
 // testPacketOSPF2LSAck is the packet:
 // 13:20:20.858322 IP 192.168.170.8 > 192.168.170.2: OSPFv2, LS-Ack, length 44
+//
 //	0x0000:  0060 0881 7a70 00e0 18b1 0cad 0800 45c0  .`..zp........E.
 //	0x0010:  0040 2bea 0000 0159 b75f c0a8 aa08 c0a8  .@+....Y._......
 //	0x0020:  aa02 0205 002c c0a8 aa08 0000 0001 e2f4  .....,..........
@@ -1052,7 +1071,7 @@ func TestPacketOSPF2LSAck(t *testing.T) {
 				AreaID:       1,
 				Checksum:     0xe2f4,
 				Content: []LSAheader{
-					LSAheader{
+					{
 						LSAge:       0xe10,
 						LSType:      0x1,
 						LinkStateID: 0xc0a8aa02,
@@ -1072,6 +1091,7 @@ func TestPacketOSPF2LSAck(t *testing.T) {
 		t.Error("No OSPF layer type found in packet")
 	}
 }
+
 func BenchmarkDecodePacketPacket9(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		gopacket.NewPacket(testPacketOSPF3LSAck, LinkTypeEthernet, gopacket.NoCopy)
@@ -1079,19 +1099,20 @@ func BenchmarkDecodePacketPacket9(b *testing.B) {
 }
 
 // testPacketOSPF3LSAck is the packet:
-//   14:43:54.185384 IP6 fe80::1 > ff02::5: OSPFv3, LS-Ack, length 136
-//   	0x0000:  3333 0000 0005 c200 1ffa 0001 86dd 6e00  33............n.
-//   	0x0010:  0000 0088 5901 fe80 0000 0000 0000 0000  ....Y...........
-//   	0x0020:  0000 0000 0001 ff02 0000 0000 0000 0000  ................
-//   	0x0030:  0000 0000 0005 0305 0088 0101 0101 0000  ................
-//   	0x0040:  0001 9d2c 0000 0005 2001 0000 0000 0202  ...,............
-//   	0x0050:  0202 8000 0002 b354 0018 0006 2003 0000  .......T........
-//   	0x0060:  0003 0202 0202 8000 0001 4473 0024 0006  ..........Ds.$..
-//   	0x0070:  2003 0000 0002 0202 0202 8000 0001 9c11  ................
-//   	0x0080:  0024 0006 2003 0000 0001 0202 0202 8000  .$..............
-//   	0x0090:  0001 cdba 0024 0006 2003 0000 0000 0202  .....$..........
-//   	0x00a0:  0202 8000 0001 efd7 0024 0005 0008 0000  .........$......
-//   	0x00b0:  0005 0202 0202 8000 0001 5433 002c       ..........T3.,
+//
+//	14:43:54.185384 IP6 fe80::1 > ff02::5: OSPFv3, LS-Ack, length 136
+//		0x0000:  3333 0000 0005 c200 1ffa 0001 86dd 6e00  33............n.
+//		0x0010:  0000 0088 5901 fe80 0000 0000 0000 0000  ....Y...........
+//		0x0020:  0000 0000 0001 ff02 0000 0000 0000 0000  ................
+//		0x0030:  0000 0000 0005 0305 0088 0101 0101 0000  ................
+//		0x0040:  0001 9d2c 0000 0005 2001 0000 0000 0202  ...,............
+//		0x0050:  0202 8000 0002 b354 0018 0006 2003 0000  .......T........
+//		0x0060:  0003 0202 0202 8000 0001 4473 0024 0006  ..........Ds.$..
+//		0x0070:  2003 0000 0002 0202 0202 8000 0001 9c11  ................
+//		0x0080:  0024 0006 2003 0000 0001 0202 0202 8000  .$..............
+//		0x0090:  0001 cdba 0024 0006 2003 0000 0000 0202  .....$..........
+//		0x00a0:  0202 8000 0001 efd7 0024 0005 0008 0000  .........$......
+//		0x00b0:  0005 0202 0202 8000 0001 5433 002c       ..........T3.,
 var testPacketOSPF3LSAck = []byte{
 	0x33, 0x33, 0x00, 0x00, 0x00, 0x05, 0xc2, 0x00, 0x1f, 0xfa, 0x00, 0x01, 0x86, 0xdd, 0x6e, 0x00,
 	0x00, 0x00, 0x00, 0x88, 0x59, 0x01, 0xfe, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -1123,7 +1144,7 @@ func TestPacketOSPF3LSAck(t *testing.T) {
 				AreaID:       1,
 				Checksum:     0x9d2c,
 				Content: []LSAheader{
-					LSAheader{
+					{
 						LSAge:       5,
 						LSType:      0x2001,
 						LinkStateID: 0x00000000,
@@ -1132,7 +1153,7 @@ func TestPacketOSPF3LSAck(t *testing.T) {
 						LSChecksum:  0xb354,
 						Length:      24,
 					},
-					LSAheader{
+					{
 						LSAge:       6,
 						LSType:      0x2003,
 						LinkStateID: 0x00000003,
@@ -1141,7 +1162,7 @@ func TestPacketOSPF3LSAck(t *testing.T) {
 						LSChecksum:  0x4473,
 						Length:      36,
 					},
-					LSAheader{
+					{
 						LSAge:       6,
 						LSType:      0x2003,
 						LinkStateID: 0x00000002,
@@ -1150,7 +1171,7 @@ func TestPacketOSPF3LSAck(t *testing.T) {
 						LSChecksum:  0x9c11,
 						Length:      36,
 					},
-					LSAheader{
+					{
 						LSAge:       6,
 						LSType:      0x2003,
 						LinkStateID: 0x00000001,
@@ -1159,7 +1180,7 @@ func TestPacketOSPF3LSAck(t *testing.T) {
 						LSChecksum:  0xcdba,
 						Length:      36,
 					},
-					LSAheader{
+					{
 						LSAge:       6,
 						LSType:      0x2003,
 						LinkStateID: 0x00000000,
@@ -1168,7 +1189,7 @@ func TestPacketOSPF3LSAck(t *testing.T) {
 						LSChecksum:  0xefd7,
 						Length:      36,
 					},
-					LSAheader{
+					{
 						LSAge:       5,
 						LSType:      0x0008,
 						LinkStateID: 0x00000005,

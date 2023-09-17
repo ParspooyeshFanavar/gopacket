@@ -3,6 +3,7 @@
 // Use of this source code is governed by a BSD-style license
 // that can be found in the LICENSE file in the root of the source
 // tree.
+//go:build linux && go1.9
 // +build linux,go1.9
 
 package pcapgo
@@ -22,10 +23,12 @@ import (
 	"github.com/dreadl0ck/gopacket"
 )
 
-var hdrLen = unix.CmsgSpace(0)
-var auxLen = unix.CmsgSpace(int(unsafe.Sizeof(unix.TpacketAuxdata{})))
-var timensLen = unix.CmsgSpace(int(unsafe.Sizeof(unix.Timespec{})))
-var timeLen = unix.CmsgSpace(int(unsafe.Sizeof(unix.Timeval{})))
+var (
+	hdrLen    = unix.CmsgSpace(0)
+	auxLen    = unix.CmsgSpace(int(unsafe.Sizeof(unix.TpacketAuxdata{})))
+	timensLen = unix.CmsgSpace(int(unsafe.Sizeof(unix.Timespec{})))
+	timeLen   = unix.CmsgSpace(int(unsafe.Sizeof(unix.Timeval{})))
+)
 
 func htons(data uint16) uint16 { return data<<8 | data>>8 }
 
@@ -135,7 +138,6 @@ func (h *EthernetHandle) ReadPacketData() ([]byte, gopacket.CaptureInfo, error) 
 
 	if haveVlan {
 		ci.AncillaryData = []interface{}{vlan}
-
 	}
 
 	return b, ci, nil
