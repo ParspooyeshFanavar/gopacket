@@ -11,7 +11,7 @@ import (
 	"encoding/binary"
 	"fmt"
 
-	"github.com/dreadl0ck/gopacket"
+	"github.com/ParspooyeshFanavar/gopacket"
 )
 
 // Dot1Q is the packet layer for 802.1Q VLAN headers.

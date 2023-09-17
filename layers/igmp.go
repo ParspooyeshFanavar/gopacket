@@ -13,7 +13,7 @@ import (
 	"net"
 	"time"
 
-	"github.com/dreadl0ck/gopacket"
+	"github.com/ParspooyeshFanavar/gopacket"
 )
 
 type IGMPType uint8

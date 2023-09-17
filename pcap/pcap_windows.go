@@ -17,8 +17,8 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/dreadl0ck/gopacket"
-	"github.com/dreadl0ck/gopacket/layers"
+	"github.com/ParspooyeshFanavar/gopacket"
+	"github.com/ParspooyeshFanavar/gopacket/layers"
 	"golang.org/x/sys/windows"
 )
 
@@ -106,6 +106,7 @@ var (
 	wpcapHandle  windows.Handle
 	msvcrtHandle syscall.Handle
 )
+
 var callocPtr,
 	pcapStrerrorPtr,
 	pcapStatustostrPtr,

@@ -15,9 +15,9 @@ import (
 	"os"
 	"strings"
 
-	"github.com/dreadl0ck/gopacket/dumpcommand"
-	"github.com/dreadl0ck/gopacket/examples/util"
-	"github.com/dreadl0ck/gopacket/pfring"
+	"github.com/ParspooyeshFanavar/gopacket/dumpcommand"
+	"github.com/ParspooyeshFanavar/gopacket/examples/util"
+	"github.com/ParspooyeshFanavar/gopacket/pfring"
 )
 
 var (

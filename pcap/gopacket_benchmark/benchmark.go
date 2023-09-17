@@ -30,10 +30,10 @@ import (
 	"runtime/pprof"
 	"time"
 
-	"github.com/dreadl0ck/gopacket"
-	"github.com/dreadl0ck/gopacket/layers"
-	"github.com/dreadl0ck/gopacket/pcap"
-	"github.com/dreadl0ck/gopacket/tcpassembly"
+	"github.com/ParspooyeshFanavar/gopacket"
+	"github.com/ParspooyeshFanavar/gopacket/layers"
+	"github.com/ParspooyeshFanavar/gopacket/pcap"
+	"github.com/ParspooyeshFanavar/gopacket/tcpassembly"
 )
 
 var (

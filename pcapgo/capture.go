@@ -20,7 +20,7 @@ import (
 	"golang.org/x/net/bpf"
 	"golang.org/x/sys/unix"
 
-	"github.com/dreadl0ck/gopacket"
+	"github.com/ParspooyeshFanavar/gopacket"
 )
 
 var (
@@ -234,7 +234,7 @@ func (h *EthernetHandle) Stats() (*unix.TpacketStats, error) {
 }
 
 // NewEthernetHandle implements pcap.OpenLive for network devices.
-// If you want better performance have a look at github.com/dreadl0ck/gopacket/afpacket.
+// If you want better performance have a look at github.com/ParspooyeshFanavar/gopacket/afpacket.
 // SetCaptureLength can be used to limit the maximum capture length.
 func NewEthernetHandle(ifname string) (*EthernetHandle, error) {
 	intf, err := net.InterfaceByName(ifname)

@@ -9,7 +9,7 @@ package layers
 import (
 	"net"
 
-	"github.com/dreadl0ck/gopacket"
+	"github.com/ParspooyeshFanavar/gopacket"
 )
 
 // FDDI contains the header for FDDI frames.

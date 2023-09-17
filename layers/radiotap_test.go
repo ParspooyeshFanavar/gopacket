@@ -8,7 +8,7 @@ package layers
 import (
 	"testing"
 
-	"github.com/dreadl0ck/gopacket"
+	"github.com/ParspooyeshFanavar/gopacket"
 )
 
 // testPacketRadiotap0 is the packet:

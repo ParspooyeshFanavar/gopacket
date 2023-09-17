@@ -12,7 +12,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/dreadl0ck/gopacket"
+	"github.com/ParspooyeshFanavar/gopacket"
 )
 
 // it have a layer like that:

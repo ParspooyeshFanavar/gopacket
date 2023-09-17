@@ -9,7 +9,7 @@ package layers
 import (
 	"testing"
 
-	"github.com/dreadl0ck/gopacket"
+	"github.com/ParspooyeshFanavar/gopacket"
 )
 
 // Adapted from https://github.com/the-tcpdump-group/tcpdump/blob/master/tests/icmpv6.pcap
@@ -65,7 +65,7 @@ func TestPacketMulticastListenerQueryMessageV2(t *testing.T) {
 		LayerTypeICMPv6,
 		LayerTypeMLDv2MulticastListenerQuery,
 	}, t)
-	// See https://github.com/dreadl0ck/gopacket/issues/517
+	// See https://github.com/ParspooyeshFanavar/gopacket/issues/517
 	// checkSerialization(p, t)
 }
 
@@ -140,6 +140,6 @@ func TestPacketMulticastListenerReportMessageV2(t *testing.T) {
 		LayerTypeICMPv6,
 		LayerTypeMLDv2MulticastListenerReport,
 	}, t)
-	// See https://github.com/dreadl0ck/gopacket/issues/517
+	// See https://github.com/ParspooyeshFanavar/gopacket/issues/517
 	// checkSerialization(p, t)
 }

@@ -17,9 +17,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/dreadl0ck/gopacket"
-	"github.com/dreadl0ck/gopacket/examples/util"
-	"github.com/dreadl0ck/gopacket/pcap"
+	"github.com/ParspooyeshFanavar/gopacket"
+	"github.com/ParspooyeshFanavar/gopacket/examples/util"
+	"github.com/ParspooyeshFanavar/gopacket/pcap"
 )
 
 var (

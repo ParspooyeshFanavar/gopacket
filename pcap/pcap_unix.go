@@ -18,9 +18,9 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/dreadl0ck/gopacket"
+	"github.com/ParspooyeshFanavar/gopacket"
 
-	"github.com/dreadl0ck/gopacket/layers"
+	"github.com/ParspooyeshFanavar/gopacket/layers"
 )
 
 /*

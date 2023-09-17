@@ -1,4 +1,4 @@
-module github.com/dreadl0ck/gopacket
+module github.com/ParspooyeshFanavar/gopacket
 
 go 1.12
 

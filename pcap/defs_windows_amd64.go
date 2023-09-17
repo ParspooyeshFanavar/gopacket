@@ -49,6 +49,7 @@ type (
 		K    uint32
 	}
 )
+
 type pcapBpfProgram struct {
 	Len       uint32
 	Pad_cgo_0 [4]byte

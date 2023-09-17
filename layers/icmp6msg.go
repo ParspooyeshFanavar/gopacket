@@ -15,7 +15,7 @@ import (
 	"net"
 	"time"
 
-	"github.com/dreadl0ck/gopacket"
+	"github.com/ParspooyeshFanavar/gopacket"
 )
 
 // Based on RFC 4861

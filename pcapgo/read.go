@@ -15,8 +15,8 @@ import (
 	"io"
 	"time"
 
-	"github.com/dreadl0ck/gopacket"
-	"github.com/dreadl0ck/gopacket/layers"
+	"github.com/ParspooyeshFanavar/gopacket"
+	"github.com/ParspooyeshFanavar/gopacket/layers"
 )
 
 // Reader wraps an underlying io.Reader to read packet data in PCAP

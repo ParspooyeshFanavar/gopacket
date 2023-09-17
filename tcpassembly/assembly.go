@@ -9,7 +9,7 @@
 // The tcpassembly package implements uni-directional TCP reassembly, for use in
 // packet-sniffing applications.  The caller reads packets off the wire, then
 // presents them to an Assembler in the form of gopacket layers.TCP packets
-// (github.com/dreadl0ck/gopacket, github.com/dreadl0ck/gopacket/layers).
+// (github.com/ParspooyeshFanavar/gopacket, github.com/ParspooyeshFanavar/gopacket/layers).
 //
 // The Assembler uses a user-supplied
 // StreamFactory to create a user-defined Stream interface, then passes packet
@@ -25,13 +25,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/dreadl0ck/gopacket"
-	"github.com/dreadl0ck/gopacket/layers"
+	"github.com/ParspooyeshFanavar/gopacket"
+	"github.com/ParspooyeshFanavar/gopacket/layers"
 )
 
 var (
-	memLog   = flag.Bool("assembly_memuse_log", false, "If true, the github.com/dreadl0ck/gopacket/tcpassembly library will log information regarding its memory use every once in a while.")
-	debugLog = flag.Bool("assembly_debug_log", false, "If true, the github.com/dreadl0ck/gopacket/tcpassembly library will log verbose debugging information (at least one line per packet)")
+	memLog   = flag.Bool("assembly_memuse_log", false, "If true, the github.com/ParspooyeshFanavar/gopacket/tcpassembly library will log information regarding its memory use every once in a while.")
+	debugLog = flag.Bool("assembly_debug_log", false, "If true, the github.com/ParspooyeshFanavar/gopacket/tcpassembly library will log verbose debugging information (at least one line per packet)")
 )
 
 const (

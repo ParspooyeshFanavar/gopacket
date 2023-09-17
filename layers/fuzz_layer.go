@@ -8,7 +8,7 @@ package layers
 import (
 	"encoding/binary"
 
-	"github.com/dreadl0ck/gopacket"
+	"github.com/ParspooyeshFanavar/gopacket"
 )
 
 // FuzzLayer is a fuzz target for the layers package of gopacket
