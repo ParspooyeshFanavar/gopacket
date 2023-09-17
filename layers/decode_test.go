@@ -1178,6 +1178,7 @@ func BenchmarkDecodeMPLS(b *testing.B) {
 }
 
 // testPPPGREIPv4IPv6VLAN is the packet from http://packetlife.net/captures/gre_and_4over6.cap
+// 04:35:03.821897 IP6 2402:f000:1:8e01::5555 > 2607:fcd0:100:2300::b108:2a6b: IP 16.0.0.200 > 192.52.166.154: GREv1, call 6016, seq 430001, ack 539254, length 119: IP 172.16.44.3.40768 > 8.8.8.8.53: 42540+ AAAA? xqt-detect-mode2-97712e88-167a-45b9-93ee-913140e76678. (71)
 //
 //	0x0000:  6000 0000 008b 04f6 2402 f000 0001 8e01  `.......$.......
 //	0x0010:  0000 0000 0000 5555 2607 fcd0 0100 2300  ......UU&.....#.

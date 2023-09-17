@@ -51,6 +51,7 @@ const (
 	EthernetTypeQinQ                        EthernetType = 0x88a8
 	EthernetTypeLinkLayerDiscovery          EthernetType = 0x88cc
 	EthernetTypeEthernetCTP                 EthernetType = 0x9000
+	EthernetTypeRaw                         EthernetType = 0x7f00
 )
 
 // IPProtocol is an enumeration of IP protocol values, and acts as a decoder

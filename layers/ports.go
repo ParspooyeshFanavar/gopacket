@@ -84,7 +84,11 @@ func (a TCPPort) LayerType() gopacket.LayerType {
 
 var tcpPortLayerTypeOverride bitfield
 
-var tcpPortLayerType = map[TCPPort]gopacket.LayerType{}
+var tcpPortLayerType = map[TCPPort]gopacket.LayerType{
+	53:   LayerTypeDNS,
+	502:  LayerTypeModbusTCP, // modbustcp
+	3868: LayerTypeDiameter,  // diameter
+}
 
 // RegisterTCPPortLayerType creates a new mapping between a TCPPort
 // and an underlaying LayerType.

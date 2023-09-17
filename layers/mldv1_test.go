@@ -54,7 +54,7 @@ func TestPacketMulticastListenerQueryMessageV1(t *testing.T) {
 		t.Error("Failed to decode packet:", p.ErrorLayer().Error())
 	}
 	checkLayers(p, []gopacket.LayerType{LayerTypeEthernet, LayerTypeIPv6, LayerTypeIPv6HopByHop, LayerTypeICMPv6, LayerTypeMLDv1MulticastListenerQuery}, t)
-	// See https://github.com/google/gopacket/issues/517
+	// See https://github.com/ParspooyeshFanavar/gopacket/issues/517
 	// checkSerialization(p, t)
 }
 
@@ -99,7 +99,7 @@ func TestPacketMulticastListenerReportMessageV1(t *testing.T) {
 		t.Error("Failed to decode packet:", p.ErrorLayer().Error())
 	}
 	checkLayers(p, []gopacket.LayerType{LayerTypeEthernet, LayerTypeIPv6, LayerTypeIPv6HopByHop, LayerTypeICMPv6, LayerTypeMLDv1MulticastListenerReport}, t)
-	// See https://github.com/google/gopacket/issues/517
+	// See https://github.com/ParspooyeshFanavar/gopacket/issues/517
 	// checkSerialization(p, t)
 }
 
@@ -144,6 +144,6 @@ func TestPacketMulticastListenerDoneMessageV1(t *testing.T) {
 		t.Error("Failed to decode packet:", p.ErrorLayer().Error())
 	}
 	checkLayers(p, []gopacket.LayerType{LayerTypeEthernet, LayerTypeIPv6, LayerTypeIPv6HopByHop, LayerTypeICMPv6, LayerTypeMLDv1MulticastListenerDone}, t)
-	// See https://github.com/google/gopacket/issues/517
+	// See https://github.com/ParspooyeshFanavar/gopacket/issues/517
 	// checkSerialization(p, t)
 }

@@ -644,6 +644,11 @@ func (q *DNSQuestion) decode(data []byte, offset int, df gopacket.DecodeFeedback
 	}
 
 	q.Name = name
+
+	// avoid runtime error: slice bounds out of range [:62] with capacity 61
+	if len(data) < endq+2 {
+		return endq, nil
+	}
 	q.Type = DNSType(binary.BigEndian.Uint16(data[endq : endq+2]))
 	q.Class = DNSClass(binary.BigEndian.Uint16(data[endq+2 : endq+4]))
 
@@ -719,6 +724,7 @@ func (rr *DNSResourceRecord) decode(data []byte, offset int, df gopacket.DecodeF
 
 	rr.Name = name
 	rr.Type = DNSType(binary.BigEndian.Uint16(data[endq : endq+2]))
+	// runtime error: slice bounds out of range [:69] with capacity 68
 	rr.Class = DNSClass(binary.BigEndian.Uint16(data[endq+2 : endq+4]))
 	rr.TTL = binary.BigEndian.Uint32(data[endq+4 : endq+8])
 	rr.DataLength = binary.BigEndian.Uint16(data[endq+8 : endq+10])

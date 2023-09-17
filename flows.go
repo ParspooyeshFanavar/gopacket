@@ -134,6 +134,10 @@ func (e EndpointType) String() string {
 
 func (a Endpoint) String() string {
 	if t, ok := endpointTypes[a.typ]; ok && t.Formatter != nil {
+		// prevent panic: runtime error: index out of range [1] with length 0
+		if a.len == 0 {
+			return ""
+		}
 		return t.Formatter(a.raw[:a.len])
 	}
 	return fmt.Sprintf("%v:%v", a.typ, a.raw)

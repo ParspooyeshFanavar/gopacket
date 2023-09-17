@@ -10,6 +10,8 @@ import (
 	"github.com/ParspooyeshFanavar/gopacket"
 )
 
+var opts = gopacket.Default
+
 var (
 	LayerTypeARP                          = gopacket.RegisterLayerType(10, gopacket.LayerTypeMetadata{Name: "ARP", Decoder: gopacket.DecodeFunc(decodeARP)})
 	LayerTypeCiscoDiscovery               = gopacket.RegisterLayerType(11, gopacket.LayerTypeMetadata{Name: "CiscoDiscovery", Decoder: gopacket.DecodeFunc(decodeCiscoDiscovery)})
@@ -148,6 +150,10 @@ var (
 	LayerTypeASFPresencePong              = gopacket.RegisterLayerType(144, gopacket.LayerTypeMetadata{Name: "ASFPresencePong", Decoder: gopacket.DecodeFunc(decodeASFPresencePong)})
 	LayerTypeERSPANII                     = gopacket.RegisterLayerType(145, gopacket.LayerTypeMetadata{Name: "ERSPAN Type II", Decoder: gopacket.DecodeFunc(decodeERSPANII)})
 	LayerTypeRADIUS                       = gopacket.RegisterLayerType(146, gopacket.LayerTypeMetadata{Name: "RADIUS", Decoder: gopacket.DecodeFunc(decodeRADIUS)})
+	LayerTypeDiameter                     = gopacket.RegisterLayerType(147, gopacket.LayerTypeMetadata{Name: "Diameter", Decoder: gopacket.DecodeFunc(decodeDiameter)})
+	LayerTypeModbus                       = gopacket.RegisterLayerType(148, gopacket.LayerTypeMetadata{Name: "Modbus", Decoder: gopacket.DecodeFunc(decodeModbus)})
+	LayerTypeENIP                         = gopacket.RegisterLayerType(149, gopacket.LayerTypeMetadata{Name: "Ethernet/IP", Decoder: gopacket.DecodeFunc(decodeENIP)})
+	LayerTypeCIP                          = gopacket.RegisterLayerType(150, gopacket.LayerTypeMetadata{Name: "CIP", Decoder: gopacket.DecodeFunc(decodeCIP)})
 	LayerTypeLinuxSLL2                    = gopacket.RegisterLayerType(276, gopacket.LayerTypeMetadata{Name: "Linux SLL2", Decoder: gopacket.DecodeFunc(decodeLinuxSLL2)})
 )
 

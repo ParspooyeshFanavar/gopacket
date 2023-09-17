@@ -439,13 +439,18 @@ type halfconnection struct {
 	queuedPackets  int
 	overlapBytes   int
 	overlapPackets int
+
+	sync.Mutex
 }
 
 func (half *halfconnection) String() string {
 	closed := ""
+
+	half.Lock()
 	if half.closed {
 		closed = "closed "
 	}
+	half.Unlock()
 	return fmt.Sprintf("%screated:%v, last:%v", closed, half.created, half.lastSeen)
 }
 
@@ -469,7 +474,7 @@ func (half *halfconnection) Dump() string {
 type connection struct {
 	key      key // client->server
 	c2s, s2c halfconnection
-	mu       sync.Mutex
+	mu       sync.RWMutex
 }
 
 func (c *connection) reset(k key, s Stream, ts time.Time) {
@@ -1220,7 +1225,9 @@ func (a *Assembler) closeHalfConnection(conn *connection, half *halfconnection) 
 	if *debugLog {
 		log.Printf("%v closing", conn)
 	}
+	half.Lock()
 	half.closed = true
+	half.Unlock()
 	for p := half.first; p != nil; p = p.next {
 		// FIXME: it should be already empty
 		a.pc.replace(p)

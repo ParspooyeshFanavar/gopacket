@@ -423,8 +423,13 @@ func extractLSAInformation(lstype, lsalength uint16, data []byte) (interface{}, 
 		var prefixes []Prefix
 		var prefixOffset uint32 = 32
 		var j uint16
+		datalen := len(data)
 		numOfPrefixes := binary.BigEndian.Uint16(data[20:22])
 		for j = 0; j < numOfPrefixes; j++ {
+			// avoid index out of range error
+			if int(prefixOffset) >= datalen {
+				break
+			}
 			prefixLen := uint8(data[prefixOffset])
 			prefix := Prefix{
 				PrefixLength:  prefixLen,
