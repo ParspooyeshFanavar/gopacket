@@ -32,7 +32,8 @@ func newPageCache() *pageCache {
 	pc := &pageCache{
 		pagePool: &sync.Pool{
 			New: func() interface{} { return new(page) },
-		}}
+		},
+	}
 	return pc
 }
 

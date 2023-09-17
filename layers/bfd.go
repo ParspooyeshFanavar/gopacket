@@ -307,7 +307,6 @@ func (d *BFD) LayerType() gopacket.LayerType {
 //
 // This function is employed in layertypes.go to register the BFD layer.
 func decodeBFD(data []byte, p gopacket.PacketBuilder) error {
-
 	// Attempt to decode the byte slice.
 	d := &BFD{}
 	err := d.DecodeFromBytes(data, p)
@@ -330,7 +329,6 @@ func decodeBFD(data []byte, p gopacket.PacketBuilder) error {
 // and returns nil.
 // Upon failure, it returns an error (non nil).
 func (d *BFD) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error {
-
 	// If the data block is too short to be a BFD record, then return an error.
 	if len(data) < bfdMinimumRecordSizeInBytes {
 		df.SetTruncated()
@@ -346,7 +344,7 @@ func (d *BFD) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error {
 	//    Contents is supposed to contain the bytes of the data at this level.
 	//    Payload is supposed to contain the payload of this level.
 	// Here we set the baselayer to be the bytes of the BFD record.
-	d.BaseLayer = BaseLayer{Contents: data[:len(data)]}
+	d.BaseLayer = BaseLayer{Contents: data[:]}
 
 	// Extract the fields from the block of bytes.
 	// To make sense of this, refer to the packet diagram

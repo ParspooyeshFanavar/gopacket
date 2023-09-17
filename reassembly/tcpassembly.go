@@ -41,8 +41,10 @@ var defaultDebug = false
 
 var debugLog = flag.Bool("assembly_debug_log", defaultDebug, "If true, the github.com/gopacket/gopacket/reassembly library will log verbose debugging information (at least one line per packet)")
 
-const invalidSequence = -1
-const uint32Max = 0xFFFFFFFF
+const (
+	invalidSequence = -1
+	uint32Max       = 0xFFFFFFFF
+)
 
 // Sequence is a TCP sequence number.  It provides a few convenience functions
 // for handling TCP wrap-around.  The sequence should always be in the range
@@ -244,12 +246,15 @@ type page struct {
 func (p *page) getBytes() []byte {
 	return p.bytes
 }
+
 func (p *page) captureInfo() gopacket.CaptureInfo {
 	return p.ac.GetCaptureInfo()
 }
+
 func (p *page) assemblerContext() AssemblerContext {
 	return p.ac
 }
+
 func (p *page) convertToPages(pc *pageCache, skip int, ac AssemblerContext) (*page, *page, int) {
 	if skip != 0 {
 		p.bytes = p.bytes[skip:]
@@ -258,25 +263,32 @@ func (p *page) convertToPages(pc *pageCache, skip int, ac AssemblerContext) (*pa
 	p.prev, p.next = nil, nil
 	return p, p, 1
 }
+
 func (p *page) length() int {
 	return len(p.bytes)
 }
+
 func (p *page) release(pc *pageCache) int {
 	pc.replace(p)
 	return 1
 }
+
 func (p *page) isStart() bool {
 	return p.start
 }
+
 func (p *page) isEnd() bool {
 	return p.end
 }
+
 func (p *page) getSeq() Sequence {
 	return p.seq
 }
+
 func (p *page) isPacket() bool {
 	return p.ac != nil
 }
+
 func (p *page) String() string {
 	return fmt.Sprintf("page@%p{seq: %v, bytes:%d, -> nextSeq:%v} (prev:%p, next:%p)", p, p.seq, len(p.bytes), p.seq+Sequence(len(p.bytes)), p.prev, p.next)
 }
@@ -293,24 +305,31 @@ type livePacket struct {
 func (lp *livePacket) getBytes() []byte {
 	return lp.bytes
 }
+
 func (lp *livePacket) captureInfo() gopacket.CaptureInfo {
 	return lp.ac.GetCaptureInfo()
 }
+
 func (lp *livePacket) assemblerContext() AssemblerContext {
 	return lp.ac
 }
+
 func (lp *livePacket) length() int {
 	return len(lp.bytes)
 }
+
 func (lp *livePacket) isStart() bool {
 	return lp.start
 }
+
 func (lp *livePacket) isEnd() bool {
 	return lp.end
 }
+
 func (lp *livePacket) getSeq() Sequence {
 	return lp.seq
 }
+
 func (lp *livePacket) isPacket() bool {
 	return true
 }
@@ -345,6 +364,7 @@ func (lp *livePacket) convertToPages(pc *pageCache, skip int, ac AssemblerContex
 	}
 	return first, current, numPages
 }
+
 func (lp *livePacket) estimateNumberOfPages() int {
 	return (len(lp.bytes) + pageBytes + 1) / pageBytes
 }
@@ -1207,7 +1227,7 @@ func (a *Assembler) closeHalfConnection(conn *connection, half *halfconnection) 
 		half.pages--
 	}
 	if conn.s2c.closed && conn.c2s.closed {
-		if half.stream.ReassemblyComplete(nil) { //FIXME: which context to pass ?
+		if half.stream.ReassemblyComplete(nil) { // FIXME: which context to pass ?
 			a.connPool.remove(conn)
 		}
 	}

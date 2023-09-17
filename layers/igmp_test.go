@@ -71,6 +71,7 @@ func TestIGMPv2MembershipQuery(t *testing.T) {
 		t.Fatal("Invalid IGMP type")
 	}
 }
+
 func BenchmarkDecodeigmpv2MembershipQueryPacket(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		gopacket.NewPacket(igmpv2MembershipQueryPacket, LinkTypeEthernet, gopacket.NoCopy)
@@ -103,6 +104,7 @@ func TestIGMPv2MembershipReport(t *testing.T) {
 		t.Fatal("Invalid IGMP type")
 	}
 }
+
 func BenchmarkDecodeigmpv2MembershipReportPacket(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		gopacket.NewPacket(igmpv2MembershipReportPacket, LinkTypeEthernet, gopacket.NoCopy)

@@ -136,7 +136,7 @@ func (t *TLS) decodeTLSRecords(data []byte, df gopacket.DecodeFeedback) error {
 	// since there are no further layers, the baselayer's content is
 	// pointing to this layer
 	// TODO: Consider removing this
-	t.BaseLayer = BaseLayer{Contents: data[:len(data)]}
+	t.BaseLayer = BaseLayer{Contents: data[:]}
 
 	var h TLSRecordHeader
 	h.ContentType = TLSType(data[0])
@@ -190,7 +190,7 @@ func (t *TLS) decodeTLSRecords(data []byte, df gopacket.DecodeFeedback) error {
 	if len(data) == tl {
 		return nil
 	}
-	return t.decodeTLSRecords(data[tl:len(data)], df)
+	return t.decodeTLSRecords(data[tl:], df)
 }
 
 // CanDecode implements gopacket.DecodingLayer.

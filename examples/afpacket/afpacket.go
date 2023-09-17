@@ -41,8 +41,8 @@ type afpacketHandle struct {
 }
 
 func newAfpacketHandle(device string, snaplen int, block_size int, num_blocks int,
-	useVLAN bool, timeout time.Duration) (*afpacketHandle, error) {
-
+	useVLAN bool, timeout time.Duration,
+) (*afpacketHandle, error) {
 	h := &afpacketHandle{}
 	var err error
 
@@ -116,8 +116,8 @@ func (h *afpacketHandle) SocketStats() (as afpacket.SocketStats, asv afpacket.So
 // The restriction is that the block_size must be divisible by both the
 // frame size and page size.
 func afpacketComputeSize(targetSizeMb int, snaplen int, pageSize int) (
-	frameSize int, blockSize int, numBlocks int, err error) {
-
+	frameSize int, blockSize int, numBlocks int, err error,
+) {
 	if snaplen < pageSize {
 		frameSize = pageSize / (pageSize / snaplen)
 	} else {

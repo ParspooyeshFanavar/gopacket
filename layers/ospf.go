@@ -578,7 +578,6 @@ func (ospf *OSPFv2) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) err
 
 // DecodeFromBytes decodes the given bytes into the OSPF layer.
 func (ospf *OSPFv3) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error {
-
 	if len(data) < 16 {
 		return fmt.Errorf("Packet too smal for OSPF Version 3")
 	}
@@ -676,6 +675,7 @@ func (ospf *OSPFv3) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) err
 func (ospf *OSPFv2) LayerType() gopacket.LayerType {
 	return LayerTypeOSPF
 }
+
 func (ospf *OSPFv3) LayerType() gopacket.LayerType {
 	return LayerTypeOSPF
 }
@@ -684,6 +684,7 @@ func (ospf *OSPFv3) LayerType() gopacket.LayerType {
 func (ospf *OSPFv2) NextLayerType() gopacket.LayerType {
 	return gopacket.LayerTypeZero
 }
+
 func (ospf *OSPFv3) NextLayerType() gopacket.LayerType {
 	return gopacket.LayerTypeZero
 }
@@ -692,6 +693,7 @@ func (ospf *OSPFv3) NextLayerType() gopacket.LayerType {
 func (ospf *OSPFv2) CanDecode() gopacket.LayerClass {
 	return LayerTypeOSPF
 }
+
 func (ospf *OSPFv3) CanDecode() gopacket.LayerClass {
 	return LayerTypeOSPF
 }

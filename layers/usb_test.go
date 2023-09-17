@@ -66,8 +66,8 @@ func TestPacketUSB0(t *testing.T) {
 			t.Errorf("USB packet processing failed:\ngot  :\n%#v\n\nwant :\n%#v\n\n", got, want)
 		}
 	}
-
 }
+
 func BenchmarkDecodePacketUSB0(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		gopacket.NewPacket(testPacketUSB0, LinkTypeLinuxUSB, gopacket.NoCopy)

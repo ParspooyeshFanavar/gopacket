@@ -59,9 +59,11 @@ type routeSlice []*rtInfo
 func (r routeSlice) Len() int {
 	return len(r)
 }
+
 func (r routeSlice) Less(i, j int) bool {
 	return r[i].Priority < r[j].Priority
 }
+
 func (r routeSlice) Swap(i, j int) {
 	r[i], r[j] = r[j], r[i]
 }

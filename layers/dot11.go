@@ -37,24 +37,31 @@ const (
 func (d Dot11Flags) ToDS() bool {
 	return d&Dot11FlagsToDS != 0
 }
+
 func (d Dot11Flags) FromDS() bool {
 	return d&Dot11FlagsFromDS != 0
 }
+
 func (d Dot11Flags) MF() bool {
 	return d&Dot11FlagsMF != 0
 }
+
 func (d Dot11Flags) Retry() bool {
 	return d&Dot11FlagsRetry != 0
 }
+
 func (d Dot11Flags) PowerManagement() bool {
 	return d&Dot11FlagsPowerManagement != 0
 }
+
 func (d Dot11Flags) MD() bool {
 	return d&Dot11FlagsMD != 0
 }
+
 func (d Dot11Flags) WEP() bool {
 	return d&Dot11FlagsWEP != 0
 }
+
 func (d Dot11Flags) Order() bool {
 	return d&Dot11FlagsOrder != 0
 }
@@ -1077,7 +1084,7 @@ func (m *Dot11) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error {
 		m.DataLayer = l.(gopacket.Layer)
 	}
 
-	m.Checksum = binary.LittleEndian.Uint32(data[len(data)-4 : len(data)])
+	m.Checksum = binary.LittleEndian.Uint32(data[len(data)-4:])
 	return nil
 }
 
@@ -1091,7 +1098,6 @@ func (m *Dot11) ChecksumValid() bool {
 
 func (m Dot11) SerializeTo(b gopacket.SerializeBuffer, opts gopacket.SerializeOptions) error {
 	buf, err := b.PrependBytes(24)
-
 	if err != nil {
 		return err
 	}
@@ -1288,6 +1294,7 @@ func (m *Dot11DataCFPollNoData) LayerType() gopacket.LayerType { return LayerTyp
 func (m *Dot11DataCFPollNoData) CanDecode() gopacket.LayerClass {
 	return LayerTypeDot11DataCFPollNoData
 }
+
 func (m *Dot11DataCFPollNoData) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error {
 	return m.Dot11Data.DecodeFromBytes(data, df)
 }
@@ -1304,9 +1311,11 @@ func decodeDot11DataCFAckPollNoData(data []byte, p gopacket.PacketBuilder) error
 func (m *Dot11DataCFAckPollNoData) LayerType() gopacket.LayerType {
 	return LayerTypeDot11DataCFAckPollNoData
 }
+
 func (m *Dot11DataCFAckPollNoData) CanDecode() gopacket.LayerClass {
 	return LayerTypeDot11DataCFAckPollNoData
 }
+
 func (m *Dot11DataCFAckPollNoData) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error {
 	return m.Dot11Data.DecodeFromBytes(data, df)
 }
@@ -1363,6 +1372,7 @@ func decodeDot11DataQOSDataCFPoll(data []byte, p gopacket.PacketBuilder) error {
 func (m *Dot11DataQOSDataCFPoll) LayerType() gopacket.LayerType {
 	return LayerTypeDot11DataQOSDataCFPoll
 }
+
 func (m *Dot11DataQOSDataCFPoll) CanDecode() gopacket.LayerClass {
 	return LayerTypeDot11DataQOSDataCFPoll
 }
@@ -1380,9 +1390,11 @@ func decodeDot11DataQOSDataCFAckPoll(data []byte, p gopacket.PacketBuilder) erro
 func (m *Dot11DataQOSDataCFAckPoll) LayerType() gopacket.LayerType {
 	return LayerTypeDot11DataQOSDataCFAckPoll
 }
+
 func (m *Dot11DataQOSDataCFAckPoll) CanDecode() gopacket.LayerClass {
 	return LayerTypeDot11DataQOSDataCFAckPoll
 }
+
 func (m *Dot11DataQOSDataCFAckPoll) NextLayerType() gopacket.LayerType {
 	return LayerTypeDot11DataCFAckPoll
 }
@@ -1412,9 +1424,11 @@ func decodeDot11DataQOSCFPollNoData(data []byte, p gopacket.PacketBuilder) error
 func (m *Dot11DataQOSCFPollNoData) LayerType() gopacket.LayerType {
 	return LayerTypeDot11DataQOSCFPollNoData
 }
+
 func (m *Dot11DataQOSCFPollNoData) CanDecode() gopacket.LayerClass {
 	return LayerTypeDot11DataQOSCFPollNoData
 }
+
 func (m *Dot11DataQOSCFPollNoData) NextLayerType() gopacket.LayerType {
 	return LayerTypeDot11DataCFPollNoData
 }
@@ -1431,9 +1445,11 @@ func decodeDot11DataQOSCFAckPollNoData(data []byte, p gopacket.PacketBuilder) er
 func (m *Dot11DataQOSCFAckPollNoData) LayerType() gopacket.LayerType {
 	return LayerTypeDot11DataQOSCFAckPollNoData
 }
+
 func (m *Dot11DataQOSCFAckPollNoData) CanDecode() gopacket.LayerClass {
 	return LayerTypeDot11DataQOSCFAckPollNoData
 }
+
 func (m *Dot11DataQOSCFAckPollNoData) NextLayerType() gopacket.LayerType {
 	return LayerTypeDot11DataCFAckPollNoData
 }
@@ -1449,6 +1465,7 @@ type Dot11InformationElement struct {
 func (m *Dot11InformationElement) LayerType() gopacket.LayerType {
 	return LayerTypeDot11InformationElement
 }
+
 func (m *Dot11InformationElement) CanDecode() gopacket.LayerClass {
 	return LayerTypeDot11InformationElement
 }
@@ -1538,9 +1555,11 @@ func decodeDot11CtrlCTS(data []byte, p gopacket.PacketBuilder) error {
 func (m *Dot11CtrlCTS) LayerType() gopacket.LayerType {
 	return LayerTypeDot11CtrlCTS
 }
+
 func (m *Dot11CtrlCTS) CanDecode() gopacket.LayerClass {
 	return LayerTypeDot11CtrlCTS
 }
+
 func (m *Dot11CtrlCTS) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error {
 	return m.Dot11Ctrl.DecodeFromBytes(data, df)
 }
@@ -1557,9 +1576,11 @@ func decodeDot11CtrlRTS(data []byte, p gopacket.PacketBuilder) error {
 func (m *Dot11CtrlRTS) LayerType() gopacket.LayerType {
 	return LayerTypeDot11CtrlRTS
 }
+
 func (m *Dot11CtrlRTS) CanDecode() gopacket.LayerClass {
 	return LayerTypeDot11CtrlRTS
 }
+
 func (m *Dot11CtrlRTS) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error {
 	return m.Dot11Ctrl.DecodeFromBytes(data, df)
 }
@@ -1576,9 +1597,11 @@ func decodeDot11CtrlBlockAckReq(data []byte, p gopacket.PacketBuilder) error {
 func (m *Dot11CtrlBlockAckReq) LayerType() gopacket.LayerType {
 	return LayerTypeDot11CtrlBlockAckReq
 }
+
 func (m *Dot11CtrlBlockAckReq) CanDecode() gopacket.LayerClass {
 	return LayerTypeDot11CtrlBlockAckReq
 }
+
 func (m *Dot11CtrlBlockAckReq) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error {
 	return m.Dot11Ctrl.DecodeFromBytes(data, df)
 }
@@ -1610,9 +1633,11 @@ func decodeDot11CtrlPowersavePoll(data []byte, p gopacket.PacketBuilder) error {
 func (m *Dot11CtrlPowersavePoll) LayerType() gopacket.LayerType {
 	return LayerTypeDot11CtrlPowersavePoll
 }
+
 func (m *Dot11CtrlPowersavePoll) CanDecode() gopacket.LayerClass {
 	return LayerTypeDot11CtrlPowersavePoll
 }
+
 func (m *Dot11CtrlPowersavePoll) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error {
 	return m.Dot11Ctrl.DecodeFromBytes(data, df)
 }
@@ -1644,9 +1669,11 @@ func decodeDot11CtrlCFEnd(data []byte, p gopacket.PacketBuilder) error {
 func (m *Dot11CtrlCFEnd) LayerType() gopacket.LayerType {
 	return LayerTypeDot11CtrlCFEnd
 }
+
 func (m *Dot11CtrlCFEnd) CanDecode() gopacket.LayerClass {
 	return LayerTypeDot11CtrlCFEnd
 }
+
 func (m *Dot11CtrlCFEnd) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error {
 	return m.Dot11Ctrl.DecodeFromBytes(data, df)
 }
@@ -1663,9 +1690,11 @@ func decodeDot11CtrlCFEndAck(data []byte, p gopacket.PacketBuilder) error {
 func (m *Dot11CtrlCFEndAck) LayerType() gopacket.LayerType {
 	return LayerTypeDot11CtrlCFEndAck
 }
+
 func (m *Dot11CtrlCFEndAck) CanDecode() gopacket.LayerClass {
 	return LayerTypeDot11CtrlCFEndAck
 }
+
 func (m *Dot11CtrlCFEndAck) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error {
 	return m.Dot11Ctrl.DecodeFromBytes(data, df)
 }
@@ -1684,12 +1713,15 @@ func decodeDot11MgmtAssociationReq(data []byte, p gopacket.PacketBuilder) error 
 func (m *Dot11MgmtAssociationReq) LayerType() gopacket.LayerType {
 	return LayerTypeDot11MgmtAssociationReq
 }
+
 func (m *Dot11MgmtAssociationReq) CanDecode() gopacket.LayerClass {
 	return LayerTypeDot11MgmtAssociationReq
 }
+
 func (m *Dot11MgmtAssociationReq) NextLayerType() gopacket.LayerType {
 	return LayerTypeDot11InformationElement
 }
+
 func (m *Dot11MgmtAssociationReq) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error {
 	if len(data) < 4 {
 		df.SetTruncated()
@@ -1703,7 +1735,6 @@ func (m *Dot11MgmtAssociationReq) DecodeFromBytes(data []byte, df gopacket.Decod
 
 func (m Dot11MgmtAssociationReq) SerializeTo(b gopacket.SerializeBuffer, opts gopacket.SerializeOptions) error {
 	buf, err := b.PrependBytes(4)
-
 	if err != nil {
 		return err
 	}
@@ -1729,12 +1760,15 @@ func decodeDot11MgmtAssociationResp(data []byte, p gopacket.PacketBuilder) error
 func (m *Dot11MgmtAssociationResp) CanDecode() gopacket.LayerClass {
 	return LayerTypeDot11MgmtAssociationResp
 }
+
 func (m *Dot11MgmtAssociationResp) LayerType() gopacket.LayerType {
 	return LayerTypeDot11MgmtAssociationResp
 }
+
 func (m *Dot11MgmtAssociationResp) NextLayerType() gopacket.LayerType {
 	return LayerTypeDot11InformationElement
 }
+
 func (m *Dot11MgmtAssociationResp) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error {
 	if len(data) < 6 {
 		df.SetTruncated()
@@ -1749,7 +1783,6 @@ func (m *Dot11MgmtAssociationResp) DecodeFromBytes(data []byte, df gopacket.Deco
 
 func (m Dot11MgmtAssociationResp) SerializeTo(b gopacket.SerializeBuffer, opts gopacket.SerializeOptions) error {
 	buf, err := b.PrependBytes(6)
-
 	if err != nil {
 		return err
 	}
@@ -1776,12 +1809,15 @@ func decodeDot11MgmtReassociationReq(data []byte, p gopacket.PacketBuilder) erro
 func (m *Dot11MgmtReassociationReq) LayerType() gopacket.LayerType {
 	return LayerTypeDot11MgmtReassociationReq
 }
+
 func (m *Dot11MgmtReassociationReq) CanDecode() gopacket.LayerClass {
 	return LayerTypeDot11MgmtReassociationReq
 }
+
 func (m *Dot11MgmtReassociationReq) NextLayerType() gopacket.LayerType {
 	return LayerTypeDot11InformationElement
 }
+
 func (m *Dot11MgmtReassociationReq) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error {
 	if len(data) < 10 {
 		df.SetTruncated()
@@ -1796,7 +1832,6 @@ func (m *Dot11MgmtReassociationReq) DecodeFromBytes(data []byte, df gopacket.Dec
 
 func (m Dot11MgmtReassociationReq) SerializeTo(b gopacket.SerializeBuffer, opts gopacket.SerializeOptions) error {
 	buf, err := b.PrependBytes(10)
-
 	if err != nil {
 		return err
 	}
@@ -1821,9 +1856,11 @@ func decodeDot11MgmtReassociationResp(data []byte, p gopacket.PacketBuilder) err
 func (m *Dot11MgmtReassociationResp) LayerType() gopacket.LayerType {
 	return LayerTypeDot11MgmtReassociationResp
 }
+
 func (m *Dot11MgmtReassociationResp) CanDecode() gopacket.LayerClass {
 	return LayerTypeDot11MgmtReassociationResp
 }
+
 func (m *Dot11MgmtReassociationResp) NextLayerType() gopacket.LayerType {
 	return LayerTypeDot11InformationElement
 }
@@ -1878,7 +1915,6 @@ func (m *Dot11MgmtProbeResp) NextLayerType() gopacket.LayerType {
 
 func (m Dot11MgmtProbeResp) SerializeTo(b gopacket.SerializeBuffer, opts gopacket.SerializeOptions) error {
 	buf, err := b.PrependBytes(12)
-
 	if err != nil {
 		return err
 	}
@@ -1902,6 +1938,7 @@ func decodeDot11MgmtMeasurementPilot(data []byte, p gopacket.PacketBuilder) erro
 func (m *Dot11MgmtMeasurementPilot) LayerType() gopacket.LayerType {
 	return LayerTypeDot11MgmtMeasurementPilot
 }
+
 func (m *Dot11MgmtMeasurementPilot) CanDecode() gopacket.LayerClass {
 	return LayerTypeDot11MgmtMeasurementPilot
 }
@@ -1936,7 +1973,6 @@ func (m *Dot11MgmtBeacon) NextLayerType() gopacket.LayerType { return LayerTypeD
 
 func (m Dot11MgmtBeacon) SerializeTo(b gopacket.SerializeBuffer, opts gopacket.SerializeOptions) error {
 	buf, err := b.PrependBytes(12)
-
 	if err != nil {
 		return err
 	}
@@ -1973,9 +2009,11 @@ func decodeDot11MgmtDisassociation(data []byte, p gopacket.PacketBuilder) error 
 func (m *Dot11MgmtDisassociation) LayerType() gopacket.LayerType {
 	return LayerTypeDot11MgmtDisassociation
 }
+
 func (m *Dot11MgmtDisassociation) CanDecode() gopacket.LayerClass {
 	return LayerTypeDot11MgmtDisassociation
 }
+
 func (m *Dot11MgmtDisassociation) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error {
 	if len(data) < 2 {
 		df.SetTruncated()
@@ -1987,7 +2025,6 @@ func (m *Dot11MgmtDisassociation) DecodeFromBytes(data []byte, df gopacket.Decod
 
 func (m Dot11MgmtDisassociation) SerializeTo(b gopacket.SerializeBuffer, opts gopacket.SerializeOptions) error {
 	buf, err := b.PrependBytes(2)
-
 	if err != nil {
 		return err
 	}
@@ -2012,12 +2049,15 @@ func decodeDot11MgmtAuthentication(data []byte, p gopacket.PacketBuilder) error 
 func (m *Dot11MgmtAuthentication) LayerType() gopacket.LayerType {
 	return LayerTypeDot11MgmtAuthentication
 }
+
 func (m *Dot11MgmtAuthentication) CanDecode() gopacket.LayerClass {
 	return LayerTypeDot11MgmtAuthentication
 }
+
 func (m *Dot11MgmtAuthentication) NextLayerType() gopacket.LayerType {
 	return LayerTypeDot11InformationElement
 }
+
 func (m *Dot11MgmtAuthentication) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error {
 	if len(data) < 6 {
 		df.SetTruncated()
@@ -2032,7 +2072,6 @@ func (m *Dot11MgmtAuthentication) DecodeFromBytes(data []byte, df gopacket.Decod
 
 func (m Dot11MgmtAuthentication) SerializeTo(b gopacket.SerializeBuffer, opts gopacket.SerializeOptions) error {
 	buf, err := b.PrependBytes(6)
-
 	if err != nil {
 		return err
 	}
@@ -2057,9 +2096,11 @@ func decodeDot11MgmtDeauthentication(data []byte, p gopacket.PacketBuilder) erro
 func (m *Dot11MgmtDeauthentication) LayerType() gopacket.LayerType {
 	return LayerTypeDot11MgmtDeauthentication
 }
+
 func (m *Dot11MgmtDeauthentication) CanDecode() gopacket.LayerClass {
 	return LayerTypeDot11MgmtDeauthentication
 }
+
 func (m *Dot11MgmtDeauthentication) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error {
 	if len(data) < 2 {
 		df.SetTruncated()
@@ -2071,7 +2112,6 @@ func (m *Dot11MgmtDeauthentication) DecodeFromBytes(data []byte, df gopacket.Dec
 
 func (m Dot11MgmtDeauthentication) SerializeTo(b gopacket.SerializeBuffer, opts gopacket.SerializeOptions) error {
 	buf, err := b.PrependBytes(2)
-
 	if err != nil {
 		return err
 	}

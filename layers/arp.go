@@ -112,7 +112,6 @@ func (arp *ARP) NextLayerType() gopacket.LayerType {
 }
 
 func decodeARP(data []byte, p gopacket.PacketBuilder) error {
-
 	arp := &ARP{}
 	return decodingLayerDecoder(arp, data, p)
 }

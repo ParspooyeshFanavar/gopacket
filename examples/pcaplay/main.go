@@ -22,15 +22,21 @@ import (
 	"github.com/gopacket/gopacket/pcap"
 )
 
-var iface = flag.String("i", "eth0", "Interface to write packets to")
-var fname = flag.String("r", "", "Filename to read from")
-var fast = flag.Bool("f", false, "Send each packets as fast as possible")
+var (
+	iface = flag.String("i", "eth0", "Interface to write packets to")
+	fname = flag.String("r", "", "Filename to read from")
+	fast  = flag.Bool("f", false, "Send each packets as fast as possible")
+)
 
-var lastTS time.Time
-var lastSend time.Time
+var (
+	lastTS   time.Time
+	lastSend time.Time
+)
 
-var start time.Time
-var bytesSent int
+var (
+	start     time.Time
+	bytesSent int
+)
 
 func writePacketDelayed(handle *pcap.Handle, buf []byte, ci gopacket.CaptureInfo) {
 	if ci.CaptureLength != ci.Length {
@@ -159,5 +165,4 @@ func main() {
 			}
 		}
 	}
-
 }

@@ -27,7 +27,6 @@ const (
 // registering layers using structs of this type as a key in case any users are
 // using OEM-extensions.
 type ASFDataIdentifier struct {
-
 	// Enterprise is the IANA Enterprise Number associated with the entity that
 	// defines the message type. A list can be found at
 	// https://www.iana.org/assignments/enterprise-numbers/enterprise-numbers.

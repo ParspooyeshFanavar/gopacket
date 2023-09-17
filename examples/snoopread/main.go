@@ -18,7 +18,7 @@ import (
 )
 
 func main() {
-	//download snoop from https://wiki.wireshark.org/SampleCaptures
+	// download snoop from https://wiki.wireshark.org/SampleCaptures
 	f, err := os.Open("example.snoop")
 	if err != nil {
 		log.Fatal(err)

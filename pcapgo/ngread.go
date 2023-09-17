@@ -69,7 +69,7 @@ func NewNgReader(r io.Reader, options NgReaderOptions) (*NgReader, error) {
 		options:           options,
 	}
 
-	//pcapng _must_ start with a section header
+	// pcapng _must_ start with a section header
 	if err := ret.readBlock(); err != nil {
 		return nil, err
 	}
@@ -181,7 +181,7 @@ func (r *NgReader) readOption() error {
 		if err := r.readBytes(r.currentOption.value); err != nil {
 			return err
 		}
-		//consume padding
+		// consume padding
 		padding := length % 4
 		if padding > 0 {
 			padding = 4 - padding
@@ -369,12 +369,12 @@ OPTIONS:
 		intf.TimestampResolution = 6
 	}
 
-	//parse options
+	// parse options
 	if intf.TimestampResolution.Binary() {
-		//negative power of 2
+		// negative power of 2
 		intf.secondMask = 1 << intf.TimestampResolution.Exponent()
 	} else {
-		//negative power of 10
+		// negative power of 10
 		intf.secondMask = 1
 		for j := uint8(0); j < intf.TimestampResolution.Exponent(); j++ {
 			intf.secondMask *= 10

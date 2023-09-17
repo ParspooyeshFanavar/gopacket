@@ -42,7 +42,7 @@ func TestPcapFileRead(t *testing.T) {
 	invalidPcap.Close() // if the file is still open later, the invalid test fails with permission denied on windows
 	defer os.Remove(invalidPcap.Name())
 
-	err = ioutil.WriteFile(invalidPcap.Name(), invalidData, 0644)
+	err = ioutil.WriteFile(invalidPcap.Name(), invalidData, 0o644)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -53,24 +53,27 @@ func TestPcapFileRead(t *testing.T) {
 		expectedLayers []gopacket.LayerType
 		err            string
 	}{
-		{filename: "test_loopback.pcap",
-			num: 24,
+		{
+			filename: "test_loopback.pcap",
+			num:      24,
 			expectedLayers: []gopacket.LayerType{
 				layers.LayerTypeLoopback,
 				layers.LayerTypeIPv6,
 				layers.LayerTypeTCP,
 			},
 		},
-		{filename: "test_ethernet.pcap",
-			num: 10,
+		{
+			filename: "test_ethernet.pcap",
+			num:      10,
 			expectedLayers: []gopacket.LayerType{
 				layers.LayerTypeEthernet,
 				layers.LayerTypeIPv4,
 				layers.LayerTypeTCP,
 			},
 		},
-		{filename: "test_dns.pcap",
-			num: 10,
+		{
+			filename: "test_dns.pcap",
+			num:      10,
 			expectedLayers: []gopacket.LayerType{
 				layers.LayerTypeEthernet,
 				layers.LayerTypeIPv4,
@@ -78,9 +81,10 @@ func TestPcapFileRead(t *testing.T) {
 				layers.LayerTypeDNS,
 			},
 		},
-		{filename: invalidPcap.Name(),
-			num: 0,
-			err: "unknown file format",
+		{
+			filename: invalidPcap.Name(),
+			num:      0,
+			err:      "unknown file format",
 		},
 	} {
 		t.Logf("\n\n\n\nProcessing file %s\n\n\n\n", file.filename)
@@ -170,7 +174,8 @@ func TestBPFInstruction(t *testing.T) {
 		{"foobar", []BPFInstruction{}, true, false},
 
 		// tcpdump -dd 'tcp[tcpflags] & (tcp-syn|tcp-ack) == (tcp-syn|tcp-ack)'
-		{"tcp[tcpflags] & (tcp-syn|tcp-ack) == (tcp-syn|tcp-ack)",
+		{
+			"tcp[tcpflags] & (tcp-syn|tcp-ack) == (tcp-syn|tcp-ack)",
 			[]BPFInstruction{
 				{0x28, 0, 0, 0x0000000c},
 				{0x15, 0, 9, 0x00000800},
@@ -184,10 +189,13 @@ func TestBPFInstruction(t *testing.T) {
 				{0x15, 0, 1, 0x00000012},
 				{0x6, 0, 0, 0x0000ffff},
 				{0x6, 0, 0, 0x00000000},
-			}, false, true},
+			},
+			false, true,
+		},
 
 		// tcpdump -dd 'tcp[tcpflags] & (tcp-syn|tcp-ack) == tcp-ack'
-		{"tcp[tcpflags] & (tcp-syn|tcp-ack) == tcp-ack",
+		{
+			"tcp[tcpflags] & (tcp-syn|tcp-ack) == tcp-ack",
 			[]BPFInstruction{
 				{0x28, 0, 0, 0x0000000c},
 				{0x15, 0, 9, 0x00000800},
@@ -201,10 +209,13 @@ func TestBPFInstruction(t *testing.T) {
 				{0x15, 0, 1, 0x00000010},
 				{0x6, 0, 0, 0x0000ffff},
 				{0x6, 0, 0, 0x00000000},
-			}, false, true},
+			},
+			false, true,
+		},
 
 		// tcpdump -dd 'udp'
-		{"udp",
+		{
+			"udp",
 			[]BPFInstruction{
 				{0x28, 0, 0, 0x0000000c},
 				{0x15, 0, 5, 0x000086dd},
@@ -218,7 +229,9 @@ func TestBPFInstruction(t *testing.T) {
 				{0x15, 0, 1, 0x00000011},
 				{0x6, 0, 0, 0x0000ffff},
 				{0x6, 0, 0, 0x00000000},
-			}, false, false},
+			},
+			false, false,
+		},
 
 		{"", oversizedBpfInstructionBuffer[:], true, false},
 	} {

@@ -58,8 +58,7 @@ type TLSHandshakeRecordClientHello struct {
 	Extensions               []uint8
 }
 
-type TLSHandshakeRecordClientKeyChange struct {
-}
+type TLSHandshakeRecordClientKeyChange struct{}
 
 // TLSHandshakeRecord defines the structure of a Handshare Record
 type TLSHandshakeRecord struct {
@@ -87,6 +86,7 @@ func (t *TLSHandshakeRecordClientHello) decodeFromBytes(data []byte, df gopacket
 	t.Extensions = data[((39 + uint16(t.SessionIDLength) + 2 + t.CipherSuitsLength) + 1 + uint16(t.CompressionMethodsLength) + 2) : ((39+uint16(t.SessionIDLength)+2+t.CipherSuitsLength)+1+uint16(t.CompressionMethodsLength)+2)+t.ExtensionsLength]
 	return nil
 }
+
 func (t *TLSHandshakeRecordClientKeyChange) decodeFromBytes(data []byte, df gopacket.DecodeFeedback) error {
 	/*TBD*/
 	return nil

@@ -2,17 +2,17 @@ package pcapgo
 
 import (
 	"fmt"
-	"github.com/gopacket/gopacket/layers"
 	"io"
 	"math"
 	"net"
 	"os"
 	"testing"
+
+	"github.com/gopacket/gopacket/layers"
 )
 
 // TestNgWriterDSB tests the WriteDecryptionSecretsBlock function.
 func TestNgWriterDSB(t *testing.T) {
-
 	// Test that we can read a DSB file.
 	pcapngFile := "tests/le/test300.pcapng"
 	tlsKey := "CLIENT_RANDOM 65bafa1a1a37aebce6ab7af420f9a6ca10513ad1d53aececbe831a28982a5c18 8d1e0c21e653f8e0720c987c3daaca094ff6eb1ccc9e15a8384a214139dfdcf25f0ee77ac81250c7a11b8da561313528\n"
@@ -47,7 +47,7 @@ func TestNgWriterDSB(t *testing.T) {
 	tmpPcapng := "tests/dbs_tmp.pcapng"
 	writer, err := createPcapng(tmpPcapng)
 
-	//write Decryption Secrets Block
+	// write Decryption Secrets Block
 	err = writer.WriteDecryptionSecretsBlock(DSB_SECRETS_TYPE_TLS, []byte(tlsKey))
 	if err != nil {
 		t.Fatal("Couldn't write Decryption Secrets Block:", err)
@@ -72,7 +72,7 @@ func TestNgWriterDSB(t *testing.T) {
 }
 
 func createPcapng(pcapngFilename string) (*NgWriter, error) {
-	pcapFile, err := os.OpenFile(pcapngFilename, os.O_TRUNC|os.O_WRONLY|os.O_CREATE, 0644)
+	pcapFile, err := os.OpenFile(pcapngFilename, os.O_TRUNC|os.O_WRONLY|os.O_CREATE, 0o644)
 	if err != nil {
 		return nil, fmt.Errorf("error creating pcap file: %v", err)
 	}

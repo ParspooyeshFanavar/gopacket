@@ -172,6 +172,7 @@ func parseOptions(opts ...interface{}) (ret options, err error) {
 	ret.framesPerBlock = ret.blockSize / ret.frameSize
 	return
 }
+
 func (o options) check() error {
 	switch {
 	case o.blockSize%pageSize != 0:

@@ -40,8 +40,10 @@ var DecodersByLayerName = map[string]Decoder{}
 
 const maxLayerType = 2000
 
-var ltMeta [maxLayerType]layerTypeMetadata
-var ltMetaMap = map[LayerType]layerTypeMetadata{}
+var (
+	ltMeta    [maxLayerType]layerTypeMetadata
+	ltMetaMap = map[LayerType]layerTypeMetadata{}
+)
 
 // RegisterLayerType creates a new layer type and registers it globally.
 // The number passed in must be unique, or a runtime panic will occur.  Numbers

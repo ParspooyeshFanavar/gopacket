@@ -157,7 +157,6 @@ func TestSIPMain(t *testing.T) {
 }
 
 func _TestPacketSIP(t *testing.T, packetData []byte, methodWanted SIPMethod, isResponse bool, wantedCseq int64, expectedHeaders map[string]string, expectedRequestURI string) {
-
 	p := gopacket.NewPacket(packetData, LinkTypeEthernet, gopacket.Default)
 	if p.ErrorLayer() != nil {
 		t.Error("Failed to decode packet:", p.ErrorLayer().Error())

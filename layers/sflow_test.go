@@ -443,7 +443,7 @@ func TestDecodeSFlowDatagram(t *testing.T) {
 			AgentUptime:     uint32(1078576845),
 			SampleCount:     uint32(7),
 			FlowSamples: []SFlowFlowSample{
-				SFlowFlowSample{
+				{
 					EnterpriseID:    0x0,
 					Format:          0x1,
 					SampleLength:    0xd0,
@@ -482,7 +482,7 @@ func TestDecodeSFlowDatagram(t *testing.T) {
 						},
 					},
 				},
-				SFlowFlowSample{
+				{
 					EnterpriseID:    0x0,
 					Format:          0x1,
 					SampleLength:    0xd0,
@@ -521,7 +521,7 @@ func TestDecodeSFlowDatagram(t *testing.T) {
 						},
 					},
 				},
-				SFlowFlowSample{
+				{
 					EnterpriseID:    0x0,
 					Format:          0x1,
 					SampleLength:    0xd0,
@@ -560,7 +560,7 @@ func TestDecodeSFlowDatagram(t *testing.T) {
 						},
 					},
 				},
-				SFlowFlowSample{
+				{
 					EnterpriseID:    0x0,
 					Format:          0x1,
 					SampleLength:    0xd0,
@@ -599,7 +599,7 @@ func TestDecodeSFlowDatagram(t *testing.T) {
 						},
 					},
 				},
-				SFlowFlowSample{
+				{
 					EnterpriseID:    0x0,
 					Format:          0x1,
 					SampleLength:    0xd0,
@@ -638,7 +638,7 @@ func TestDecodeSFlowDatagram(t *testing.T) {
 						},
 					},
 				},
-				SFlowFlowSample{
+				{
 					EnterpriseID:    0x0,
 					Format:          0x1,
 					SampleLength:    0x94,
@@ -679,7 +679,7 @@ func TestDecodeSFlowDatagram(t *testing.T) {
 				},
 			},
 			CounterSamples: []SFlowCounterSample{
-				SFlowCounterSample{
+				{
 					Format:         0x2,
 					SampleLength:   0xa8,
 					SequenceNumber: 0x20f2,
@@ -760,7 +760,7 @@ func TestPacketPacket0(t *testing.T) {
 			AgentUptime:     uint32(52000),
 			SampleCount:     uint32(3),
 			FlowSamples: []SFlowFlowSample{
-				SFlowFlowSample{
+				{
 					EnterpriseID:    0x0,
 					Format:          0x1,
 					SampleLength:    340,
@@ -807,17 +807,17 @@ func TestPacketPacket0(t *testing.T) {
 							PeerAS:      999,
 							ASPathCount: 3,
 							ASPath: []SFlowASDestination{
-								SFlowASDestination{
+								{
 									Type:    SFlowASSequence,
 									Count:   3,
 									Members: []uint32{123, 456, 789},
 								},
-								SFlowASDestination{
+								{
 									Type:    SFlowASSet,
 									Count:   3,
 									Members: []uint32{11111, 22222, 33333},
 								},
-								SFlowASDestination{
+								{
 									Type:    SFlowASSequence,
 									Count:   3,
 									Members: []uint32{777, 888, 999},
@@ -840,7 +840,7 @@ func TestPacketPacket0(t *testing.T) {
 						},
 					},
 				},
-				SFlowFlowSample{
+				{
 					EnterpriseID:    0x0,
 					Format:          0x1,
 					SampleLength:    400,
@@ -887,17 +887,17 @@ func TestPacketPacket0(t *testing.T) {
 							PeerAS:      999,
 							ASPathCount: 3,
 							ASPath: []SFlowASDestination{
-								SFlowASDestination{
+								{
 									Type:    SFlowASSequence,
 									Count:   3,
 									Members: []uint32{123, 456, 789},
 								},
-								SFlowASDestination{
+								{
 									Type:    SFlowASSet,
 									Count:   3,
 									Members: []uint32{11111, 22222, 33333},
 								},
-								SFlowASDestination{
+								{
 									Type:    SFlowASSequence,
 									Count:   3,
 									Members: []uint32{777, 888, 999},
@@ -920,7 +920,7 @@ func TestPacketPacket0(t *testing.T) {
 						},
 					},
 				},
-				SFlowFlowSample{
+				{
 					EnterpriseID:    0x0,
 					Format:          0x1,
 					SampleLength:    340,
@@ -967,17 +967,17 @@ func TestPacketPacket0(t *testing.T) {
 							PeerAS:      999,
 							ASPathCount: 3,
 							ASPath: []SFlowASDestination{
-								SFlowASDestination{
+								{
 									Type:    SFlowASSequence,
 									Count:   3,
 									Members: []uint32{123, 456, 789},
 								},
-								SFlowASDestination{
+								{
 									Type:    SFlowASSet,
 									Count:   3,
 									Members: []uint32{11111, 22222, 33333},
 								},
-								SFlowASDestination{
+								{
 									Type:    SFlowASSequence,
 									Count:   3,
 									Members: []uint32{777, 888, 999},
@@ -1028,7 +1028,7 @@ func TestDecodeProcessorCounter(t *testing.T) {
 		AgentUptime:     uint32(1929595000),
 		SampleCount:     uint32(1),
 		CounterSamples: []SFlowCounterSample{
-			SFlowCounterSample{
+			{
 				Format:         SFlowTypeExpandedCounterSample,
 				SampleLength:   0x34,
 				SequenceNumber: 0x0178e0,
@@ -1075,7 +1075,7 @@ func TestDecodeExtendedSwitchFlow(t *testing.T) {
 		AgentUptime:     uint32(0x32e0e47c),
 		SampleCount:     uint32(1),
 		FlowSamples: []SFlowFlowSample{
-			SFlowFlowSample{
+			{
 				Format:                SFlowTypeFlowSample,
 				SampleLength:          0x38,
 				SequenceNumber:        0x123,
@@ -1128,7 +1128,7 @@ func TestDecodeExtendedRouterFlow(t *testing.T) {
 		AgentUptime:     uint32(0x32e0e47c),
 		SampleCount:     uint32(1),
 		FlowSamples: []SFlowFlowSample{
-			SFlowFlowSample{
+			{
 				Format:                SFlowTypeFlowSample,
 				SampleLength:          0x34,
 				SequenceNumber:        0x123,
@@ -1180,7 +1180,7 @@ func TestDecodeExtendedRouterFlowIPv6(t *testing.T) {
 		AgentUptime:     uint32(0x32e0e47c),
 		SampleCount:     uint32(1),
 		FlowSamples: []SFlowFlowSample{
-			SFlowFlowSample{
+			{
 				Format:                SFlowTypeFlowSample,
 				SampleLength:          0x34,
 				SequenceNumber:        0x123,
@@ -1232,7 +1232,7 @@ func TestDecodeExtendedIpv4TunnelIngressFlow(t *testing.T) {
 		AgentUptime:     uint32(0x1bd50),
 		SampleCount:     uint32(1),
 		FlowSamples: []SFlowFlowSample{
-			SFlowFlowSample{
+			{
 				Format:                SFlowTypeFlowSample,
 				SampleLength:          0x48,
 				SequenceNumber:        0x74,
@@ -1291,7 +1291,7 @@ func TestDecodeExtendedIpv4TunnelEgressFlow(t *testing.T) {
 		AgentUptime:     uint32(0x4268),
 		SampleCount:     uint32(1),
 		FlowSamples: []SFlowFlowSample{
-			SFlowFlowSample{
+			{
 				Format:                SFlowTypeFlowSample,
 				SampleLength:          0x48,
 				SequenceNumber:        0x12,
@@ -1350,7 +1350,7 @@ func TestDecodeEthernetFrameFlow(t *testing.T) {
 		AgentUptime:     0x3297,
 		SampleCount:     0x7,
 		FlowSamples: []SFlowFlowSample{
-			SFlowFlowSample{
+			{
 				EnterpriseID:          0x0,
 				Format:                0x1,
 				SampleLength:          0x40,
@@ -1379,7 +1379,7 @@ func TestDecodeEthernetFrameFlow(t *testing.T) {
 					},
 				},
 			},
-			SFlowFlowSample{
+			{
 				EnterpriseID:          0x0,
 				Format:                0x1,
 				SampleLength:          0x40,
@@ -1406,7 +1406,8 @@ func TestDecodeEthernetFrameFlow(t *testing.T) {
 						Type:   0x3,
 					},
 				},
-			}, SFlowFlowSample{
+			},
+			{
 				EnterpriseID:          0x0,
 				Format:                0x1,
 				SampleLength:          0x40,
@@ -1435,7 +1436,7 @@ func TestDecodeEthernetFrameFlow(t *testing.T) {
 					},
 				},
 			},
-			SFlowFlowSample{
+			{
 				EnterpriseID:          0x0,
 				Format:                0x1,
 				SampleLength:          0x40,
@@ -1464,7 +1465,7 @@ func TestDecodeEthernetFrameFlow(t *testing.T) {
 					},
 				},
 			},
-			SFlowFlowSample{
+			{
 				EnterpriseID:          0x0,
 				Format:                0x1,
 				SampleLength:          0x40,
@@ -1493,7 +1494,7 @@ func TestDecodeEthernetFrameFlow(t *testing.T) {
 					},
 				},
 			},
-			SFlowFlowSample{
+			{
 				EnterpriseID:          0x0,
 				Format:                0x1,
 				SampleLength:          0x40,
@@ -1522,7 +1523,7 @@ func TestDecodeEthernetFrameFlow(t *testing.T) {
 					},
 				},
 			},
-			SFlowFlowSample{
+			{
 				EnterpriseID:          0x0,
 				Format:                0x1,
 				SampleLength:          0x40,
@@ -1575,7 +1576,7 @@ func TestDecodePortnameCounter(t *testing.T) {
 		AgentUptime:     0xe04d248,
 		SampleCount:     0x1,
 		CounterSamples: []SFlowCounterSample{
-			SFlowCounterSample{
+			{
 				Format:         0x2,
 				SampleLength:   0xd8,
 				SequenceNumber: 0x5be0,
@@ -1661,7 +1662,7 @@ func TestDecodeVLANCounter(t *testing.T) {
 		AgentUptime:     uint32(1929595000),
 		SampleCount:     uint32(1),
 		CounterSamples: []SFlowCounterSample{
-			SFlowCounterSample{
+			{
 				Format:         SFlowTypeExpandedCounterSample,
 				SampleLength:   0x34,
 				SequenceNumber: 0x0178e0,
@@ -1705,11 +1706,11 @@ func TestDecodeLACPCounter(t *testing.T) {
 		DatagramVersion: uint32(5),
 		AgentAddress:    []byte{0x7f, 0x00, 0x00, 0x01},
 		SubAgentID:      uint32(0x00),
-		SequenceNumber:  uint32(14565),    //38e5
-		AgentUptime:     uint32(95295000), //5AE1618
+		SequenceNumber:  uint32(14565),    // 38e5
+		AgentUptime:     uint32(95295000), // 5AE1618
 		SampleCount:     uint32(1),
 		CounterSamples: []SFlowCounterSample{
-			SFlowCounterSample{
+			{
 				Format:         SFlowTypeCounterSample,
 				SampleLength:   0x74,
 				SequenceNumber: 0x0d30,
@@ -1762,7 +1763,7 @@ func TestDecodeOpenflowCounter(t *testing.T) {
 		AgentUptime:     0xe0412e0,
 		SampleCount:     0x1,
 		CounterSamples: []SFlowCounterSample{
-			SFlowCounterSample{
+			{
 				Format:         SFlowTypeCounterSample,
 				SampleLength:   0xd0,
 				SequenceNumber: 0x5bdb,
@@ -1841,7 +1842,7 @@ func TestDecodeAppResourcesOvsdbCounter(t *testing.T) {
 		AgentUptime:     0xe045160,
 		SampleCount:     0x1,
 		CounterSamples: []SFlowCounterSample{
-			SFlowCounterSample{
+			{
 				Format:         SFlowTypeCounterSample,
 				SampleLength:   0x5c,
 				SequenceNumber: 0x5bdd,

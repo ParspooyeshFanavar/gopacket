@@ -74,6 +74,7 @@ func TestPacketDNSRegression(t *testing.T) {
 	}
 	checkLayers(p, []gopacket.LayerType{LayerTypeEthernet, LayerTypeIPv4, LayerTypeUDP, LayerTypeDNS}, t)
 }
+
 func BenchmarkDecodePacketDNSRegression(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		gopacket.NewPacket(testPacketDNSRegression, LinkTypeEthernet, gopacket.NoCopy)
@@ -82,6 +83,7 @@ func BenchmarkDecodePacketDNSRegression(b *testing.B) {
 
 // response to `dig TXT google.com` over IPv4 link:
 var testParseDNSTypeTXTValue = `v=spf1 include:_spf.google.com ~all`
+
 var testParseDNSTypeTXT = []byte{
 	0x02, 0x00, 0x00, 0x00, // PF_INET
 	0x45, 0x00, 0x00, 0x73, 0x00, 0x00, 0x40, 0x00, 0x39, 0x11, 0x64, 0x98, 0xd0, 0x43, 0xde, 0xde,
@@ -201,9 +203,12 @@ var testParseDNSTypeURI = []byte{
 	0x3a, 0x2f, 0x2f, 0x77, 0x77, 0x77, 0x2e, 0x64, 0x6e, 0x73, 0x2e, 0x74, 0x65, 0x73, 0x74, 0x3a,
 	0x38, 0x30, 0x30, 0x30, 0x00, 0x00, 0x29, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 }
-var testParseDNSTypeURITarget = "http://www.dns.test:8000"
-var testParseDNSTypeURIPriority = uint16(10)
-var testParseDNSTypeURIWeight = uint16(5)
+
+var (
+	testParseDNSTypeURITarget   = "http://www.dns.test:8000"
+	testParseDNSTypeURIPriority = uint16(10)
+	testParseDNSTypeURIWeight   = uint16(5)
+)
 
 func TestParseDNSTypeURI(t *testing.T) {
 	p := gopacket.NewPacket(testParseDNSTypeURI, LinkTypeNull, testDecodeOptions)
@@ -519,7 +524,7 @@ func TestDNSEncodeQueryWithOPT(t *testing.T) {
 			Type:  DNSTypeOPT,
 			Class: 4096,
 			OPT: []DNSOPT{
-				DNSOPT{
+				{
 					Code: DNSOptionCodeDeviceID,
 					Data: []byte("OpenDNS"),
 				},
@@ -545,8 +550,10 @@ func TestDNSEncodeQueryWithOPT(t *testing.T) {
 }
 
 func TestDNSEncodeResponse(t *testing.T) {
-	dns := &DNS{ID: 1234, QR: true, OpCode: DNSOpCodeQuery,
-		AA: true, RD: true, RA: true}
+	dns := &DNS{
+		ID: 1234, QR: true, OpCode: DNSOpCodeQuery,
+		AA: true, RD: true, RA: true,
+	}
 	dns.Questions = append(dns.Questions,
 		DNSQuestion{
 			Name:  []byte("example1.com"),
@@ -1136,13 +1143,13 @@ func TestPacketDNSPanic7(t *testing.T) {
 
 func TestDNSPacketWriteAnswer(t *testing.T) {
 	dns := &DNS{ID: 0x1234, QR: true, OpCode: DNSOpCodeQuery, ResponseCode: DNSResponseCodeNoErr, Answers: []DNSResourceRecord{
-		DNSResourceRecord{
+		{
 			Name:  []byte("www.example.com"),
 			Type:  DNSTypeA,
 			Class: DNSClassIN,
 			IP:    net.IPv4(127, 0, 0, 1),
 		},
-		DNSResourceRecord{
+		{
 			Name:  []byte("www.example.com"),
 			Type:  DNSTypeAAAA,
 			Class: DNSClassIN,

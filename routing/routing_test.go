@@ -284,10 +284,8 @@ func TestPrivateRoute(t *testing.T) {
 			if !tt.wantPreferredSrc.Equal(preferredSrc) {
 				t.Errorf("route() illegal return value `preferredSrc`:\ngot	:%#v\n\nwant	:%#v\n\n", preferredSrc, tt.wantPreferredSrc)
 			}
-
 		})
 	}
-
 }
 
 func TestRouting(t *testing.T) {
@@ -539,8 +537,10 @@ func init() {
 	localInterface := net.Interface{Index: 1, MTU: 1500, Name: "Local", HardwareAddr: localHW, Flags: 1}
 	testRouter.ifaces[1] = &localInterface
 	testRouter.addrs[1] = ipAddrs{v4: net.IPv4(10, 0, 0, 2)}
-	localRoute := &rtInfo{Dst: &net.IPNet{IP: net.IPv4(10, 0, 0, 0), Mask: net.CIDRMask(8, 32)},
-		Gateway: net.IPv4(10, 0, 0, 1), InputIface: 0, OutputIface: 1, Priority: 300}
+	localRoute := &rtInfo{
+		Dst:     &net.IPNet{IP: net.IPv4(10, 0, 0, 0), Mask: net.CIDRMask(8, 32)},
+		Gateway: net.IPv4(10, 0, 0, 1), InputIface: 0, OutputIface: 1, Priority: 300,
+	}
 	testRouter.v4 = append(testRouter.v4, localRoute)
 	sort.Sort(testRouter.v4)
 }

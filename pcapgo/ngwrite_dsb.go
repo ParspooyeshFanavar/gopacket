@@ -69,7 +69,6 @@ type pcapngDecryptionSecretsBlock struct {
 
 // WriteDecryptionSecretsBlock writes a Decryption Secrets Block to the writer.
 func (w *NgWriter) WriteDecryptionSecretsBlock(secretType uint32, secretPayload []byte) error {
-
 	switch secretType {
 	case DSB_SECRETS_TYPE_SSH, DSB_SECRETS_TYPE_ZIGBEE_NWK_KEY, DSB_SECRETS_TYPE_WIREGUARD, DSB_SECRETS_TYPE_ZIGBEE_APS_KEY, DSB_SECRETS_TYPE_TLS:
 	default:

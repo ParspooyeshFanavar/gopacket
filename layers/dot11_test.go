@@ -191,10 +191,11 @@ func TestPacketDot11DataQOSData(t *testing.T) {
 	checkLayers(p, []gopacket.LayerType{LayerTypeRadioTap, LayerTypeDot11, LayerTypeDot11DataQOSData, LayerTypeDot11Data, LayerTypeLLC, LayerTypeSNAP, LayerTypeARP}, t)
 
 	if got, ok := p.Layer(LayerTypeARP).(*ARP); ok {
-		want := &ARP{BaseLayer: BaseLayer{
-			Contents: []uint8{0x0, 0x1, 0x8, 0x0, 0x6, 0x4, 0x0, 0x1, 0x0, 0x19, 0xe3, 0xd3, 0x53, 0x52, 0xa9, 0xfe, 0xf7, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x8c, 0xb4, 0x33, 0x44},
-			Payload:  []uint8{},
-		},
+		want := &ARP{
+			BaseLayer: BaseLayer{
+				Contents: []uint8{0x0, 0x1, 0x8, 0x0, 0x6, 0x4, 0x0, 0x1, 0x0, 0x19, 0xe3, 0xd3, 0x53, 0x52, 0xa9, 0xfe, 0xf7, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x8c, 0xb4, 0x33, 0x44},
+				Payload:  []uint8{},
+			},
 			AddrType:          0x1,
 			Protocol:          0x800,
 			HwAddressSize:     0x6,
@@ -211,6 +212,7 @@ func TestPacketDot11DataQOSData(t *testing.T) {
 		}
 	}
 }
+
 func BenchmarkDecodePacketDot11DataQOSData(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		gopacket.NewPacket(testPacketDot11DataQOSData, LinkTypeIEEE80211Radio, gopacket.NoCopy)
@@ -304,6 +306,7 @@ func TestPacketDot11CtrlAck(t *testing.T) {
 		}
 	}
 }
+
 func BenchmarkDecodePacketDot11CtrlAck(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		gopacket.NewPacket(testPacketDot11CtrlAck, LinkTypeIEEE80211Radio, gopacket.NoCopy)
@@ -427,6 +430,7 @@ func TestPacketDot11DataIP(t *testing.T) {
 	}
 	checkLayers(p, []gopacket.LayerType{LayerTypeRadioTap, LayerTypeDot11, LayerTypeDot11Data, LayerTypeLLC, LayerTypeSNAP, LayerTypeIPv4, LayerTypeUDP, LayerTypeDHCPv4}, t)
 }
+
 func BenchmarkDecodePacketDot11DataIP(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		gopacket.NewPacket(testPacketDot11DataIP, LinkTypeIEEE80211Radio, gopacket.NoCopy)

@@ -24,10 +24,12 @@ import (
 	"github.com/gopacket/gopacket"
 )
 
-var hdrLen = unix.CmsgSpace(0)
-var auxLen = unix.CmsgSpace(int(unsafe.Sizeof(unix.TpacketAuxdata{})))
-var timensLen = unix.CmsgSpace(int(unsafe.Sizeof(unix.Timespec{})))
-var timeLen = unix.CmsgSpace(int(unsafe.Sizeof(unix.Timeval{})))
+var (
+	hdrLen    = unix.CmsgSpace(0)
+	auxLen    = unix.CmsgSpace(int(unsafe.Sizeof(unix.TpacketAuxdata{})))
+	timensLen = unix.CmsgSpace(int(unsafe.Sizeof(unix.Timespec{})))
+	timeLen   = unix.CmsgSpace(int(unsafe.Sizeof(unix.Timeval{})))
+)
 
 func htons(data uint16) uint16 { return data<<8 | data>>8 }
 
@@ -47,7 +49,7 @@ func (h *EthernetHandle) readOne() (ci gopacket.CaptureInfo, vlan int, haveVlan 
 	// we could use unix.Recvmsg, but that does a memory allocation (for the returned sockaddr) :(
 	var msg unix.Msghdr
 	var sa unix.RawSockaddrLinklayer
-	var handle = atomic.LoadUintptr(&h.fd)
+	handle := atomic.LoadUintptr(&h.fd)
 
 	/*
 	 * check if the handle got closed already
@@ -152,7 +154,6 @@ func (h *EthernetHandle) ReadPacketData() ([]byte, gopacket.CaptureInfo, error) 
 
 	if haveVlan {
 		ci.AncillaryData = []interface{}{vlan}
-
 	}
 
 	return b, ci, nil

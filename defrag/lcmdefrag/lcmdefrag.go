@@ -64,7 +64,7 @@ func (lp *lcmPacket) append(in *layers.LCM) {
 func (lp *lcmPacket) assemble() (out *layers.LCM, err error) {
 	var blob []byte
 
-	//Extract packets
+	// Extract packets
 	for i := uint16(0); i < lp.totalFrags; i++ {
 		fragment, ok := lp.frags[i]
 		if !ok {

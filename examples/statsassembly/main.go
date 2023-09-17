@@ -25,22 +25,26 @@ import (
 	"github.com/gopacket/gopacket/tcpassembly"
 )
 
-var iface = flag.String("i", "eth0", "Interface to get packets from")
-var snaplen = flag.Int("s", 65536, "SnapLen for pcap packet capture")
-var filter = flag.String("f", "tcp", "BPF filter for pcap")
-var logAllPackets = flag.Bool("v", false, "Log whenever we see a packet")
-var bufferedPerConnection = flag.Int("connection_max_buffer", 0, `
+var (
+	iface                 = flag.String("i", "eth0", "Interface to get packets from")
+	snaplen               = flag.Int("s", 65536, "SnapLen for pcap packet capture")
+	filter                = flag.String("f", "tcp", "BPF filter for pcap")
+	logAllPackets         = flag.Bool("v", false, "Log whenever we see a packet")
+	bufferedPerConnection = flag.Int("connection_max_buffer", 0, `
 Max packets to buffer for a single connection before skipping over a gap in data
 and continuing to stream the connection after the buffer.  If zero or less, this
 is infinite.`)
+)
 var bufferedTotal = flag.Int("total_max_buffer", 0, `
 Max packets to buffer total before skipping over gaps in connections and
 continuing to stream connection data.  If zero or less, this is infinite`)
+
 var flushAfter = flag.String("flush_after", "2m", `
 Connections which have buffered packets (they've gotten packets out of order and
 are waiting for old packets to fill the gaps) are flushed after they're this old
 (their oldest gap is skipped).  Any string parsed by time.ParseDuration is
 acceptable here`)
+
 var packetCount = flag.Int("c", -1, `
 Quit after processing this many packets, flushing all currently buffered
 connections.  If negative, this is infinite`)
@@ -170,7 +174,6 @@ loop:
 		// copy, but its cost is much more careful handling of the
 		// resulting byte slice.
 		data, ci, err := handle.ZeroCopyReadPacketData()
-
 		if err != nil {
 			log.Printf("error getting packet: %v", err)
 			continue

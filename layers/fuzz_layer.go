@@ -22,7 +22,7 @@ func FuzzLayer(data []byte) int {
 	}
 	// use the first two bytes to choose the top level layer
 	startLayer := binary.BigEndian.Uint16(data[:2])
-	var fuzzOpts = gopacket.DecodeOptions{
+	fuzzOpts := gopacket.DecodeOptions{
 		Lazy:                     data[2]&0x1 != 0,
 		NoCopy:                   data[2]&0x2 != 0,
 		SkipDecodeRecovery:       data[2]&0x4 != 0,

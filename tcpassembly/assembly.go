@@ -29,11 +29,15 @@ import (
 	"github.com/gopacket/gopacket/layers"
 )
 
-var memLog = flag.Bool("assembly_memuse_log", false, "If true, the github.com/gopacket/gopacket/tcpassembly library will log information regarding its memory use every once in a while.")
-var debugLog = flag.Bool("assembly_debug_log", false, "If true, the github.com/gopacket/gopacket/tcpassembly library will log verbose debugging information (at least one line per packet)")
+var (
+	memLog   = flag.Bool("assembly_memuse_log", false, "If true, the github.com/gopacket/gopacket/tcpassembly library will log information regarding its memory use every once in a while.")
+	debugLog = flag.Bool("assembly_debug_log", false, "If true, the github.com/gopacket/gopacket/tcpassembly library will log verbose debugging information (at least one line per packet)")
+)
 
-const invalidSequence = -1
-const uint32Size = 1 << 32
+const (
+	invalidSequence = -1
+	uint32Size      = 1 << 32
+)
 
 // Sequence is a TCP sequence number.  It provides a few convenience functions
 // for handling TCP wrap-around.  The sequence should always be in the range

@@ -310,7 +310,6 @@ func (s *SIP) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error {
 //	Response 	: SIP/2.0 200 OK
 //	Response	: SIP/2.0 501 Not Implemented
 func (s *SIP) ParseFirstLine(firstLine []byte) error {
-
 	var err error
 
 	// Splits line by space
@@ -377,7 +376,6 @@ func (s *SIP) ParseFirstLine(firstLine []byte) error {
 //	   nonce="1cec4341ae6cbe5a359ea9c8e88df84f", opaque="",
 //	   uri="sip:ss2.wcom.com", response="71ba27c64bd01de719686aa4590d5824"
 func (s *SIP) ParseHeader(header []byte) (err error) {
-
 	// Ignore empty headers
 	if len(header) == 0 {
 		return
@@ -417,7 +415,6 @@ func (s *SIP) ParseHeader(header []byte) (err error) {
 // ParseSpecificHeaders will parse some specific key values from
 // specific headers like CSeq or Content-Length integer values
 func (s *SIP) ParseSpecificHeaders(headerName string, headerValue string) (err error) {
-
 	switch headerName {
 	case "cseq":
 

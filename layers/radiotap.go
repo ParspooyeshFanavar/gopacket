@@ -55,66 +55,87 @@ const (
 func (r RadioTapPresent) TSFT() bool {
 	return r&RadioTapPresentTSFT != 0
 }
+
 func (r RadioTapPresent) Flags() bool {
 	return r&RadioTapPresentFlags != 0
 }
+
 func (r RadioTapPresent) Rate() bool {
 	return r&RadioTapPresentRate != 0
 }
+
 func (r RadioTapPresent) Channel() bool {
 	return r&RadioTapPresentChannel != 0
 }
+
 func (r RadioTapPresent) FHSS() bool {
 	return r&RadioTapPresentFHSS != 0
 }
+
 func (r RadioTapPresent) DBMAntennaSignal() bool {
 	return r&RadioTapPresentDBMAntennaSignal != 0
 }
+
 func (r RadioTapPresent) DBMAntennaNoise() bool {
 	return r&RadioTapPresentDBMAntennaNoise != 0
 }
+
 func (r RadioTapPresent) LockQuality() bool {
 	return r&RadioTapPresentLockQuality != 0
 }
+
 func (r RadioTapPresent) TxAttenuation() bool {
 	return r&RadioTapPresentTxAttenuation != 0
 }
+
 func (r RadioTapPresent) DBTxAttenuation() bool {
 	return r&RadioTapPresentDBTxAttenuation != 0
 }
+
 func (r RadioTapPresent) DBMTxPower() bool {
 	return r&RadioTapPresentDBMTxPower != 0
 }
+
 func (r RadioTapPresent) Antenna() bool {
 	return r&RadioTapPresentAntenna != 0
 }
+
 func (r RadioTapPresent) DBAntennaSignal() bool {
 	return r&RadioTapPresentDBAntennaSignal != 0
 }
+
 func (r RadioTapPresent) DBAntennaNoise() bool {
 	return r&RadioTapPresentDBAntennaNoise != 0
 }
+
 func (r RadioTapPresent) RxFlags() bool {
 	return r&RadioTapPresentRxFlags != 0
 }
+
 func (r RadioTapPresent) TxFlags() bool {
 	return r&RadioTapPresentTxFlags != 0
 }
+
 func (r RadioTapPresent) RtsRetries() bool {
 	return r&RadioTapPresentRtsRetries != 0
 }
+
 func (r RadioTapPresent) DataRetries() bool {
 	return r&RadioTapPresentDataRetries != 0
 }
+
 func (r RadioTapPresent) MCS() bool {
 	return r&RadioTapPresentMCS != 0
 }
+
 func (r RadioTapPresent) AMPDUStatus() bool {
 	return r&RadioTapPresentAMPDUStatus != 0
 }
+
 func (r RadioTapPresent) VHT() bool {
 	return r&RadioTapPresentVHT != 0
 }
+
 func (r RadioTapPresent) EXT() bool {
 	return r&RadioTapPresentEXT != 0
 }
@@ -135,24 +156,31 @@ const (
 func (r RadioTapChannelFlags) Turbo() bool {
 	return r&RadioTapChannelFlagsTurbo != 0
 }
+
 func (r RadioTapChannelFlags) CCK() bool {
 	return r&RadioTapChannelFlagsCCK != 0
 }
+
 func (r RadioTapChannelFlags) OFDM() bool {
 	return r&RadioTapChannelFlagsOFDM != 0
 }
+
 func (r RadioTapChannelFlags) Ghz2() bool {
 	return r&RadioTapChannelFlagsGhz2 != 0
 }
+
 func (r RadioTapChannelFlags) Ghz5() bool {
 	return r&RadioTapChannelFlagsGhz5 != 0
 }
+
 func (r RadioTapChannelFlags) Passive() bool {
 	return r&RadioTapChannelFlagsPassive != 0
 }
+
 func (r RadioTapChannelFlags) Dynamic() bool {
 	return r&RadioTapChannelFlagsDynamic != 0
 }
+
 func (r RadioTapChannelFlags) GFSK() bool {
 	return r&RadioTapChannelFlagsGFSK != 0
 }
@@ -209,24 +237,31 @@ const (
 func (r RadioTapFlags) CFP() bool {
 	return r&RadioTapFlagsCFP != 0
 }
+
 func (r RadioTapFlags) ShortPreamble() bool {
 	return r&RadioTapFlagsShortPreamble != 0
 }
+
 func (r RadioTapFlags) WEP() bool {
 	return r&RadioTapFlagsWEP != 0
 }
+
 func (r RadioTapFlags) Frag() bool {
 	return r&RadioTapFlagsFrag != 0
 }
+
 func (r RadioTapFlags) FCS() bool {
 	return r&RadioTapFlagsFCS != 0
 }
+
 func (r RadioTapFlags) Datapad() bool {
 	return r&RadioTapFlagsDatapad != 0
 }
+
 func (r RadioTapFlags) BadFCS() bool {
 	return r&RadioTapFlagsBadFCS != 0
 }
+
 func (r RadioTapFlags) ShortGI() bool {
 	return r&RadioTapFlagsShortGI != 0
 }
@@ -634,6 +669,7 @@ func (self RadioTapVHTKnown) GI() bool { return self&RadioTapVHTKnownGI != 0 }
 func (self RadioTapVHTKnown) SGINSYMDisambiguation() bool {
 	return self&RadioTapVHTKnownSGINSYMDisambiguation != 0
 }
+
 func (self RadioTapVHTKnown) LDPCExtraOFDMSymbol() bool {
 	return self&RadioTapVHTKnownLDPCExtraOFDMSymbol != 0
 }
@@ -878,7 +914,7 @@ func (m *RadioTap) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) erro
 			headlen += 2
 		}
 		if headlen%4 == 2 {
-			payload = append(payload[:headlen], payload[headlen+2:len(payload)]...)
+			payload = append(payload[:headlen], payload[headlen+2:]...)
 		}
 	}
 
@@ -1056,7 +1092,6 @@ func (m RadioTap) SerializeTo(b gopacket.SerializeBuffer, opts gopacket.Serializ
 	}
 
 	packetBuf, err := b.PrependBytes(int(offset))
-
 	if err != nil {
 		return err
 	}

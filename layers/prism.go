@@ -94,8 +94,10 @@ func (pv *PrismValue) IsSupplied() bool {
 	return pv.Status == 1
 }
 
-var ErrPrismExpectedMoreData = errors.New("Expected more data.")
-var ErrPrismInvalidCode = errors.New("Invalid header code.")
+var (
+	ErrPrismExpectedMoreData = errors.New("Expected more data.")
+	ErrPrismInvalidCode      = errors.New("Invalid header code.")
+)
 
 func decodePrismHeader(data []byte, p gopacket.PacketBuilder) error {
 	d := &PrismHeader{}
@@ -116,7 +118,7 @@ func (m *PrismHeader) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) e
 	m.Code = binary.LittleEndian.Uint16(data[0:4])
 	m.Length = binary.LittleEndian.Uint16(data[4:8])
 	m.DeviceName = string(data[8:24])
-	m.BaseLayer = BaseLayer{Contents: data[:m.Length], Payload: data[m.Length:len(data)]}
+	m.BaseLayer = BaseLayer{Contents: data[:m.Length], Payload: data[m.Length:]}
 
 	switch m.Code {
 	case PrismType1MessageCode:

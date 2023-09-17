@@ -44,17 +44,19 @@ type testSequence struct {
 }
 
 /* For benchmark: do nothing */
-type testFactoryBench struct {
-}
+type testFactoryBench struct{}
 
 func (t *testFactoryBench) New(a, b gopacket.Flow, tcp *layers.TCP, ac AssemblerContext) Stream {
 	return t
 }
+
 func (t *testFactoryBench) Accept(tcp *layers.TCP, ci gopacket.CaptureInfo, dir TCPFlowDirection, seq Sequence, start *bool, ac AssemblerContext) bool {
 	return true
 }
+
 func (t *testFactoryBench) ReassembledSG(sg ScatterGather, ac AssemblerContext) {
 }
+
 func (t *testFactoryBench) ReassemblyComplete(ac AssemblerContext) bool {
 	return true
 }
@@ -67,12 +69,14 @@ type testFactory struct {
 func (t *testFactory) New(a, b gopacket.Flow, tcp *layers.TCP, ac AssemblerContext) Stream {
 	return t
 }
+
 func (t *testFactory) Reassembled(r []Reassembly) {
 	t.reassembly = r
 	for i := 0; i < len(r); i++ {
-		//t.reassembly[i].Seen = time.Time{}
+		// t.reassembly[i].Seen = time.Time{}
 	}
 }
+
 func (t *testFactory) ReassembledSG(sg ScatterGather, ac AssemblerContext) {
 	_, start, end, skip := sg.Info()
 	l, _ := sg.Lengths()
@@ -100,13 +104,16 @@ type testMemoryFactory struct {
 func (tf *testMemoryFactory) New(a, b gopacket.Flow, tcp *layers.TCP, ac AssemblerContext) Stream {
 	return tf
 }
+
 func (tf *testMemoryFactory) Accept(tcp *layers.TCP, ci gopacket.CaptureInfo, dir TCPFlowDirection, seq Sequence, start *bool, ac AssemblerContext) bool {
 	return true
 }
+
 func (tf *testMemoryFactory) ReassembledSG(sg ScatterGather, ac AssemblerContext) {
 	bytes, _ := sg.Lengths()
 	tf.bytes += bytes
 }
+
 func (tf *testMemoryFactory) ReassemblyComplete(ac AssemblerContext) bool {
 	return true
 }
@@ -189,17 +196,17 @@ func TestReorder(t *testing.T) {
 				BaseLayer: layers.BaseLayer{Payload: []byte{7, 8, 9}},
 			},
 			want: []Reassembly{
-				Reassembly{
+				{
 					Skip:  -1,
 					Bytes: []byte{1, 2, 3},
 				},
-				Reassembly{
+				{
 					Bytes: []byte{4, 5, 6},
 				},
-				Reassembly{
+				{
 					Bytes: []byte{7, 8, 9},
 				},
-				Reassembly{
+				{
 					Bytes: []byte{10, 11, 12},
 				},
 			},
@@ -230,13 +237,13 @@ func TestReorder(t *testing.T) {
 				BaseLayer: layers.BaseLayer{Payload: []byte{1, 2, 3}},
 			},
 			want: []Reassembly{
-				Reassembly{
+				{
 					Bytes: []byte{1, 2, 3},
 				},
-				Reassembly{
+				{
 					Bytes: []byte{2, 2, 3},
 				},
-				Reassembly{
+				{
 					Bytes: []byte{3, 2, 3},
 				},
 			},
@@ -255,7 +262,7 @@ func TestMaxPerSkip(t *testing.T) {
 				BaseLayer: layers.BaseLayer{Payload: []byte{1, 2, 3}},
 			},
 			want: []Reassembly{
-				Reassembly{
+				{
 					Start: true,
 					Bytes: []byte{1, 2, 3},
 				},
@@ -296,17 +303,17 @@ func TestMaxPerSkip(t *testing.T) {
 				BaseLayer: layers.BaseLayer{Payload: []byte{6, 2, 3}},
 			},
 			want: []Reassembly{
-				Reassembly{
+				{
 					Skip:  3,
 					Bytes: []byte{3, 2, 3},
 				},
-				Reassembly{
+				{
 					Bytes: []byte{4, 2, 3},
 				},
-				Reassembly{
+				{
 					Bytes: []byte{5, 2, 3},
 				},
-				Reassembly{
+				{
 					Bytes: []byte{6, 2, 3},
 				},
 			},
@@ -325,7 +332,7 @@ func TestReorderFast(t *testing.T) {
 				BaseLayer: layers.BaseLayer{Payload: []byte{1, 2, 3}},
 			},
 			want: []Reassembly{
-				Reassembly{
+				{
 					Start: true,
 					Bytes: []byte{1, 2, 3},
 				},
@@ -348,10 +355,10 @@ func TestReorderFast(t *testing.T) {
 				BaseLayer: layers.BaseLayer{Payload: []byte{2, 2, 3}},
 			},
 			want: []Reassembly{
-				Reassembly{
+				{
 					Bytes: []byte{2, 2, 3},
 				},
-				Reassembly{
+				{
 					Bytes: []byte{3, 2, 3},
 				},
 			},
@@ -370,7 +377,7 @@ func TestOverlap(t *testing.T) {
 				BaseLayer: layers.BaseLayer{Payload: []byte{1, 2, 3, 4, 5, 6, 7, 8, 9, 0}},
 			},
 			want: []Reassembly{
-				Reassembly{
+				{
 					Start: true,
 					Bytes: []byte{1, 2, 3, 4, 5, 6, 7, 8, 9, 0},
 				},
@@ -384,7 +391,7 @@ func TestOverlap(t *testing.T) {
 				BaseLayer: layers.BaseLayer{Payload: []byte{7, 8, 9, 0, 1, 2, 3, 4, 5}},
 			},
 			want: []Reassembly{
-				Reassembly{
+				{
 					Bytes: []byte{1, 2, 3, 4, 5},
 				},
 			},
@@ -397,7 +404,7 @@ func TestOverlap(t *testing.T) {
 				BaseLayer: layers.BaseLayer{Payload: []byte{0, 1, 2, 3, 4, 5, 6, 7}},
 			},
 			want: []Reassembly{
-				Reassembly{
+				{
 					Bytes: []byte{6, 7},
 				},
 			},
@@ -434,14 +441,14 @@ func TestBufferedOverlap1(t *testing.T) {
 				BaseLayer: layers.BaseLayer{Payload: []byte{1, 2, 3, 4, 5, 6, 7, 8, 9, 0}},
 			},
 			want: []Reassembly{
-				Reassembly{
+				{
 					Start: true,
 					Bytes: []byte{1, 2, 3, 4, 5, 6, 7, 8, 9, 0},
 				},
-				Reassembly{
+				{
 					Bytes: []byte{1, 2, 3, 4, 5},
 				},
-				Reassembly{
+				{
 					Bytes: []byte{6, 7},
 				},
 			},
@@ -478,11 +485,11 @@ func TestBufferedOverlapCase6(t *testing.T) {
 				BaseLayer: layers.BaseLayer{Payload: []byte{1, 2, 3, 4, 5, 6, 7, 8, 9, 0}},
 			},
 			want: []Reassembly{
-				Reassembly{
+				{
 					Start: true,
 					Bytes: []byte{1, 2, 3, 4, 5, 6, 7, 8, 9, 0},
 				},
-				Reassembly{
+				{
 					Bytes: []byte{11, 12, 13, 14, 5},
 				},
 			},
@@ -501,7 +508,7 @@ func TestBufferedOverlapExisting(t *testing.T) {
 				BaseLayer: layers.BaseLayer{Payload: []byte{1, 2, 3, 4, 5, 6, 7}},
 			},
 			want: []Reassembly{
-				Reassembly{
+				{
 					Start: true,
 					Bytes: []byte{1, 2, 3, 4, 5, 6, 7},
 				},
@@ -515,7 +522,7 @@ func TestBufferedOverlapExisting(t *testing.T) {
 				BaseLayer: layers.BaseLayer{Payload: []byte{5, 6, 7, 8, 9, 10}},
 			},
 			want: []Reassembly{
-				Reassembly{
+				{
 					Bytes: []byte{8, 9, 10},
 				},
 			},
@@ -534,7 +541,7 @@ func TestBufferedOverlapReemit(t *testing.T) {
 				BaseLayer: layers.BaseLayer{Payload: []byte{1, 2, 3, 4, 5, 6, 7}},
 			},
 			want: []Reassembly{
-				Reassembly{
+				{
 					Start: true,
 					Bytes: []byte{1, 2, 3, 4, 5, 6, 7},
 				},
@@ -598,17 +605,17 @@ func TestReorderRetransmission2(t *testing.T) {
 				BaseLayer: layers.BaseLayer{Payload: []byte{6, 6, 6, 2, 2}},
 			},
 			want: []Reassembly{
-				Reassembly{
+				{
 					Skip:  -1,
 					Bytes: []byte{1, 2, 3},
 				},
-				Reassembly{
+				{
 					Bytes: []byte{6, 6, 6},
 				},
-				Reassembly{
+				{
 					Bytes: []byte{2, 2, 3},
 				},
-				Reassembly{
+				{
 					Bytes: []byte{10, 11},
 				},
 			},
@@ -627,7 +634,7 @@ func TestOverrun1(t *testing.T) {
 				BaseLayer: layers.BaseLayer{Payload: []byte{1, 2, 3, 4, 5, 6, 7, 8, 9, 0}},
 			},
 			want: []Reassembly{
-				Reassembly{
+				{
 					Start: true,
 					Bytes: []byte{1, 2, 3, 4, 5, 6, 7, 8, 9, 0},
 				},
@@ -641,7 +648,7 @@ func TestOverrun1(t *testing.T) {
 				BaseLayer: layers.BaseLayer{Payload: []byte{1, 2, 3, 4}},
 			},
 			want: []Reassembly{
-				Reassembly{
+				{
 					Bytes: []byte{1, 2, 3, 4},
 				},
 			},
@@ -669,11 +676,11 @@ func TestOverrun2(t *testing.T) {
 				BaseLayer: layers.BaseLayer{Payload: []byte{1, 2, 3, 4, 5, 6, 7, 8, 9, 0}},
 			},
 			want: []Reassembly{
-				Reassembly{
+				{
 					Start: true,
 					Bytes: []byte{1, 2, 3, 4, 5, 6, 7, 8, 9, 0},
 				},
-				Reassembly{
+				{
 					Bytes: []byte{1, 2, 3, 4},
 				},
 			},
@@ -702,17 +709,17 @@ func TestCacheLargePacket(t *testing.T) {
 				BaseLayer: layers.BaseLayer{Payload: []byte{}},
 			},
 			want: []Reassembly{
-				Reassembly{
+				{
 					Start: true,
 					Bytes: []byte{},
 				},
-				Reassembly{
+				{
 					Bytes: data[:pageBytes],
 				},
-				Reassembly{
+				{
 					Bytes: data[pageBytes : pageBytes*2],
 				},
-				Reassembly{
+				{
 					Bytes: data[pageBytes*2 : pageBytes*3],
 				},
 			},
@@ -791,7 +798,7 @@ func TestFlush(t *testing.T) {
 					},
 					want: []Reassembly{
 						// flushed after flush interval.
-						Reassembly{
+						{
 							Skip:  -1,
 							Bytes: []byte{1, 2, 3},
 						},
@@ -806,7 +813,7 @@ func TestFlush(t *testing.T) {
 					},
 					want: []Reassembly{
 						// flushed after flush interval.
-						Reassembly{
+						{
 							Skip:  -1,
 							Bytes: []byte{4, 5, 6, 7},
 						},
@@ -837,7 +844,7 @@ func TestFlush(t *testing.T) {
 					},
 					want: []Reassembly{
 						// First half is flushed after flush interval.
-						Reassembly{
+						{
 							Skip:  -1,
 							Bytes: []byte{1, 2, 3},
 						},
@@ -852,7 +859,7 @@ func TestFlush(t *testing.T) {
 					},
 					want: []Reassembly{
 						// continues data is flushed.
-						Reassembly{
+						{
 							Skip:  -1,
 							Bytes: []byte{11, 22, 33, 44, 55, 66, 77},
 						},
@@ -866,7 +873,7 @@ func TestFlush(t *testing.T) {
 						BaseLayer: layers.BaseLayer{Payload: []byte{8, 9}},
 					},
 					want: []Reassembly{
-						Reassembly{
+						{
 							// Should be flushed because is continues.
 							Bytes: []byte{8, 9},
 						},
@@ -910,7 +917,7 @@ func TestFlush(t *testing.T) {
 						BaseLayer: layers.BaseLayer{Payload: []byte{10, 11, 12}},
 					},
 					want: []Reassembly{
-						Reassembly{
+						{
 							Skip:  -1,
 							End:   true,
 							Bytes: []byte{1, 2, 3},
@@ -939,12 +946,14 @@ type testKeepFactory struct {
 func (tkf *testKeepFactory) New(a, b gopacket.Flow, tcp *layers.TCP, ac AssemblerContext) Stream {
 	return tkf
 }
+
 func (tkf *testKeepFactory) ReassembledSG(sg ScatterGather, ac AssemblerContext) {
 	l, _ := sg.Lengths()
 	_, _, _, tkf.skipped = sg.Info()
 	tkf.bytes = sg.Fetch(l)
 	sg.KeepFrom(tkf.keep)
 }
+
 func (tkf *testKeepFactory) ReassemblyComplete(ac AssemblerContext) bool {
 	return true
 }
@@ -1251,8 +1260,10 @@ type testFSMFactory struct {
 func (t *testFSMFactory) New(a, b gopacket.Flow, tcp *layers.TCP, ac AssemblerContext) Stream {
 	return t
 }
+
 func (t *testFSMFactory) ReassembledSG(sg ScatterGather, ac AssemblerContext) {
 }
+
 func (t *testFSMFactory) ReassemblyComplete(ac AssemblerContext) bool {
 	return false
 }
@@ -1279,7 +1290,7 @@ func testFSM(t *testing.T, s []testFSMSequence) {
 	fact := &testFSMFactory{}
 	p := NewStreamPool(fact)
 	a := NewAssembler(p)
-	//a.MaxBufferedPagesPerConnection = 4
+	// a.MaxBufferedPagesPerConnection = 4
 	fact.nb = 0
 	port := layers.TCPPort(0)
 	for i, test := range s {

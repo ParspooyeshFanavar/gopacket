@@ -29,7 +29,7 @@ var DefaultNgWriterOptions = NgWriterOptions{
 	SectionInfo: NgSectionInfo{
 		Hardware:    runtime.GOARCH,
 		OS:          runtime.GOOS,
-		Application: "gopacket", //spread the word
+		Application: "gopacket", // spread the word
 	},
 }
 
@@ -37,7 +37,7 @@ var DefaultNgWriterOptions = NgWriterOptions{
 var DefaultNgInterface = NgInterface{
 	Name:                "intf0",
 	OS:                  runtime.GOOS,
-	SnapLength:          0, //unlimited
+	SnapLength:          0, // unlimited
 	TimestampResolution: 9,
 }
 
@@ -105,7 +105,7 @@ func prepareNgOptions(options []ngOption) uint32 {
 		length := ngOptionLength(option)
 		options[i].length = uint16(length)
 		length += (4-length&3)&3 + // padding
-			4 //header
+			4 // header
 		ret += uint32(length)
 	}
 	if ret > 0 {

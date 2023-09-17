@@ -119,7 +119,7 @@ func TestEthernetHandle_Close_WithCancel(t *testing.T) {
 
 func consumePacketSource(ctx context.Context, tb testing.TB, pkgsrc *gopacket.PacketSource, done chan<- struct{}) {
 	tb.Helper()
-	var writer = pcapgo.NewWriter(new(bytes.Buffer))
+	writer := pcapgo.NewWriter(new(bytes.Buffer))
 	defer close(done)
 	for packet := range pkgsrc.PacketsCtx(ctx) {
 		if err := writer.WritePacket(packet.Metadata().CaptureInfo, packet.Data()); err != nil {
@@ -128,9 +128,7 @@ func consumePacketSource(ctx context.Context, tb testing.TB, pkgsrc *gopacket.Pa
 	}
 }
 
-var (
-	dummyInterfaceIdx int32 = -1
-)
+var dummyInterfaceIdx int32 = -1
 
 // setupDummyInterface configures a dummy interface and returns the generated interface name.
 // It assigns an address from the 127.10.0.0/24 network.

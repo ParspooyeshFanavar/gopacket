@@ -74,84 +74,82 @@ type icmpv4TypeCodeInfoStruct struct {
 	codeStr *map[uint8]string
 }
 
-var (
-	icmpv4TypeCodeInfo = map[uint8]icmpv4TypeCodeInfoStruct{
-		ICMPv4TypeDestinationUnreachable: icmpv4TypeCodeInfoStruct{
-			"DestinationUnreachable", &map[uint8]string{
-				ICMPv4CodeNet:                 "Net",
-				ICMPv4CodeHost:                "Host",
-				ICMPv4CodeProtocol:            "Protocol",
-				ICMPv4CodePort:                "Port",
-				ICMPv4CodeFragmentationNeeded: "FragmentationNeeded",
-				ICMPv4CodeSourceRoutingFailed: "SourceRoutingFailed",
-				ICMPv4CodeNetUnknown:          "NetUnknown",
-				ICMPv4CodeHostUnknown:         "HostUnknown",
-				ICMPv4CodeSourceIsolated:      "SourceIsolated",
-				ICMPv4CodeNetAdminProhibited:  "NetAdminProhibited",
-				ICMPv4CodeHostAdminProhibited: "HostAdminProhibited",
-				ICMPv4CodeNetTOS:              "NetTOS",
-				ICMPv4CodeHostTOS:             "HostTOS",
-				ICMPv4CodeCommAdminProhibited: "CommAdminProhibited",
-				ICMPv4CodeHostPrecedence:      "HostPrecedence",
-				ICMPv4CodePrecedenceCutoff:    "PrecedenceCutoff",
-			},
+var icmpv4TypeCodeInfo = map[uint8]icmpv4TypeCodeInfoStruct{
+	ICMPv4TypeDestinationUnreachable: {
+		"DestinationUnreachable", &map[uint8]string{
+			ICMPv4CodeNet:                 "Net",
+			ICMPv4CodeHost:                "Host",
+			ICMPv4CodeProtocol:            "Protocol",
+			ICMPv4CodePort:                "Port",
+			ICMPv4CodeFragmentationNeeded: "FragmentationNeeded",
+			ICMPv4CodeSourceRoutingFailed: "SourceRoutingFailed",
+			ICMPv4CodeNetUnknown:          "NetUnknown",
+			ICMPv4CodeHostUnknown:         "HostUnknown",
+			ICMPv4CodeSourceIsolated:      "SourceIsolated",
+			ICMPv4CodeNetAdminProhibited:  "NetAdminProhibited",
+			ICMPv4CodeHostAdminProhibited: "HostAdminProhibited",
+			ICMPv4CodeNetTOS:              "NetTOS",
+			ICMPv4CodeHostTOS:             "HostTOS",
+			ICMPv4CodeCommAdminProhibited: "CommAdminProhibited",
+			ICMPv4CodeHostPrecedence:      "HostPrecedence",
+			ICMPv4CodePrecedenceCutoff:    "PrecedenceCutoff",
 		},
-		ICMPv4TypeTimeExceeded: icmpv4TypeCodeInfoStruct{
-			"TimeExceeded", &map[uint8]string{
-				ICMPv4CodeTTLExceeded:                    "TTLExceeded",
-				ICMPv4CodeFragmentReassemblyTimeExceeded: "FragmentReassemblyTimeExceeded",
-			},
+	},
+	ICMPv4TypeTimeExceeded: {
+		"TimeExceeded", &map[uint8]string{
+			ICMPv4CodeTTLExceeded:                    "TTLExceeded",
+			ICMPv4CodeFragmentReassemblyTimeExceeded: "FragmentReassemblyTimeExceeded",
 		},
-		ICMPv4TypeParameterProblem: icmpv4TypeCodeInfoStruct{
-			"ParameterProblem", &map[uint8]string{
-				ICMPv4CodePointerIndicatesError: "PointerIndicatesError",
-				ICMPv4CodeMissingOption:         "MissingOption",
-				ICMPv4CodeBadLength:             "BadLength",
-			},
+	},
+	ICMPv4TypeParameterProblem: {
+		"ParameterProblem", &map[uint8]string{
+			ICMPv4CodePointerIndicatesError: "PointerIndicatesError",
+			ICMPv4CodeMissingOption:         "MissingOption",
+			ICMPv4CodeBadLength:             "BadLength",
 		},
-		ICMPv4TypeSourceQuench: icmpv4TypeCodeInfoStruct{
-			"SourceQuench", nil,
+	},
+	ICMPv4TypeSourceQuench: {
+		"SourceQuench", nil,
+	},
+	ICMPv4TypeRedirect: {
+		"Redirect", &map[uint8]string{
+			ICMPv4CodeNet:     "Net",
+			ICMPv4CodeHost:    "Host",
+			ICMPv4CodeTOSNet:  "TOS+Net",
+			ICMPv4CodeTOSHost: "TOS+Host",
 		},
-		ICMPv4TypeRedirect: icmpv4TypeCodeInfoStruct{
-			"Redirect", &map[uint8]string{
-				ICMPv4CodeNet:     "Net",
-				ICMPv4CodeHost:    "Host",
-				ICMPv4CodeTOSNet:  "TOS+Net",
-				ICMPv4CodeTOSHost: "TOS+Host",
-			},
-		},
-		ICMPv4TypeEchoRequest: icmpv4TypeCodeInfoStruct{
-			"EchoRequest", nil,
-		},
-		ICMPv4TypeEchoReply: icmpv4TypeCodeInfoStruct{
-			"EchoReply", nil,
-		},
-		ICMPv4TypeTimestampRequest: icmpv4TypeCodeInfoStruct{
-			"TimestampRequest", nil,
-		},
-		ICMPv4TypeTimestampReply: icmpv4TypeCodeInfoStruct{
-			"TimestampReply", nil,
-		},
-		ICMPv4TypeInfoRequest: icmpv4TypeCodeInfoStruct{
-			"InfoRequest", nil,
-		},
-		ICMPv4TypeInfoReply: icmpv4TypeCodeInfoStruct{
-			"InfoReply", nil,
-		},
-		ICMPv4TypeRouterSolicitation: icmpv4TypeCodeInfoStruct{
-			"RouterSolicitation", nil,
-		},
-		ICMPv4TypeRouterAdvertisement: icmpv4TypeCodeInfoStruct{
-			"RouterAdvertisement", nil,
-		},
-		ICMPv4TypeAddressMaskRequest: icmpv4TypeCodeInfoStruct{
-			"AddressMaskRequest", nil,
-		},
-		ICMPv4TypeAddressMaskReply: icmpv4TypeCodeInfoStruct{
-			"AddressMaskReply", nil,
-		},
-	}
-)
+	},
+	ICMPv4TypeEchoRequest: {
+		"EchoRequest", nil,
+	},
+	ICMPv4TypeEchoReply: {
+		"EchoReply", nil,
+	},
+	ICMPv4TypeTimestampRequest: {
+		"TimestampRequest", nil,
+	},
+	ICMPv4TypeTimestampReply: {
+		"TimestampReply", nil,
+	},
+	ICMPv4TypeInfoRequest: {
+		"InfoRequest", nil,
+	},
+	ICMPv4TypeInfoReply: {
+		"InfoReply", nil,
+	},
+	ICMPv4TypeRouterSolicitation: {
+		"RouterSolicitation", nil,
+	},
+	ICMPv4TypeRouterAdvertisement: {
+		"RouterAdvertisement", nil,
+	},
+	ICMPv4TypeAddressMaskRequest: {
+		"AddressMaskRequest", nil,
+	},
+	ICMPv4TypeAddressMaskReply: {
+		"AddressMaskReply", nil,
+	},
+}
 
 type ICMPv4TypeCode uint16
 

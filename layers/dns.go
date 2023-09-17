@@ -311,7 +311,7 @@ func (d *DNS) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error {
 
 	// since there are no further layers, the baselayer's content is
 	// pointing to this layer
-	d.BaseLayer = BaseLayer{Contents: data[:len(data)]}
+	d.BaseLayer = BaseLayer{Contents: data[:]}
 	d.ID = binary.BigEndian.Uint16(data[:2])
 	d.QR = data[2]&0x80 != 0
 	d.OpCode = DNSOpCode(data[2]>>3) & 0x0F
@@ -762,7 +762,6 @@ func encodeName(name []byte, data []byte, offset int) int {
 }
 
 func (rr *DNSResourceRecord) encode(data []byte, offset int, opts gopacket.SerializeOptions) (int, error) {
-
 	noff := encodeName(rr.Name, data, offset)
 	nSz := noff - offset
 
@@ -832,7 +831,6 @@ func (rr *DNSResourceRecord) encode(data []byte, offset int, opts gopacket.Seria
 }
 
 func (rr *DNSResourceRecord) String() string {
-
 	if rr.Type == DNSTypeOPT {
 		opts := make([]string, len(rr.OPT))
 		for i, opt := range rr.OPT {

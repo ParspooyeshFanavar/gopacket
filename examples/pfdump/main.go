@@ -20,10 +20,12 @@ import (
 	"github.com/gopacket/gopacket/pfring"
 )
 
-var iface = flag.String("i", "eth0", "Interface to read packets from")
-var snaplen = flag.Int("s", 65536, "Snap length (number of bytes max to read per packet")
-var cluster = flag.Int("cluster", -1, "If >= 0, sets the pfring cluster to this value")
-var clustertype = flag.Int("clustertype", int(pfring.ClusterPerFlow), "Cluster type")
+var (
+	iface       = flag.String("i", "eth0", "Interface to read packets from")
+	snaplen     = flag.Int("s", 65536, "Snap length (number of bytes max to read per packet")
+	cluster     = flag.Int("cluster", -1, "If >= 0, sets the pfring cluster to this value")
+	clustertype = flag.Int("clustertype", int(pfring.ClusterPerFlow), "Cluster type")
+)
 
 func main() {
 	defer util.Run()()

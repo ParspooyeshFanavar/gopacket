@@ -35,6 +35,7 @@ func TestPacketRadiotap0(t *testing.T) {
 		t.Error("Radiotap Rate decode error")
 	}
 }
+
 func BenchmarkDecodePacketRadiotap0(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		gopacket.NewPacket(testPacketRadiotap0, LayerTypeRadioTap, gopacket.NoCopy)
@@ -75,6 +76,7 @@ func TestPacketRadiotap1(t *testing.T) {
 		t.Error("Radiotap GI error")
 	}
 }
+
 func BenchmarkDecodePacketRadiotap1(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		gopacket.NewPacket(testPacketRadiotap1, LayerTypeRadioTap, gopacket.NoCopy)

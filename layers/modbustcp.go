@@ -23,9 +23,11 @@ import (
 //
 //******************************************************************************
 
-const mbapRecordSizeInBytes int = 7
-const modbusPDUMinimumRecordSizeInBytes int = 2
-const modbusPDUMaximumRecordSizeInBytes int = 253
+const (
+	mbapRecordSizeInBytes             int = 7
+	modbusPDUMinimumRecordSizeInBytes int = 2
+	modbusPDUMaximumRecordSizeInBytes int = 253
+)
 
 // ModbusProtocol type
 type ModbusProtocol uint16
@@ -77,7 +79,6 @@ func (d *ModbusTCP) LayerType() gopacket.LayerType {
 //
 // This function is employed in layertypes.go to register the ModbusTCP layer.
 func decodeModbusTCP(data []byte, p gopacket.PacketBuilder) error {
-
 	// Attempt to decode the byte slice.
 	d := &ModbusTCP{}
 	err := d.DecodeFromBytes(data, p)
@@ -90,7 +91,6 @@ func decodeModbusTCP(data []byte, p gopacket.PacketBuilder) error {
 	p.SetApplicationLayer(d)
 
 	return p.NextDecoder(d.NextLayerType())
-
 }
 
 //******************************************************************************
@@ -102,7 +102,6 @@ func decodeModbusTCP(data []byte, p gopacket.PacketBuilder) error {
 // and returns nil.
 // Upon failure, it returns an error (non nil).
 func (d *ModbusTCP) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error {
-
 	// If the data block is too short to be a MBAP record, then return an error.
 	if len(data) < mbapRecordSizeInBytes+modbusPDUMinimumRecordSizeInBytes {
 		df.SetTruncated()
@@ -117,7 +116,7 @@ func (d *ModbusTCP) DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) err
 	// ModbusTCP type embeds type BaseLayer which contains two fields:
 	//    Contents is supposed to contain the bytes of the data at this level (MPBA).
 	//    Payload is supposed to contain the payload of this level (PDU).
-	d.BaseLayer = BaseLayer{Contents: data[:mbapRecordSizeInBytes], Payload: data[mbapRecordSizeInBytes:len(data)]}
+	d.BaseLayer = BaseLayer{Contents: data[:mbapRecordSizeInBytes], Payload: data[mbapRecordSizeInBytes:]}
 
 	// Extract the fields from the block of bytes.
 	// The fields can just be copied in big endian order.

@@ -83,8 +83,7 @@ import (
 // SFlowRecord holds both flow sample records and counter sample records.
 // A Record is the structure that actually holds the sampled data
 // and / or counters.
-type SFlowRecord interface {
-}
+type SFlowRecord interface{}
 
 // SFlowDataSource encodes a 2-bit SFlowSourceFormat in its most significant
 // 2 bits, and an SFlowSourceValue in its least significant 30 bits.
@@ -2380,7 +2379,7 @@ func decodeLACPCounters(data *[]byte) (SFlowLACPCounters, error) {
 	*data, la.ActorSystemID = (*data)[6:], (*data)[:6]
 	*data = (*data)[2:] // remove padding
 	*data, la.PartnerSystemID = (*data)[6:], (*data)[:6]
-	*data = (*data)[2:] //remove padding
+	*data = (*data)[2:] // remove padding
 	*data, la.AttachedAggID = (*data)[4:], binary.BigEndian.Uint32((*data)[:4])
 	*data, la.LacpPortState.PortStateAll = (*data)[4:], binary.BigEndian.Uint32((*data)[:4])
 	*data, la.LACPDUsRx = (*data)[4:], binary.BigEndian.Uint32((*data)[:4])
@@ -2393,7 +2392,6 @@ func decodeLACPCounters(data *[]byte) (SFlowLACPCounters, error) {
 	*data, la.MarkerResponsePDUsTx = (*data)[4:], binary.BigEndian.Uint32((*data)[:4])
 
 	return la, nil
-
 }
 
 // **************************************************

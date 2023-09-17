@@ -29,9 +29,11 @@ type Writer struct {
 	buf [16]byte
 }
 
-const magicMicroseconds = 0xA1B2C3D4
-const versionMajor = 2
-const versionMinor = 4
+const (
+	magicMicroseconds = 0xA1B2C3D4
+	versionMajor      = 2
+	versionMinor      = 4
+)
 
 // NewWriterNanos returns a new writer object, for writing packet data out
 // to the given writer.  If this is a new empty writer (as opposed to
@@ -95,8 +97,10 @@ func (w *Writer) WriteFileHeader(snaplen uint32, linktype layers.LinkType) error
 	return err
 }
 
-const nanosPerMicro = 1000
-const nanosPerNano = 1
+const (
+	nanosPerMicro = 1000
+	nanosPerNano  = 1
+)
 
 func (w *Writer) writePacketHeader(ci gopacket.CaptureInfo) error {
 	t := ci.Timestamp

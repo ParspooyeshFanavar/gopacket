@@ -22,7 +22,6 @@ import (
 // with the one provided and throws an error if there is any difference.
 // The desc argument is output with any failure message to identify the test.
 func checkBFD(desc string, t *testing.T, packetBytes []byte, pExpectedBFD *BFD) {
-
 	// Analyse the packet bytes, yielding a new packet object p.
 	p := gopacket.NewPacket(packetBytes, LinkTypeEthernet, gopacket.Default)
 	if p.ErrorLayer() != nil {
@@ -38,7 +37,8 @@ func checkBFD(desc string, t *testing.T, packetBytes []byte, pExpectedBFD *BFD) 
 		LayerTypeEthernet,
 		LayerTypeIPv4,
 		LayerTypeUDP,
-		LayerTypeBFD}, t)
+		LayerTypeBFD,
+	}, t)
 
 	// Select the Application (BFD) layer.
 	pResultBFD, ok := p.ApplicationLayer().(*BFD)
@@ -61,7 +61,6 @@ func checkBFD(desc string, t *testing.T, packetBytes []byte, pExpectedBFD *BFD) 
 		t.Errorf("BFD packet serialization failed for packet "+desc+
 			":\ngot  :\n%+v\n\nwant :\n%+v\n\n", buf.Bytes(), pResultBFD.Contents)
 	}
-
 }
 
 func TestBFDNoAuth(t *testing.T) {
@@ -72,7 +71,7 @@ func TestBFDNoAuth(t *testing.T) {
 	//    https://wiki.wireshark.org/SampleCaptures?action=AttachFile&do=get&target=bfd-raw-auth-simple.pcap
 	//
 	// Changed to remove the authentication header, and adjust all of the lengths
-	var testPacketBFD = []byte{
+	testPacketBFD := []byte{
 		0x00, 0x00, 0x01, 0x00, 0x00, 0x01, 0x00, 0x10, 0x94, 0x00, 0x00, 0x02, 0x08, 0x00, 0x45, 0x00,
 		0x00, 0x3d, 0x00, 0x00, 0x00, 0x00, 0x0a, 0x11, 0x2f, 0x58, 0xc0, 0x55, 0x01, 0x02, 0xc0, 0x00,
 		0x00, 0x01, 0xc0, 0x00, 0x0e, 0xc8, 0x00, 0x20, 0x72, 0x31, 0x20, 0x40, 0x05, 0x18, 0x00, 0x00,
@@ -114,13 +113,12 @@ func TestBFDNoAuth(t *testing.T) {
 //******************************************************************************
 
 func TestBFDAuthTypePassword(t *testing.T) {
-
 	// This test packet is the first BFD packet in the BFD sample capture
 	// pcap file bfd-raw-auth-simple.pcap on the Wireshark sample captures page:
 	//
 	//    https://wiki.wireshark.org/SampleCaptures
 	//    https://wiki.wireshark.org/SampleCaptures?action=AttachFile&do=get&target=bfd-raw-auth-simple.pcap
-	var testPacketBFD = []byte{
+	testPacketBFD := []byte{
 		0x00, 0x00, 0x01, 0x00, 0x00, 0x01, 0x00, 0x10, 0x94, 0x00, 0x00, 0x02, 0x08, 0x00, 0x45, 0x00,
 		0x00, 0x3d, 0x00, 0x00, 0x00, 0x00, 0x0a, 0x11, 0x2f, 0x58, 0xc0, 0x55, 0x01, 0x02, 0xc0, 0x00,
 		0x00, 0x01, 0xc0, 0x00, 0x0e, 0xc8, 0x00, 0x29, 0x72, 0x31, 0x20, 0x44, 0x05, 0x21, 0x00, 0x00,
@@ -169,13 +167,12 @@ func TestBFDAuthTypePassword(t *testing.T) {
 //******************************************************************************
 
 func TestBFDAuthTypeKeyedMD5(t *testing.T) {
-
 	// This test packet is the first BFD packet in the BFD sample capture
 	// pcap file bfd-raw-auth-md5.pcap on the Wireshark sample captures page:
 	//
 	//    https://wiki.wireshark.org/SampleCaptures
 	//    https://wiki.wireshark.org/SampleCaptures?action=AttachFile&do=get&target=bfd-raw-auth-md5.pcap
-	var testPacketBFD = []byte{
+	testPacketBFD := []byte{
 		0x00, 0x00, 0x01, 0x00, 0x00, 0x01, 0x00, 0x10, 0x94, 0x00, 0x00, 0x02, 0x08, 0x00, 0x45, 0x00,
 		0x00, 0x4c, 0x00, 0x01, 0x00, 0x00, 0x0a, 0x11, 0x2f, 0x48, 0xc0, 0x55, 0x01, 0x02, 0xc0, 0x00,
 		0x00, 0x01, 0x04, 0x00, 0x0e, 0xc8, 0x00, 0x38, 0x6a, 0xcc, 0x20, 0x44, 0x05, 0x30, 0x00, 0x00,
@@ -229,13 +226,12 @@ func TestBFDAuthTypeKeyedMD5(t *testing.T) {
 //******************************************************************************
 
 func TestBFDAuthTypeMeticulousKeyedSHA1(t *testing.T) {
-
 	// This test packet is the first BFD packet in the BFD sample capture
 	// pcap file bfd-raw-auth-sha1.pcap on the Wireshark sample captures page:
 	//
 	//    https://wiki.wireshark.org/SampleCaptures
 	//    https://wiki.wireshark.org/SampleCaptures?action=AttachFile&do=get&target=bfd-raw-auth-sha1.pcap
-	var testPacketBFD = []byte{
+	testPacketBFD := []byte{
 		0x00, 0x00, 0x01, 0x00, 0x00, 0x01, 0x00, 0x10, 0x94, 0x00, 0x00, 0x02, 0x08, 0x00, 0x45, 0x00,
 		0x00, 0x50, 0x00, 0x00, 0x00, 0x00, 0x0a, 0x11, 0x2f, 0x45, 0xc0, 0x55, 0x01, 0x02, 0xc0, 0x00,
 		0x00, 0x01, 0x04, 0x00, 0x0e, 0xc8, 0x00, 0x3c, 0x37, 0x8a, 0x20, 0x44, 0x05, 0x34, 0x00, 0x00,

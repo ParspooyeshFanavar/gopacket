@@ -413,7 +413,7 @@ func (p *Handle) ListDataLinks() (datalinks []Datalink, err error) {
 //
 //	C.pcap_freecode(&bpf)
 func (p *Handle) compileBPFFilter(expr string) (pcapBpfProgram, error) {
-	var maskp = uint32(pcapNetmaskUnknown)
+	maskp := uint32(pcapNetmaskUnknown)
 
 	// Only do the lookup on network interfaces.
 	// No device indicates we're handling a pcap file.
@@ -570,6 +570,7 @@ func (p *Handle) NewBPFInstructionFilter(bpfInstructions []BPFInstruction) (*BPF
 	runtime.SetFinalizer(bpf, destroyBPF)
 	return bpf, nil
 }
+
 func destroyBPF(bpf *BPF) {
 	bpf.bpf.bpf.free()
 }

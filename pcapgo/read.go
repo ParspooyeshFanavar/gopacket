@@ -7,14 +7,13 @@
 package pcapgo
 
 import (
+	"bufio"
+	"compress/gzip"
 	"encoding/binary"
 	"errors"
 	"fmt"
 	"io"
 	"time"
-
-	"bufio"
-	"compress/gzip"
 
 	"github.com/gopacket/gopacket"
 	"github.com/gopacket/gopacket/layers"
@@ -45,12 +44,16 @@ type Reader struct {
 	packetBuf []byte
 }
 
-const magicNanoseconds = 0xA1B23C4D
-const magicMicrosecondsBigendian = 0xD4C3B2A1
-const magicNanosecondsBigendian = 0x4D3CB2A1
+const (
+	magicNanoseconds           = 0xA1B23C4D
+	magicMicrosecondsBigendian = 0xD4C3B2A1
+	magicNanosecondsBigendian  = 0x4D3CB2A1
+)
 
-const magicGzip1 = 0x1f
-const magicGzip2 = 0x8b
+const (
+	magicGzip1 = 0x1f
+	magicGzip2 = 0x8b
+)
 
 // NewReader returns a new reader object, for reading packet data from
 // the given reader. The reader must be open and header data is

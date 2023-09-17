@@ -94,7 +94,6 @@ func TestDecodeSTPRData(t *testing.T) {
 	if !reflect.DeepEqual(expectedSTP, decodedSTP) {
 		t.Error("Expect ", expectedSTP, "actual ", decodedSTP)
 	}
-
 }
 
 // test harness to ensure the stp layer can be encoded/decoded properly
@@ -123,13 +122,12 @@ func testEncodeDecodeSTP(stp *STP) error {
 		return fmt.Errorf("Expect %v actual %v", expectedSTP, newSTP)
 	}
 	return nil
-
 }
 
 // Test to ensure what has been encode can be decoded
 func TestEncodeDecodeSTP(t *testing.T) {
 	STPs := []*STP{
-		&STP{
+		{
 			ProtocolID: 0,
 			Version:    0,
 			Type:       0,
@@ -150,7 +148,7 @@ func TestEncodeDecodeSTP(t *testing.T) {
 			HelloTime:  2 * 256,
 			FDelay:     15 * 256,
 		},
-		&STP{
+		{
 			ProtocolID: 0,
 			Version:    0,
 			Type:       0,

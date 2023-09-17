@@ -57,8 +57,10 @@ func BenchmarkArrayLookup(b *testing.B) {
 	}
 }
 
-var testError1 = &testError{}
-var testError2 error = testError1
+var (
+	testError1       = &testError{}
+	testError2 error = testError1
+)
 
 func BenchmarkTypeToInterface1(b *testing.B) {
 	var e error
@@ -69,6 +71,7 @@ func BenchmarkTypeToInterface1(b *testing.B) {
 	// variable.
 	testError2 = e
 }
+
 func BenchmarkTypeToInterface2(b *testing.B) {
 	var e error
 	for i := 0; i < b.N; i++ {
@@ -88,6 +91,7 @@ func BenchmarkPassDecodeOptionsByValue(b *testing.B) {
 		decodeOptsByValue(decodeOpts)
 	}
 }
+
 func BenchmarkPassDecodeOptionsByPointer(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		decodeOptsByPointer(&decodeOpts)
@@ -99,24 +103,29 @@ func BenchmarkLockOSThread(b *testing.B) {
 		runtime.LockOSThread()
 	}
 }
+
 func BenchmarkUnlockOSThread(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		runtime.UnlockOSThread()
 	}
 }
+
 func lockUnlock() {
 	runtime.LockOSThread()
 	runtime.UnlockOSThread()
 }
+
 func lockDeferUnlock() {
 	runtime.LockOSThread()
 	defer runtime.UnlockOSThread()
 }
+
 func BenchmarkLockUnlockOSThread(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		lockUnlock()
 	}
 }
+
 func BenchmarkLockDeferUnlockOSThread(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		lockDeferUnlock()
@@ -138,6 +147,7 @@ func BenchmarkUnbufferedChannel(b *testing.B) {
 		<-cb
 	}
 }
+
 func BenchmarkSmallBufferedChannel(b *testing.B) {
 	ca := make(chan bool, 1)
 	cb := make(chan bool, 1)
@@ -153,6 +163,7 @@ func BenchmarkSmallBufferedChannel(b *testing.B) {
 		<-cb
 	}
 }
+
 func BenchmarkLargeBufferedChannel(b *testing.B) {
 	ca := make(chan bool, 1000)
 	cb := make(chan bool, 1000)
@@ -168,24 +179,28 @@ func BenchmarkLargeBufferedChannel(b *testing.B) {
 		<-cb
 	}
 }
+
 func BenchmarkEndpointFastHashShort(b *testing.B) {
 	e := Endpoint{typ: 1, len: 2}
 	for i := 0; i < b.N; i++ {
 		e.FastHash()
 	}
 }
+
 func BenchmarkEndpointFastHashLong(b *testing.B) {
 	e := Endpoint{typ: 1, len: 16}
 	for i := 0; i < b.N; i++ {
 		e.FastHash()
 	}
 }
+
 func BenchmarkFlowFastHashShort(b *testing.B) {
 	e := Flow{typ: 1, slen: 2, dlen: 2}
 	for i := 0; i < b.N; i++ {
 		e.FastHash()
 	}
 }
+
 func BenchmarkFlowFastHashLong(b *testing.B) {
 	e := Flow{typ: 1, slen: 16, dlen: 16}
 	for i := 0; i < b.N; i++ {

@@ -105,18 +105,18 @@ func addIPv6JumboOption(ip6 *IPv6) {
 func setIPv6PayloadJumboLength(hbh []byte) error {
 	pLen := len(hbh)
 	if pLen < 8 {
-		//HopByHop is minimum 8 bytes
+		// HopByHop is minimum 8 bytes
 		return fmt.Errorf("Invalid IPv6 payload (length %d)", pLen)
 	}
 	hbhLen := int((hbh[1] + 1) * 8)
 	if hbhLen > pLen {
 		return fmt.Errorf("Invalid hop-by-hop length (length: %d, payload: %d", hbhLen, pLen)
 	}
-	offset := 2 //start with options
+	offset := 2 // start with options
 	for offset < hbhLen {
 		opt := hbh[offset]
 		if opt == 0 {
-			//Pad1
+			// Pad1
 			offset++
 			continue
 		}

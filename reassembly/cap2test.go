@@ -62,7 +62,7 @@ func main() {
 		} else {
 			pktTcp++
 			tcp := tcp.(*layers.TCP)
-			//fmt.Printf("packet: %s\n", tcp)
+			// fmt.Printf("packet: %s\n", tcp)
 			var b bytes.Buffer
 			b.WriteString("{\n")
 			// TCP

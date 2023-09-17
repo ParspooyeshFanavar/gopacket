@@ -55,13 +55,11 @@ const (
 	RMCPClassOEM RMCPClass = 0x08
 )
 
-var (
-	rmcpClassLayerTypes = [16]gopacket.LayerType{
-		RMCPClassASF: LayerTypeASF,
-		// RMCPClassIPMI is to implement; RMCPClassOEM is deliberately not
-		// implemented, so we return LayerTypePayload
-	}
-)
+var rmcpClassLayerTypes = [16]gopacket.LayerType{
+	RMCPClassASF: LayerTypeASF,
+	// RMCPClassIPMI is to implement; RMCPClassOEM is deliberately not
+	// implemented, so we return LayerTypePayload
+}
 
 // RegisterRMCPLayerType allows specifying that the payload of a RMCP packet of
 // a certain class should processed by the provided layer type. This overrides

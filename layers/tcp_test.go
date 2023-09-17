@@ -18,23 +18,30 @@ func TestTCPOptionKindString(t *testing.T) {
 		o *TCPOption
 		s string
 	}{
-		{&TCPOption{
-			OptionType:   TCPOptionKindNop,
-			OptionLength: 1,
+		{
+			&TCPOption{
+				OptionType:   TCPOptionKindNop,
+				OptionLength: 1,
+			},
+			"TCPOption(NOP:)",
 		},
-			"TCPOption(NOP:)"},
-		{&TCPOption{
-			OptionType:   TCPOptionKindMSS,
-			OptionLength: 4,
-			OptionData:   []byte{0x12, 0x34},
+		{
+			&TCPOption{
+				OptionType:   TCPOptionKindMSS,
+				OptionLength: 4,
+				OptionData:   []byte{0x12, 0x34},
+			},
+			"TCPOption(MSS:4660 0x1234)",
 		},
-			"TCPOption(MSS:4660 0x1234)"},
-		{&TCPOption{
-			OptionType:   TCPOptionKindTimestamps,
-			OptionLength: 10,
-			OptionData:   []byte{0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x01},
+		{
+			&TCPOption{
+				OptionType:   TCPOptionKindTimestamps,
+				OptionLength: 10,
+				OptionData:   []byte{0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x01},
+			},
+			"TCPOption(Timestamps:2/1 0x0000000200000001)",
 		},
-			"TCPOption(Timestamps:2/1 0x0000000200000001)"}}
+	}
 
 	for _, tc := range testData {
 		if s := tc.o.String(); s != tc.s {
@@ -90,7 +97,7 @@ func TestPacketTCPOptionDecode(t *testing.T) {
 		{
 			OptionType:   TCPOptionKindMSS,
 			OptionLength: 4,
-			OptionData:   []byte{32, 00},
+			OptionData:   []byte{32, 0o0},
 		},
 		{
 			OptionType:   TCPOptionKindEndList,

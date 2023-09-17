@@ -50,6 +50,7 @@ func TestVRRPPacketPacket0(t *testing.T) {
 		t.Fatalf("Unable to decode VRRPv2 checksum. Received %d, expected %d", vrrp.Checksum, 47698)
 	}
 }
+
 func BenchmarkDecodeVRRPPacket0(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		gopacket.NewPacket(vrrpPacketPriority100, LayerTypeEthernet, gopacket.NoCopy)

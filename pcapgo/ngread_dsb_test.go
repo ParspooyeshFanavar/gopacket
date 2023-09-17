@@ -2,11 +2,12 @@ package pcapgo
 
 import (
 	"fmt"
-	"github.com/gopacket/gopacket"
 	"io"
 	"os"
 	"testing"
 	"time"
+
+	"github.com/gopacket/gopacket"
 )
 
 type BufferPacketSource struct {
@@ -17,7 +18,6 @@ type BufferPacketSource struct {
 
 // TestNgReadDSB tests the readDecryptionSecretsBlock function.
 func TestNgReaderDSB(t *testing.T) {
-
 	// Test that we can read a pcapng file with DSB.
 	pcapngFile := "tests/le/test301.pcapng"
 	start := time.Now()

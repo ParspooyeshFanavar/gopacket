@@ -13,8 +13,10 @@ import (
 	"github.com/gopacket/gopacket"
 )
 
-type EAPCode uint8
-type EAPType uint8
+type (
+	EAPCode uint8
+	EAPType uint8
+)
 
 const (
 	EAPCodeRequest  EAPCode = 1
