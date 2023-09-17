@@ -10,7 +10,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/gopacket/gopacket"
+	"github.com/ParspooyeshFanavar/gopacket"
 )
 
 // TLSAlertLevel defines the alert level data type

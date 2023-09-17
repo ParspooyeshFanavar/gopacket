@@ -10,7 +10,7 @@ import (
 	"encoding/binary"
 	"errors"
 
-	"github.com/gopacket/gopacket"
+	"github.com/ParspooyeshFanavar/gopacket"
 )
 
 // MPLS is the MPLS packet header.

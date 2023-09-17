@@ -7,7 +7,7 @@
 package layers
 
 import (
-	"github.com/gopacket/gopacket"
+	"github.com/ParspooyeshFanavar/gopacket"
 )
 
 var (

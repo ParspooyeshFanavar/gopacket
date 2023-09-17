@@ -111,7 +111,6 @@ func TestPacketHeader(t *testing.T) {
 	equal(t, ci.CaptureLength, 42)
 	equal(t, ci.Length, 42)
 	equal(t, ci.Timestamp, time.Date(2019, 0o4, 23, 0o7, 0o1, 32, 831815*1000, time.UTC)) // with nanosec
-
 }
 
 func TestBadPacketHeader(t *testing.T) {

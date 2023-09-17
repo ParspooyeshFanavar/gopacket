@@ -11,7 +11,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/gopacket/gopacket"
+	"github.com/ParspooyeshFanavar/gopacket"
 )
 
 /*refer to https://datatracker.ietf.org/doc/html/rfc5246#appendix-A.4*/

@@ -11,8 +11,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/gopacket/gopacket"
-	"github.com/gopacket/gopacket/layers"
+	"github.com/ParspooyeshFanavar/gopacket"
+	"github.com/ParspooyeshFanavar/gopacket/layers"
 )
 
 func TestNgWriteSimple(t *testing.T) {

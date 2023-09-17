@@ -1,4 +1,4 @@
-module github.com/gopacket/gopacket
+module github.com/ParspooyeshFanavar/gopacket
 
 go 1.20
 

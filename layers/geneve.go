@@ -11,7 +11,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/gopacket/gopacket"
+	"github.com/ParspooyeshFanavar/gopacket"
 )
 
 // Geneve is specifed here https://tools.ietf.org/html/draft-ietf-nvo3-geneve-03

@@ -29,12 +29,12 @@ import (
 	"sync"
 	"time"
 
-	"github.com/gopacket/gopacket"
-	"github.com/gopacket/gopacket/examples/util"
-	"github.com/gopacket/gopacket/ip4defrag"
-	"github.com/gopacket/gopacket/layers" // pulls in all layers decoders
-	"github.com/gopacket/gopacket/pcap"
-	"github.com/gopacket/gopacket/reassembly"
+	"github.com/ParspooyeshFanavar/gopacket"
+	"github.com/ParspooyeshFanavar/gopacket/examples/util"
+	"github.com/ParspooyeshFanavar/gopacket/ip4defrag"
+	"github.com/ParspooyeshFanavar/gopacket/layers" // pulls in all layers decoders
+	"github.com/ParspooyeshFanavar/gopacket/pcap"
+	"github.com/ParspooyeshFanavar/gopacket/reassembly"
 )
 
 var (

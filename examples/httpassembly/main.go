@@ -17,12 +17,12 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/gopacket/gopacket"
-	"github.com/gopacket/gopacket/examples/util"
-	"github.com/gopacket/gopacket/layers"
-	"github.com/gopacket/gopacket/pcap"
-	"github.com/gopacket/gopacket/tcpassembly"
-	"github.com/gopacket/gopacket/tcpassembly/tcpreader"
+	"github.com/ParspooyeshFanavar/gopacket"
+	"github.com/ParspooyeshFanavar/gopacket/examples/util"
+	"github.com/ParspooyeshFanavar/gopacket/layers"
+	"github.com/ParspooyeshFanavar/gopacket/pcap"
+	"github.com/ParspooyeshFanavar/gopacket/tcpassembly"
+	"github.com/ParspooyeshFanavar/gopacket/tcpassembly/tcpreader"
 )
 
 var (

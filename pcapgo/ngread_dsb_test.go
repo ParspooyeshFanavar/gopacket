@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/gopacket/gopacket"
+	"github.com/ParspooyeshFanavar/gopacket"
 )
 
 type BufferPacketSource struct {

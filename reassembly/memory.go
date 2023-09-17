@@ -12,10 +12,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/gopacket/gopacket/layers"
+	"github.com/ParspooyeshFanavar/gopacket/layers"
 )
 
-var memLog = flag.Bool("assembly_memuse_log", defaultDebug, "If true, the github.com/gopacket/gopacket/reassembly library will log information regarding its memory use every once in a while.")
+var memLog = flag.Bool("assembly_memuse_log", defaultDebug, "If true, the github.com/ParspooyeshFanavar/gopacket/reassembly library will log information regarding its memory use every once in a while.")
 
 /*
  * pageCache

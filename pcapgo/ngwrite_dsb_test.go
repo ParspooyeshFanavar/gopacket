@@ -8,7 +8,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/gopacket/gopacket/layers"
+	"github.com/ParspooyeshFanavar/gopacket/layers"
 )
 
 // TestNgWriterDSB tests the WriteDecryptionSecretsBlock function.
